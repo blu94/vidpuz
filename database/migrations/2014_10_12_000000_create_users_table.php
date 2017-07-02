@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->boolean('is_active')->default(1);
             $table->string('email')->unique();
+            $table->integer('role_id')->index()->unsigned()->default(1);
+            $table->boolean('first_login')->default(1);
+            $table->dateTime('birthday');
+            $table->string('gender')->default('M');
             $table->string('password');
             $table->longText('bio');
             $table->rememberToken();
