@@ -19,8 +19,10 @@ class CreateAssetsTable extends Migration
             $table->text('path');
             $table->string('type');
             $table->string('format');
+            $table->boolean('is_public')->default(1);
             $table->integer('user_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
