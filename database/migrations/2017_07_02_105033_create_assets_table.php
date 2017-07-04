@@ -17,8 +17,8 @@ class CreateAssetsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('path');
-            $table->string('type');
-            $table->string('format');
+            $table->string('format')->nullable();
+            $table->string('usage')->nullable();
             $table->boolean('is_public')->default(1);
             $table->integer('user_id');
             $table->timestamps();
