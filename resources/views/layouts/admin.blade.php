@@ -31,10 +31,10 @@
 
     {{-- header --}}
     <header class="header_section">
-      <span class="title font_size18 color_white">
+      <span class="logo_title font_size18 color_white">
         VIDEO PUZZLE
       </span>
-      <div class="operation_div sidebar_icon sidebar_trigger">
+      <div class="header_operation_div sidebar_icon sidebar_trigger">
         <div class="clear-menu-btn">
           <input type="checkbox">
           <span class="top"></span>
@@ -43,28 +43,64 @@
           <span class="circle"></span>
         </div>
       </div>
+
+      {{-- sidebar --}}
+      <div class="sidebar">
+        <div class="profile_div">
+          <img src="http://via.placeholder.com/150x150" alt="">
+          {{-- username --}}
+          <span class="username font_size12">{{Auth::user()->username}}</span>
+        </div>
+        <div class="nav_container">
+          <ul class="nav_ul">
+            <a href="{{ route('admin.index') }}">
+              <li>
+                <img src="{{asset('icon/dashboard_neon_blue.svg')}}" alt="">
+                <span class="title">DASHBOARD</span>
+              </li>
+            </a>
+            <a href="#">
+              <li>
+                <img src="{{asset('icon/notification_neon_blue.svg')}}" alt="">
+                <span class="title">NOTIFICATION</span>
+              </li>
+            </a>
+            <a href="#">
+              <li>
+                <img src="{{asset('icon/users_neon_blue.svg')}}" alt="">
+                <span class="title">USER</span>
+              </li>
+            </a>
+            <a href="{{ route('admin.assets.index') }}">
+              <li>
+                <img src="{{asset('icon/folder_neon_blue.svg')}}" alt="">
+                <span class="title">ASSETS</span>
+              </li>
+            </a>
+            <a href="{{ url('/logout') }}">
+              <li>
+                <img src="{{asset('icon/exit_neon_blue.svg')}}" alt="">
+                <span class="title">LOGOUT</span>
+              </li>
+            </a>
+          </ul>
+        </div>
+      </div>
+      {{-- sidebar --}}
     </header>
     {{-- header --}}
 
-    {{-- sidebar --}}
-    <div class="sidebar">
-      <div class="profile_div">
-        <img src="http://via.placeholder.com/150x150" alt="">
-      </div>
-      <div class="nav_container">
-        <ul class="nav_ul">
-          <a href="#">
-            <li>
-              <img src="{{asset('icon/notification_neon_blue.svg')}}" alt="">
-              <span class="title">NOTIFICATION</span>
-            </li>
-          </a>
-        </ul>
-      </div>
-    </div>
-    {{-- sidebar --}}
+
 
     @yield('content')
+
+
+    <footer class="footer bg_darkgrey color_white">
+      <span class="col-md-12 col-sm-12 text-center">
+        © 2017 Copyright All rights reserved.
+      </span>
+
+    </footer>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -30,6 +30,14 @@ Route::group(['middleware'=>'admin'], function(){
       'index'  => 'admin.index'
     ]
   ]);
+
+  Route::resource('/admin/assets', 'admin\AdminAssetController', [
+    'names'=> [
+      'index'  => 'admin.assets.index',
+      'create'  => 'admin.assets.create',
+      'store'  => 'admin.assets.store'
+    ]
+  ]);
 });
 
 Route::group(['middleware'=>'user'], function(){

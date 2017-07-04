@@ -2,13 +2,19 @@
   font-family: 'skarpalt';
   src: url('../fonts/skarpalt.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'pale_blue_eyes';
   src: url('../fonts/pale_blue_eyes.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'avenirlt';
+  src: url('../fonts/avenir/AvenirLTStd-Light.otf') format('opentype');
+}
+
 body {
-  font-family: 'skarpalt';
+  font-family: 'avenirlt';
 }
 
 .font_size8 {
@@ -123,6 +129,9 @@ body {
 
 .bg_lightgray {
   background-color: #eee;
+}
+.bg_darkgrey {
+  background-color: #1F2123;
 }
 
 .color_white {
