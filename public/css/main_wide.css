@@ -1,0 +1,16 @@
+body {
+
+}
+
+
+.header_section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100%;
+  border-bottom: 1pt solid #2ab5d3;
+}
+.header_section .title {
+  display: block;
+}

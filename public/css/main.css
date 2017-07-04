@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'skarpalt';
+  src: url('../fonts/skarpalt.ttf') format('truetype');
+}
+body {
+  font-family: 'skarpalt';
+}
