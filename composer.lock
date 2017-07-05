@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9c3c4efb4f52ae1d56fe18f61460a723",
+    "content-hash": "0fcf28ba7524f299850f6d6eaa9a33ed",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -320,6 +320,52 @@
                 "event-emitter"
             ],
             "time": "2012-11-02T14:49:47+00:00"
+        },
+        {
+            "name": "folour/flavy",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/folour/Flavy.git",
+                "reference": "5e72bd8287cdd40090a16b73d81e072e4c08cdc0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/folour/Flavy/zipball/5e72bd8287cdd40090a16b73d81e072e4c08cdc0",
+                "reference": "5e72bd8287cdd40090a16b73d81e072e4c08cdc0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.2",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Folour\\Flavy\\": "src/Folour/Flavy"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPLv3"
+            ],
+            "authors": [
+                {
+                    "name": "Vadim Bova",
+                    "email": "folour@gmail.com"
+                }
+            ],
+            "description": "FFmpeg layer for Laravel 5.2-5.4, this is a fork of rafasamp/sonus package",
+            "keywords": [
+                "audio",
+                "conversion",
+                "converter",
+                "ffmpeg",
+                "laravel",
+                "video",
+                "video thumbnailer"
+            ],
+            "time": "2017-05-08T22:22:48+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

@@ -35,6 +35,7 @@ Route::group(['middleware'=>'admin'], function(){
     'names'=> [
       'index'  => 'admin.assets.index',
       'create'  => 'admin.assets.create',
+      'show'  => 'admin.assets.show',
       'store'  => 'admin.assets.store'
     ]
   ]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Flavy;
 
 class AdminAssetController extends Controller
 {
@@ -48,6 +49,8 @@ class AdminAssetController extends Controller
 
         $extension = pathinfo($path, PATHINFO_EXTENSION);
 
+        Flavy::thumbnail($path, '/assets/thumb.jpg', 10); //Make 10 thumbnail and calculate time interval $duration/$count
+
         $asset = Asset::create([
           'title' => $name,
           'path' => $path,
@@ -67,6 +70,8 @@ class AdminAssetController extends Controller
     public function show($id)
     {
         //
+        $path = 'assets/1499233000860a7bac22cda073cb9c80e2e07ccb9djl.mp4';
+        Flavy::thumbnail($path, 'assets/thumb.jpg', 10); //Make 10 thumbnail and calculate time interval $duration/$count
     }
 
     /**
