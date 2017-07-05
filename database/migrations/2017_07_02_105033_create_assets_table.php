@@ -21,6 +21,8 @@ class CreateAssetsTable extends Migration
             $table->string('usage')->nullable();
             $table->boolean('is_public')->default(1);
             $table->integer('user_id');
+            $table->integer('assetable_id')->nullable();
+            $table->string('assetable_type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

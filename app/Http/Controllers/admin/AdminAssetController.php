@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Asset;
 use Auth;
 
+use Carbon;
+use Thumbnail;
+
 class AdminAssetController extends Controller
 {
     /**
@@ -29,6 +32,7 @@ class AdminAssetController extends Controller
     public function create()
     {
         //
+        return view('admin.assets.create');
     }
 
     /**
@@ -46,9 +50,36 @@ class AdminAssetController extends Controller
 
         $path = '/assets/' . $name;
 
-        $file->move('assets', $path);
+        $upload_status = $file->move('assets', $path);
 
         $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+
+
+        if($upload_status) {
+
+          $thumbnail_path   = '/assets';
+
+          $video_path       = $path;
+
+          // set thumbnail image name
+          $thumbnail_image  = time() . $name.".jpg";
+
+          // get video length and process it
+          // assign the value to time_to_image (which will get screenshot of video at that specified seconds)
+          $time_to_image    = floor(($data['video_length'])/2);
+
+
+          $thumbnail_status = Thumbnail::getThumbnail($video_path,$thumbnail_path,$thumbnail_image,$time_to_image);
+          if($thumbnail_status)
+          {
+            echo "Thumbnail generated";
+          }
+          else
+          {
+            echo "thumbnail generation has failed";
+          }
+        }
 
         $asset = Asset::create([
           'title' => $name,
