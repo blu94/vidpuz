@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Asset;
+use Auth;
+
 class AdminAssetController extends Controller
 {
     /**
@@ -37,6 +40,24 @@ class AdminAssetController extends Controller
     public function store(Request $request)
     {
         //
+        $file = $request->file('file');
+
+        $name = time() . md5($file->getClientOriginalName()) . $file->getClientOriginalName();
+
+        $path = '/assets/' . $name;
+
+        $file->move('assets', $path);
+
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+        $asset = Asset::create([
+          'title' => $name,
+          'path' => $path,
+          'format' => $extension,
+          'user_id' => Auth::user()->id
+        ]);
+        //
+        // echo $asset->id;
     }
 
     /**
