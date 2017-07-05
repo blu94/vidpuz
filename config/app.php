@@ -163,7 +163,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+<<<<<<< HEAD
         Folour\Flavy\Provider\FlavyServiceProvider::class,
+=======
+        Lakshmaji\Thumbnail\ThumbnailServiceProvider::class,
+>>>>>>> parent of f59ab95... update
 
         /*
          * Package Service Providers...
@@ -229,7 +233,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+<<<<<<< HEAD
         'Flavy' => Folour\Flavy\FlavyFacade::class,
+=======
+        'Thumbnail' => Lakshmaji\Thumbnail\Facade\Thumbnail::class,
+>>>>>>> parent of f59ab95... update
 
     ],
 

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Flavy;
 
-class AdminAssetController extends Controller
+class AssetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,6 @@ class AdminAssetController extends Controller
     public function index()
     {
         //
-        return view('admin.assets.index');
     }
 
     /**
@@ -27,7 +24,6 @@ class AdminAssetController extends Controller
     public function create()
     {
         //
-        return view('admin.assets.create');
     }
 
     /**
@@ -39,29 +35,6 @@ class AdminAssetController extends Controller
     public function store(Request $request)
     {
         //
-<<<<<<< HEAD
-        $file = $request->file('file');
-
-        $name = time() . md5($file->getClientOriginalName()) . $file->getClientOriginalName();
-
-        $path = '/assets/' . $name;
-
-        $file->move('assets', $path);
-
-        $extension = pathinfo($path, PATHINFO_EXTENSION);
-
-        Flavy::thumbnail($path, '/assets/thumb.jpg', 10); //Make 10 thumbnail and calculate time interval $duration/$count
-
-        $asset = Asset::create([
-          'title' => $name,
-          'path' => $path,
-          'format' => $extension,
-          'user_id' => Auth::user()->id
-        ]);
-        //
-        // echo $asset->id;
-=======
->>>>>>> parent of f59ab95... update
     }
 
     /**
@@ -73,8 +46,6 @@ class AdminAssetController extends Controller
     public function show($id)
     {
         //
-        $path = 'assets/1499233000860a7bac22cda073cb9c80e2e07ccb9djl.mp4';
-        Flavy::thumbnail($path, 'assets/thumb.jpg', 10); //Make 10 thumbnail and calculate time interval $duration/$count
     }
 
     /**
