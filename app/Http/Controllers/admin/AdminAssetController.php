@@ -39,7 +39,6 @@ class AdminAssetController extends Controller
     public function store(Request $request)
     {
         //
-<<<<<<< HEAD
         $file = $request->file('file');
 
         $name = time() . md5($file->getClientOriginalName()) . $file->getClientOriginalName();
@@ -60,8 +59,6 @@ class AdminAssetController extends Controller
         ]);
         //
         // echo $asset->id;
-=======
->>>>>>> parent of f59ab95... update
     }
 
     /**
@@ -73,8 +70,6 @@ class AdminAssetController extends Controller
     public function show($id)
     {
         //
-        $path = 'assets/1499233000860a7bac22cda073cb9c80e2e07ccb9djl.mp4';
-        Flavy::thumbnail($path, 'assets/thumb.jpg', 10); //Make 10 thumbnail and calculate time interval $duration/$count
     }
 
     /**
