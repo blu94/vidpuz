@@ -7,12 +7,4 @@ use Illuminate\Database\Eloquent\Model;
 class Asset extends Model
 {
     //
-    protected $fillable = [
-      'title',
-      'path',
-      'format',
-      'usage',
-      'is_public',
-      'user_id',
-    ];
 }
