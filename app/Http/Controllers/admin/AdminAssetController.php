@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Flavy;
+use App\Asset;
+use Auth;
 
 class AdminAssetController extends Controller
 {
@@ -45,18 +47,35 @@ class AdminAssetController extends Controller
 
         $path = '/assets/' . $name;
 
-        $file->move('assets', $path);
+        $upload_status = $file->move('assets', $path);
 
         $extension = pathinfo($path, PATHINFO_EXTENSION);
 
-        Flavy::thumbnail($path, '/assets/thumb.jpg', 10); //Make 10 thumbnail and calculate time interval $duration/$count
+
 
         $asset = Asset::create([
           'title' => $name,
           'path' => $path,
           'format' => $extension,
+          'usage' => 'VIDEO',
           'user_id' => Auth::user()->id
         ]);
+
+        // create thumbnail
+        $thumbnail_name =  md5($name).'_thumbnail.jpg';
+        $thumbnail_path = '/assets/' . $thumbnail_name;
+        Flavy::thumbnail(public_path() . $path, public_path() . $thumbnail_path, 1);
+        $thumbnail_rec = Asset::create([
+          'title' => $thumbnail_name,
+          'path' => $thumbnail_path,
+          'format' => 'jpg',
+          'usage' => 'VIDEO_THUMBNAIL',
+          'is_public' => 1,
+          'user_id' => Auth::user()->id,
+          'assetable_id' => $asset->id,
+          'assetable_type' => 'App\Asset'
+        ]);
+
         //
         // echo $asset->id;
     }
@@ -69,7 +88,6 @@ class AdminAssetController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

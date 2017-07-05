@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/assets/*
+!/public/assets/149924286175be7176fd9620a98cc51991c2e3b9b6small.ogv
 /storage/*.key
 /vendor
 /.idea

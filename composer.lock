@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0fcf28ba7524f299850f6d6eaa9a33ed",
+    "content-hash": "896b6afc8807fecbde814366721d6483",
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -456,16 +456,16 @@
         },
         {
             "name": "lakshmaji/thumbnail",
-            "version": "v1.4.4",
+            "version": "1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lakshmaji/Thumbnail.git",
-                "reference": "5d0a8f0ac0d7ebab5b44ab1924a70a5957cc7f02"
+                "reference": "bb216357a1332f75642f8e762c1966f39e080cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lakshmaji/Thumbnail/zipball/5d0a8f0ac0d7ebab5b44ab1924a70a5957cc7f02",
-                "reference": "5d0a8f0ac0d7ebab5b44ab1924a70a5957cc7f02",
+                "url": "https://api.github.com/repos/lakshmaji/Thumbnail/zipball/bb216357a1332f75642f8e762c1966f39e080cb0",
+                "reference": "bb216357a1332f75642f8e762c1966f39e080cb0",
                 "shasum": ""
             },
             "require": {
@@ -497,7 +497,7 @@
                 "thumbnail",
                 "video"
             ],
-            "time": "2017-05-06T11:59:16+00:00"
+            "time": "2017-05-19T19:21:26+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1141,6 +1141,60 @@
                 "random"
             ],
             "time": "2017-03-13T16:27:32+00:00"
+        },
+        {
+            "name": "pbmedia/laravel-ffmpeg",
+            "version": "1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pascalbaljetmedia/laravel-ffmpeg.git",
+                "reference": "163cb05e56e8481f20755d891666231f8418b256"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pascalbaljetmedia/laravel-ffmpeg/zipball/163cb05e56e8481f20755d891666231f8418b256",
+                "reference": "163cb05e56e8481f20755d891666231f8418b256",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "^5.1",
+                "illuminate/filesystem": "^5.1",
+                "illuminate/log": "^5.1",
+                "league/flysystem": "^1.0",
+                "php": "^7.0",
+                "php-ffmpeg/php-ffmpeg": "~0.6",
+                "symfony/process": "^2.5|^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "5.*",
+                "scrutinizer/ocular": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pbmedia\\LaravelFFMpeg\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pascal Baljet",
+                    "email": "pascal@pascalbaljetmedia.com",
+                    "homepage": "http://www.pascalbaljetmedia.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "FFMpeg for Laravel 5.1 and higher",
+            "homepage": "https://github.com/pbmedia/laravel-ffmpeg",
+            "keywords": [
+                "laravel-ffmpeg",
+                "pbmedia"
+            ],
+            "time": "2017-05-22T08:42:37+00:00"
         },
         {
             "name": "php-ffmpeg/php-ffmpeg",

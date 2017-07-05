@@ -10,7 +10,9 @@
         "lakshmaji/thumbnail": "^1.4",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "pbmedia/laravel-ffmpeg": "^1.1",
+        "php-ffmpeg/php-ffmpeg": "^0.9.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
