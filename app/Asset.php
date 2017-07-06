@@ -13,6 +13,7 @@ class Asset extends Model
       'format',
       'usage',
       'is_public',
+      'description',
       'user_id',
       'assetable_id',
       'assetable_type',

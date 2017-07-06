@@ -16,6 +16,9 @@
 body {
   font-family: 'avenirlt';
 }
+a, a:hover {
+  text-decoration: none !important;
+}
 
 .font_size8 {
   font-size: 8pt;
@@ -132,6 +135,9 @@ body {
 }
 .bg_darkgrey {
   background-color: #1F2123;
+}
+.bg_lightblue {
+  background-color: #cae9f7;
 }
 
 .color_white {

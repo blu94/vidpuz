@@ -31,6 +31,10 @@ Route::group(['middleware'=>'admin'], function(){
     ]
   ]);
 
+
+  Route::post('admin/assets/store_asset', ['as'=>'admin.assets.store_asset', 'uses'=>'admin\AdminAssetController@store_asset']);
+  Route::post('admin/assets/update_asset', ['as'=>'admin.assets.update_asset', 'uses'=>'admin\AdminAssetController@update_asset']);
+
   Route::resource('/admin/assets', 'admin\AdminAssetController', [
     'names'=> [
       'index'  => 'admin.assets.index',
@@ -39,6 +43,8 @@ Route::group(['middleware'=>'admin'], function(){
       'store'  => 'admin.assets.store'
     ]
   ]);
+
+
 });
 
 Route::group(['middleware'=>'user'], function(){

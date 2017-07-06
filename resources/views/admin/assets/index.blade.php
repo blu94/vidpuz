@@ -16,7 +16,13 @@
     </div>
 
     <div class="assets_container">
-      
+      @foreach ($assets as $asset)
+        <div class="assets_item_container">
+          <img src="{{asset($asset->thumbnail_img)}}" alt="">
+          <a href="#" class="user_thumbnail"><img src="http://via.placeholder.com/150x150" alt="" class=""></a>
+          <a href="#" class="play_button">PLAY</a>
+        </div>
+      @endforeach
     </div>
   </div>
 @endsection

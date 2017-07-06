@@ -16,8 +16,10 @@
     <meta name="wide_style" content="{{asset('css/main_wide.css')}}">
     <meta name="medium_style" content="{{asset('css/main_medium.css')}}">
     <meta name="small_style" content="{{asset('css/main_small.css')}}">
-    <link rel="stylesheet" href="{{asset('css/main.css')}}">
+    <link rel="stylesheet" href="{{asset('css/main.css?v='.$version)}}">
     <link rel="stylesheet" id='responsive_stylesheet' href="{{asset('css/main_wide.css?v='.$version)}}">
+
+    @yield('header_section_content')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
