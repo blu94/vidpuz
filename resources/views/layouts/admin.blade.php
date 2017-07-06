@@ -48,8 +48,14 @@
 
       {{-- sidebar --}}
       <div class="sidebar">
-        <div class="profile_div">
-          <img src="http://via.placeholder.com/150x150" alt="">
+        <div class="profile_div redirect_to_page" data-redirect-url='{{route('admin.users.edit', Auth::user()->id)}}'>
+
+
+          @if (Auth::user()->profileimage() == NULL)
+            <img src="http://via.placeholder.com/150x150" alt="">
+          @elseif (Auth::user()->profileimage() != NULL)
+            <img src="{{asset(Auth::user()->profileimage()->path)}}" alt="">
+          @endif
           {{-- username --}}
           <span class="username font_size12">{{Auth::user()->username}}</span>
         </div>

@@ -44,4 +44,12 @@ class User extends Authenticatable
       }
       return false;
     }
+
+    public function assets(){
+      return $this->morphMany('App\Asset', 'assetable');
+    }
+
+    public function profileimage() {
+      return $this->assets()->where('usage', 'PROFILE')->first();
+    }
 }

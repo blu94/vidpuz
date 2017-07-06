@@ -84,4 +84,9 @@ $(document).ready(function() {
       }
     });
   });
+
+  $('.redirect_to_page').click(function() {
+    var url = $(this).data('redirect-url');
+    window.location.href = url;
+  });
 });

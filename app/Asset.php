@@ -18,4 +18,8 @@ class Asset extends Model
       'assetable_id',
       'assetable_type',
     ];
+
+    public function assetable() {
+      return $this->morphTo();
+    }
 }

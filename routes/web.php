@@ -44,6 +44,15 @@ Route::group(['middleware'=>'admin'], function(){
     ]
   ]);
 
+  Route::resource('/admin/users', 'admin\AdminUsersController', [
+    'names'=> [
+      'index'  => 'admin.users.index',
+      'create'  => 'admin.users.create',
+      'edit'  => 'admin.users.edit',
+      'store'  => 'admin.users.store'
+    ]
+  ]);
+
 
 });
 
