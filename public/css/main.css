@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: 'avenirlt';
+  font-family: 'avenirlt' !important;
 }
 a, a:hover {
   text-decoration: none !important;
@@ -129,7 +129,9 @@ a, a:hover {
   font-size: 43pt;
 }
 
-
+.bg_white {
+  background-color: white;
+}
 .bg_lightgray {
   background-color: #eee;
 }
@@ -139,7 +141,48 @@ a, a:hover {
 .bg_lightblue {
   background-color: #cae9f7;
 }
+.bg_lightpink {
+  background-color: #ff6699;
+}
+.bg_lightgreen {
+  background-color: #6fc6b0;
+}
+.bg_red {
+  background-color: #db2828;
+}
 
 .color_white {
   color: white;
+}
+.color_lightgray {
+  color: #eee;
+}
+.color_darkgrey {
+  color: #1F2123;
+}
+.color_lightblue {
+  color: #cae9f7;
+}
+.color_lightpink {
+  color: #ff6699;
+}
+.color_lightgreen {
+  color: #6fc6b0;
+}
+.color_red {
+  color: #db2828;
+}
+
+.message_div {
+  margin-bottom: 0;
+  margin-top: 15px;
+}
+
+.no_pad_left_right {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.margin_left10 {
+  margin-left: 10px !important;
 }

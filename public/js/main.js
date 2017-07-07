@@ -89,4 +89,44 @@ $(document).ready(function() {
     var url = $(this).data('redirect-url');
     window.location.href = url;
   });
+
+  $('.bulk_action_trigger').click(function() {
+    $('.bulk_action_group').show();
+    $(this).hide();
+    $('.bulk_action_checkbox_container').fadeIn();
+    $('.bulk_action_checkbox_container').siblings('.user_thumbnail').fadeOut();
+    $('.bulk_action_checkbox_container').siblings('.play_button').fadeOut();
+  });
+
+  $('.cancel_bulk_action').click(function() {
+    var bulk_id = $(this).data('bulk-action-id');
+
+    $('.bulk_action_group').hide();
+    $('.bulk_action_trigger').fadeIn();
+    $('.bulk_action_checkbox_container').hide();
+    $('.bulk_action_checkbox_container').siblings('.user_thumbnail').fadeIn();
+    $('.bulk_action_checkbox_container').siblings('.play_button').fadeIn();
+  });
+
+  $('.bulk_action_checkbox').on('change', function() {
+    if($(this).prop('checked') == true) {
+      $(this).siblings('.tick_symbol').show().css({'display':'flex'});
+    }
+    else if ($(this).prop('checked') == false) {
+      $(this).siblings('.tick_symbol').hide();
+    }
+  });
+
+  $('.submit_bulk_action').click(function(e) {
+
+    if($(".bulk_action_checkbox:checked").length == 0) {
+      alert('No item selected, please select at least 1 item.');
+      e.preventDefault();
+    }
+
+    if ($('.bulk_action_select').val() == '') {
+      alert('No action is selected, please select an action.');
+      e.preventDefault();
+    }
+  });
 });

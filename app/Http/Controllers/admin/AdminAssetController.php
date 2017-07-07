@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Flavy;
 use App\Asset;
+use App\Tag;
+use App\Taggable;
 use Auth;
 use DB;
 
@@ -46,6 +49,7 @@ class AdminAssetController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -56,6 +60,7 @@ class AdminAssetController extends Controller
      */
     public function show($id)
     {
+
     }
 
     /**
@@ -67,6 +72,35 @@ class AdminAssetController extends Controller
     public function edit($id)
     {
         //
+        $asset = Asset::select(
+          '*',
+          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+        )
+        ->where('assets.usage', 'VIDEO')
+        ->where('assets.id', $id)
+        ->get();
+
+        $asset = $asset[0];
+
+
+        // get tag value
+        $taggable = Taggable::where('taggable_id', $asset->id)->where('taggable_type', 'LIKE', 'App%%Asset')->get();
+
+        $tag_array = [];
+        foreach ($taggable as $asset_tag) {
+          array_push($tag_array, $asset_tag->tag->title);
+        }
+        $tag_value = implode(",", $tag_array);
+
+
+        // get available tag
+        $all_tag = Tag::select('title')->get();
+        $all_tag_value = "['".implode("','", $tag_array)."']";
+
+        if($asset->usage == 'VIDEO') {
+          return view('admin.assets.edit', compact('asset', 'tag_value', 'all_tag_value'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -79,6 +113,63 @@ class AdminAssetController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $asset_status = 0;
+        if(!empty($request->is_public)) {
+          $asset_status = 1;
+        }
+        else {
+          $asset_status = 0;
+        }
+
+        if ($request->operation_btn == 'UPDATE') {
+          $asset = Asset::findOrFail($id);
+          $asset->update([
+            'title' => $request->title,
+            'is_public' => $asset_status,
+            'description' => $request->description
+          ]);
+
+
+          // update tag
+          Taggable::where('taggable_id', $asset->id)->where('taggable_type', 'LIKE', 'App%%Asset')->delete();
+
+          $tag_array = explode(',', $request->tag);
+
+          foreach ($tag_array as $tag) {
+            $find_tag = Tag::where('title', $tag)->first();
+
+            if(count($find_tag) == 0) {
+              $insert_tag = Tag::create([
+                'title' => $tag,
+                'user_id' => Auth::user()->id,
+                'is_active' => 1
+              ]);
+
+              $connect_tag = Taggable::create([
+                'tag_id' => $insert_tag->id,
+                'taggable_id' => $asset->id,
+                'taggable_type' => 'App\Asset'
+              ]);
+            }
+            else if(count($find_tag) > 0) {
+
+              $connect_tag = Taggable::create([
+                'tag_id' => $find_tag->id,
+                'taggable_id' => $asset->id,
+                'taggable_type' => 'App\Asset'
+              ]);
+
+            }
+          }
+
+          Session::flash('success_message', 'Asset update sucessfully.');
+          return redirect()->back();
+        }
+        elseif ($request->operation_btn == 'DELETE') {
+          # code...
+        }
+
+
     }
 
     /**
@@ -149,9 +240,8 @@ class AdminAssetController extends Controller
               </label>
             </div>
             <textarea name='name' rows='8' cols='80' class='uploaded_file_description col-md-12 col-sm-12' data-file-id='".$asset->id."'></textarea>
-            <input type='text' name='' class='uploaded_file_tag col-md-9 col-sm-9' value='' data-file-id='".$asset->id."'>
-            <div class='col-md-3 col-sm-3 submit_btn_container'>
-              <button type='button' name='button' class='btn submit_file_changes_btn' data-file-id='".$asset->id."' data-update-url='".route('admin.assets.update_asset')."'>SAVED</button>
+            <div class='col-md-12 col-sm-12 submit_btn_container'>
+              <button type='button' name='button' class='btn submit_file_changes_btn pull-right' data-file-id='".$asset->id."' data-update-url='".route('admin.assets.update_asset')."'>SAVED</button>
             </div>
           </div>
 
@@ -168,5 +258,20 @@ class AdminAssetController extends Controller
         'description' => $request->description
       ]);
       return $request->file_id;
+    }
+
+    public function bulk_action(Request $request) {
+
+      // delete asset
+      if ($request->bulk_action_select == 'delete') {
+        foreach ($request->bulk_action_checkbox as $key => $asset) {
+          $target_asset = Asset::findOrFail($asset);
+          $target_asset->delete();
+
+        }
+        Session::flash('success_message', 'Asset delete sucessfully.');
+      }
+
+      return redirect('admin/assets');
     }
 }

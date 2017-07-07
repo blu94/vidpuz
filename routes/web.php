@@ -34,12 +34,15 @@ Route::group(['middleware'=>'admin'], function(){
 
   Route::post('admin/assets/store_asset', ['as'=>'admin.assets.store_asset', 'uses'=>'admin\AdminAssetController@store_asset']);
   Route::post('admin/assets/update_asset', ['as'=>'admin.assets.update_asset', 'uses'=>'admin\AdminAssetController@update_asset']);
+  Route::post('admin/assets/bulk_action', ['as'=>'admin.assets.bulk_action', 'uses'=>'admin\AdminAssetController@bulk_action']);
 
   Route::resource('/admin/assets', 'admin\AdminAssetController', [
     'names'=> [
       'index'  => 'admin.assets.index',
       'create'  => 'admin.assets.create',
       'show'  => 'admin.assets.show',
+      'edit'  => 'admin.assets.edit',
+      'update'  => 'admin.assets.update',
       'store'  => 'admin.assets.store'
     ]
   ]);
