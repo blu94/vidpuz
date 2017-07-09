@@ -53,9 +53,9 @@
 
 
           @if (Auth::user()->profileimage() == NULL)
-            <img src="http://via.placeholder.com/150x150" alt="">
+            <img src="http://via.placeholder.com/150x150" class='sidebar_profile_pic' alt="">
           @elseif (Auth::user()->profileimage() != NULL)
-            <img src="{{asset(Auth::user()->profileimage()->path)}}" alt="">
+            <img src="{{asset(Auth::user()->profileimage()->path)}}" class='sidebar_profile_pic' alt="">
           @endif
           {{-- username --}}
           <span class="username font_size12">{{Auth::user()->username}}</span>
@@ -74,7 +74,7 @@
                 <span class="title">NOTIFICATION</span>
               </li>
             </a>
-            <a href="#">
+            <a href="{{route('admin.users.index')}}">
               <li>
                 <img src="{{asset('icon/users_neon_blue.svg')}}" alt="">
                 <span class="title">USER</span>

@@ -27,14 +27,10 @@
         </button>
 
         <div class="bulk_action_group">
-          <div class="input-group col-sm-3 pull-left ">
-            <span class="input-group-btn">
-              <button class="btn bg_red color_white cancel_bulk_action" type="button" name='bulk_action_cancel'>CANCEL</button>
-            </span>
-            {!! Form::select('bulk_action_select', ['' => 'Bulk Action', 'delete' => 'Delete'], null, ['class' => 'form-control bulk_action_select']) !!}
-            <span class="input-group-btn">
-              <button class="btn btn-primary color_white submit_bulk_action" type="submit" name='bulk_action_submit'>APPLY</button>
-            </span>
+          <div class="ui buttons col-sm-3 pull-left ">
+            <button class="ui button color_white cancel_bulk_action" type="button" name='bulk_action_cancel'>CANCEL</button>
+            {!! Form::select('bulk_action_select', ['' => 'Bulk Action', 'delete' => 'Delete', 'public' => 'Public selected asset', 'private' => 'Private selected asset'], null, ['class' => 'ui button bulk_action_select']) !!}
+            <button class="ui primary button submit_bulk_action" type="submit" name='bulk_action_submit'>APPLY</button>
 
           </div>
         </div>

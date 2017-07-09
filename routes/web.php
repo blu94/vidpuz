@@ -35,6 +35,8 @@ Route::group(['middleware'=>'admin'], function(){
   Route::post('admin/assets/store_asset', ['as'=>'admin.assets.store_asset', 'uses'=>'admin\AdminAssetController@store_asset']);
   Route::post('admin/assets/update_asset', ['as'=>'admin.assets.update_asset', 'uses'=>'admin\AdminAssetController@update_asset']);
   Route::post('admin/assets/bulk_action', ['as'=>'admin.assets.bulk_action', 'uses'=>'admin\AdminAssetController@bulk_action']);
+  Route::post('admin/assets/changeprofileimg', ['as'=>'admin.assets.changeprofileimg', 'uses'=>'admin\AdminAssetController@changeprofileimg']);
+
 
   Route::resource('/admin/assets', 'admin\AdminAssetController', [
     'names'=> [
@@ -52,7 +54,8 @@ Route::group(['middleware'=>'admin'], function(){
       'index'  => 'admin.users.index',
       'create'  => 'admin.users.create',
       'edit'  => 'admin.users.edit',
-      'store'  => 'admin.users.store'
+      'store'  => 'admin.users.store',
+      'update'  => 'admin.users.update'
     ]
   ]);
 

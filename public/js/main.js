@@ -129,4 +129,46 @@ $(document).ready(function() {
       e.preventDefault();
     }
   });
+
+  $('.profile_img').hover(
+    function () {
+      $('.edit_profile_image').css({'opacity':'0.5'});
+      $('.upload_profile_btn').fadeIn();
+    },
+    function () {
+      $('.edit_profile_image').css({'opacity':'1'});
+      $('.upload_profile_btn').fadeOut();
+    }
+  );
+
+  $('.edit_profile_btn').click(function() {
+    $('.edit_user_detail_lightbox').fadeIn().css({'display':'flex'});
+  });
+
+  $('.special_close').on('click', function(event) {
+    if ($(event.target).has('.not_to_close').length) {
+      $(".lightbox").fadeOut();
+    }
+  });
+
+  $('.update_user_detail_submit_btn').click(function(e) {
+    var bday = $('.user_detail_birthday').val();
+    var surname = $('.user_detail_surname').val();
+    var givenname = $('.user_detail_givenname').val();
+    var gender = $('.user_detail_gender select').val();
+    var error = 0;
+    $('.ui.form').addClass('loading');
+
+    if (bday == '') { $('.user_detail_birthday').parent('.field').addClass('error'); error+=1;} else if (bday != '') { $('.user_detail_birthday').parent('.field').removeClass('error');}
+    if (surname == '') { $('.user_detail_surname').parent('.field').addClass('error'); error+=1;} else if (surname != '') { $('.user_detail_surname').parent('.field').removeClass('error');}
+    if (givenname == '') { $('.user_detail_givenname').parent('.field').addClass('error'); error+=1;} else if (givenname != '') { $('.user_detail_givenname').parent('.field').removeClass('error');}
+    if (gender == '') { $('.user_detail_gender').parent('.field').addClass('error'); error+=1;} else if (gender != '') { $('.user_detail_gender').parent('.field').removeClass('error');}
+
+    if (error > 0) {
+      alert('Please fill in the form correctly.');
+      $('.ui.form').removeClass('loading');
+      e.preventDefault();
+    }
+
+  });
 });

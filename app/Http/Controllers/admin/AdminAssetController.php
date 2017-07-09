@@ -25,7 +25,10 @@ class AdminAssetController extends Controller
         $assets = Asset::select(
           '*',
           DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
-        )->where('usage', 'VIDEO')->get();
+        )
+        ->where('usage', 'VIDEO')
+        ->orderBy('created_at', 'desc')
+        ->get();
         return view('admin.assets.index', compact('assets'));
     }
 
@@ -94,8 +97,12 @@ class AdminAssetController extends Controller
 
 
         // get available tag
-        $all_tag = Tag::select('title')->get();
-        $all_tag_value = "['".implode("','", $tag_array)."']";
+        $all_tag = Tag::all();
+        $all_tag_array = [];
+        foreach ($all_tag as $tag) {
+          array_push($all_tag_array, $tag->title);
+        }
+        $all_tag_value = "['".implode("','", $all_tag_array)."']";
 
         if($asset->usage == 'VIDEO') {
           return view('admin.assets.edit', compact('asset', 'tag_value', 'all_tag_value'));
@@ -271,7 +278,56 @@ class AdminAssetController extends Controller
         }
         Session::flash('success_message', 'Asset delete sucessfully.');
       }
+      elseif($request->bulk_action_select == 'public') {
+        foreach ($request->bulk_action_checkbox as $key => $asset) {
+          $target_asset = Asset::findOrFail($asset);
+          $target_asset->update(['is_public'=>1]);
+
+        }
+        Session::flash('success_message', 'Asset publish sucessfully.');
+      }
+      elseif($request->bulk_action_select == 'private') {
+        foreach ($request->bulk_action_checkbox as $key => $asset) {
+          $target_asset = Asset::findOrFail($asset);
+          $target_asset->update(['is_public'=>0]);
+
+        }
+        Session::flash('success_message', 'Asset private sucessfully.');
+      }
 
       return redirect('admin/assets');
+    }
+
+    public function changeprofileimg(Request $request) {
+
+      $profile_img = Asset::where('assetable_id', $request->user_id)
+      ->where('assetable_type', 'LIKE', 'App%%User')
+      ->where('usage', 'PROFILE');
+
+      $profile_img->delete();
+
+      $file = $request->file('file');
+
+      $usage = $request->usage;
+
+      $name = time() . md5($file->getClientOriginalName()) . $file->getClientOriginalName();
+
+      $path = '/assets/' . $name;
+
+      $upload_status = $file->move('assets', $path);
+
+      $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+      $asset = Asset::create([
+        'title' => $name,
+        'path' => $path,
+        'format' => $extension,
+        'usage' => $usage,
+        'user_id' => $request->user_id,
+        'assetable_id' => $request->user_id,
+        'assetable_type' => 'App\User'
+      ]);
+
+      echo $path;
     }
 }

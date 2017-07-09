@@ -172,6 +172,9 @@ a, a:hover {
 .color_red {
   color: #db2828;
 }
+.color_grey {
+  color: #4d4d4e;
+}
 
 .message_div {
   margin-bottom: 0;
@@ -183,6 +186,32 @@ a, a:hover {
   padding-right: 0 !important;
 }
 
+.margin_top0 {
+  margin-top: 0 !important;
+}
 .margin_left10 {
   margin-left: 10px !important;
+}
+
+
+/*lightbox*/
+.lightbox {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 10100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.lightbox_content {
+  display: block;
+  float: left;
+  min-width: 100px;
+  min-height: 100px;
+  padding: 20px;
+  background-color: white;
 }
