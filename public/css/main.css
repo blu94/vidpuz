@@ -215,3 +215,6 @@ a, a:hover {
   padding: 20px;
   background-color: white;
 }
+.error_wrapper {
+  margin-top: 15px;
+}

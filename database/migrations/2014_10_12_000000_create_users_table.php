@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->dateTime('birthday');
             $table->string('gender')->default('M');
             $table->string('password');
-            $table->longText('bio');
+            $table->longText('bio')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -667,6 +667,9 @@ input:checked + .slider:before {
 .edit_profile_lightbox_wrapper {
   display: block;
   width: 500px;
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .all_user_wrapper {
   display: block;
@@ -712,7 +715,22 @@ input:checked + .slider:before {
   border-radius: 100%;
   margin-bottom: 20px;
 }
+.register_user_wrapper {
+  display: block;
+  float: left;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 10px;
+}
 /*body*/
+
+/*hide scrollbar*/
+.edit_profile_lightbox_wrapper::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/*hide scrollbar*/
 
 /*footer*/
 .footer {

@@ -57,6 +57,7 @@
   <div class="lightbox edit_user_detail_lightbox special_close">
     <div class="lightbox_content not_to_close">
       <div class="edit_profile_lightbox_wrapper">
+        {{-- edit detail --}}
         {!! Form::open(['method' => 'PATCH', 'action' => ['admin\AdminUsersController@update', $user->id], 'class' => 'ui form']) !!}
           <h4 class="ui dividing header margin_top0">User Detail</h4>
           <div class="field">
@@ -100,10 +101,36 @@
           @endif
 
 
-          {!! Form::submit('Update', ['class' => 'ui button pull-right update_user_detail_submit_btn']) !!}
+          {!! Form::submit('Update', ['class' => 'ui button update_user_detail_submit_btn']) !!}
+
+        {!! Form::close() !!}
+        {{-- edit detail --}}
+
+        {{-- edit password --}}
+
+        {!! Form::open(['method' => 'POST', 'class' => 'ui form']) !!}
+
+          <h4 class="ui dividing header">Edit Password</h4>
+          <div class="field">
+            <label>Password</label>
+            {!! Form::text('password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'Password']) !!}
+          </div>
+
+          <div class="field">
+            <label>New Password</label>
+            {!! Form::text('new_password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'New Password']) !!}
+          </div>
+
+          <div class="field">
+            <label>Retype Password</label>
+            {!! Form::text('retype_password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'Retype Password']) !!}
+          </div>
+
+          {!! Form::submit('Update', ['class' => 'ui button change_password_submit_btn']) !!}
 
         {!! Form::close() !!}
 
+        {{-- edit password --}}
       </div>
     </div>
   </div>
