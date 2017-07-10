@@ -693,6 +693,25 @@ input:checked + .slider:before {
   border-radius: 10px;
   margin: 0 1% 15px;
 }
+.user_item_container .user_item_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  float: left;
+  background-color: ;
+  color: #333;
+}
+.user_item_container .user_item_wrapper .user_item_thumbnail {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-bottom: 20px;
+}
 .add_icon_container {
   display: flex;
   align-items: center;

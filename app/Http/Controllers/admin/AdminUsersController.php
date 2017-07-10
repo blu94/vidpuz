@@ -19,7 +19,8 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        return view('admin.users.index');
+        $users = User::where('role_id', '!=', '1')->get();
+        return view('admin.users.index', compact('users'));
     }
 
     /**
@@ -42,7 +43,24 @@ class AdminUsersController extends Controller
     public function store(CreateUserRequest $request)
     {
         //
-        return $request->all();
+        if(trim($request->password) == '') {
+          $input = $request->except('password');
+        }
+        $user = User::create([
+          'surname' => $request->surname,
+          'givenname' => $request->givenname,
+          'username' => $request->username,
+          'is_active' => 1,
+          'email' => $request->email,
+          'role_id' => 2,
+          'first_login' => 1,
+          'birthday' => $request->birthday,
+          'gender' => $request->gender,
+          'password' => bcrypt($request->password)
+        ]);
+
+        Session::flash('success_message', 'User create sucessfully.');
+        return redirect('admin/users');
     }
 
     /**

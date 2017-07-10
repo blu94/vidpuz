@@ -19,6 +19,7 @@ class User extends Authenticatable
         'password',
         'surname',
         'givenname',
+        'username',
         'birthday',
         'gender',
         'bio',

@@ -93,7 +93,14 @@
             <div class="ui segment">
               <div class="field">
                 <div class="ui toggle checkbox">
-                  {!! Form::checkbox('status', $user->status, null, ['class' => 'hidden', 'tabindex' => '0']) !!}
+                  @php
+                    $check_status = '';
+                    if ($user->is_active == 1) {
+                      $check_status = 'checked';
+                    }
+
+                  @endphp
+                  {!! Form::checkbox('status', $user->status, null, ['class' => 'hidden', 'tabindex' => '0', $check_status]) !!}
                   <label>Status</label>
                 </div>
               </div>
