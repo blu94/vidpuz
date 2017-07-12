@@ -7,7 +7,7 @@
 @section('content')
   {{-- puzzle parameter initialize --}}
   @php
-    $matrix_x = 3;
+    $matrix_x = 6;
     $matrix_y = 3;
   @endphp
 

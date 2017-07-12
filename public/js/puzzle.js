@@ -20,37 +20,118 @@ $(document).ready(function() {
 
 
   function create_pieaces (x, y, matrix_x, matrix_y) {
+    // var clipping_path = "";
+    // clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+    //
+    // if((x == 0) && (y == 0)) {
+    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+    // }
+    // else if((x == 0) && (y < (matrix_y -1))) {
+    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+    // }
+    // else if((x < (matrix_x -1)) && (y == 0)) {
+    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+    // }
+    // else if((x < (matrix_x -1)) && (y < (matrix_y -1))) {
+    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+    // }
+    // else if((x == (matrix_x -1)) && (y < (matrix_y -1))) {
+    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+    //   if((x == (matrix_x -1)) && (y == 0)) {
+    //     clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+    //   }
+    // }
+    // else if((x < (matrix_x -1)) && (y == (matrix_y -1))) {
+    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+    //   if((x == 0) && (y == (matrix_y -1))) {
+    //     clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+    //   }
+    // }
+    // else if((x == (matrix_x -1)) && (y == (matrix_y -1))) {
+    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 28%, 67% 37%, 68% 46%, 67% 67%, 43% 67%, 35% 67%, 27% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 28%, 67% 37%, 68% 46%, 67% 67%, 43% 67%, 35% 67%, 27% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+    // }
+
+
+    var videoHeight = $('#v').height();
+    var videoWidth = $('#v').width();
+    // $('.canvas_pieces').width((videoWidth/matrix_x) * 1.25);
+    // $('.canvas_pieces').height((videoHeight/matrix_y) * 1.25);
+
     var clipping_path = "";
-    clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+    var convas_rate_width = 0;
+    var convas_rate_height = 0;
+    var canvas_location_x = 0;
+    var canvas_location_y = 0;
+    clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+    convas_rate_width = 1;
+    convas_rate_height = 1;
+    canvas_location_x = 1.25;
+    canvas_location_y = 1.25;
 
     if((x == 0) && (y == 0)) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      convas_rate_width = 1;
+      convas_rate_height = 1;
+      canvas_location_x = 1.25;
+      canvas_location_y = 1.25;
     }
     else if((x == 0) && (y < (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      convas_rate_width = 1.25;
+      convas_rate_height = 1.25;
+      canvas_location_x = 1.55;
+      canvas_location_y = 1.55;
     }
     else if((x < (matrix_x -1)) && (y == 0)) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      convas_rate_width = 1;
+      convas_rate_height = 1;
+      canvas_location_x = 1.25;
+      canvas_location_y = 1.25;
     }
     else if((x < (matrix_x -1)) && (y < (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      convas_rate_width = 1.25;
+      convas_rate_height = 1.25;
+      canvas_location_x = 1.55;
+      canvas_location_y = 1.55;
     }
     else if((x == (matrix_x -1)) && (y < (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 25% 0, 50% 20%, 75% 0, 100% 0, 100% 26%, 100% 40%, 100% 54%, 100% 80.5%, 75% 80.5%, 50% 100%, 25% 80.5%, 0 80.5%, 0 60%, 25% 40%, 0 20%);clip-path: polygon(0 0, 25% 0, 50% 20%, 75% 0, 100% 0, 100% 26%, 100% 40%, 100% 54%, 100% 80.5%, 75% 80.5%, 50% 100%, 25% 80.5%, 0 80.5%, 0 60%, 25% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      convas_rate_width = 1.25;
+      convas_rate_height = 1;
+      canvas_location_x = 1.25;
+      canvas_location_y = 1.25;
+
       if((x == (matrix_x -1)) && (y == 0)) {
-        clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+        clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 80.5% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 80.5% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+        convas_rate_width = 1;
+        convas_rate_height = 1;
+        canvas_location_x = 1.25;
+        canvas_location_y = 1.25;
       }
     }
     else if((x < (matrix_x -1)) && (y == (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 20% 50%, 0 25%);clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 20% 50%, 0 25%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
+      convas_rate_width = 1;
+      convas_rate_height = 1.25;
       if((x == 0) && (y == (matrix_y -1))) {
-        clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
+        clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 0 50%, 0 25%);clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 0 50%, 0 25%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
+        convas_rate_width = 1;
+        convas_rate_height = 1.25;
+        canvas_location_x = 1.25;
+        canvas_location_y = 1.25;
       }
     }
     else if((x == (matrix_x -1)) && (y == (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 28%, 67% 37%, 68% 46%, 67% 67%, 43% 67%, 35% 67%, 27% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 28%, 67% 37%, 68% 46%, 67% 67%, 43% 67%, 35% 67%, 27% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
-
+      clipping_path = "-webkit-clip-path: polygon(0 0, 25% 0, 50% 25%, 75% 0, 100% 0, 100% 20%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 25% 100%, 0 100%, 0 75%, 25% 50%, 0 25%);clip-path: polygon(0 0, 25% 0, 50% 25%, 75% 0, 100% 0, 100% 20%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 25% 100%, 0 100%, 0 75%, 25% 50%, 0 25%);; width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
+      convas_rate_width = 1.25;
+      convas_rate_height = 1.25;
+      canvas_location_x = 1.25;
+      canvas_location_y = 1.25;
     }
+
+
 
     // randomize the pieaces
     var random_x_coord = Math.floor((Math.random() * 90) + 1);
@@ -64,10 +145,7 @@ $(document).ready(function() {
     var back = document.createElement('canvas');
     var backcontext = back.getContext('2d');
 
-    var videoHeight = $('#v').height();
-    var videoWidth = $('#v').width();
-    $('.canvas_pieces').width((videoWidth/matrix_x) * 1.5);
-    $('.canvas_pieces').height((videoHeight/matrix_y) * 1.5);
+
 
     // grid wrapper size
     $('.puzzle_grids_wrapper').width((videoWidth/matrix_x) * matrix_x);
@@ -86,10 +164,10 @@ $(document).ready(function() {
     var cw,ch;
 
     v.addEventListener('play', function(){
-      cw = v.clientWidth;
-      ch = v.clientHeight;
-      canvas.width = (videoWidth/matrix_x) * 1.5;
-      canvas.height = (videoHeight/matrix_y) * 1.5;
+      cw = v.clientWidth * convas_rate_width;
+      ch = v.clientHeight * convas_rate_height;
+      canvas.width = (videoWidth/matrix_x) * canvas_location_x;
+      canvas.height = (videoHeight/matrix_y) * canvas_location_y;
       back.width = cw;
       back.height = ch;
 
