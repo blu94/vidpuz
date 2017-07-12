@@ -56,10 +56,10 @@ $(document).ready(function() {
     var random_x_coord = Math.floor((Math.random() * 90) + 1);
     var random_y_coord = Math.floor((Math.random() * 400) + 1);
 
-    $(".puzzle_wrapper").append("<div id='pieaces_"+x+y+"' data-number='"+x+y+"' class='canvas_pieces' style='"+clipping_path+" left: "+random_x_coord+"px; top:"+random_y_coord+"px;'><canvas id='c"+x+y+"'></canvas></div>");
+    $(".puzzle_wrapper").append("<div id='pieaces_"+x+y+"' data-number='"+x+y+"' class='canvas_pieces' style='"+clipping_path+" left: "+random_x_coord+"%; top:"+random_y_coord+"px;'><canvas id='target_canvas"+x+y+"'></canvas></div>");
 
     var v = document.getElementById('v');
-    var canvas = document.getElementById('c'+x+y);
+    var canvas = document.getElementById('target_canvas'+x+y);
     var context = canvas.getContext('2d');
     var back = document.createElement('canvas');
     var backcontext = back.getContext('2d');
@@ -88,8 +88,8 @@ $(document).ready(function() {
     v.addEventListener('play', function(){
       cw = v.clientWidth;
       ch = v.clientHeight;
-      canvas.width = (videoWidth/matrix_x) * 1.4;
-      canvas.height = (videoHeight/matrix_y) * 1.65;
+      canvas.width = (videoWidth/matrix_x) * 1.5;
+      canvas.height = (videoHeight/matrix_y) * 1.5;
       back.width = cw;
       back.height = ch;
 
@@ -126,7 +126,7 @@ $(document).ready(function() {
     // Draw the pixels onto the visible canvas
     c.putImageData(idata,0,0);
     // Start over!
-    setTimeout(draw,60,v,c,bc,w,h,x,y,matrix_x, matrix_y);
+    setTimeout(draw,10,v,c,bc,w,h,x,y,matrix_x, matrix_y);
   }
 
   // drag individual pieace
