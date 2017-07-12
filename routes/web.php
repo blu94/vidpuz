@@ -59,6 +59,15 @@ Route::group(['middleware'=>'admin'], function(){
     ]
   ]);
 
+  // Route::get('admin/puzzles/play/{id}', ['as'=>'admin.puzzles.play', 'uses'=>'admin\AdminPuzzleController@play']);
+
+  Route::resource('/admin/puzzles', 'admin\AdminPuzzleController', [
+    'names'=> [
+      'index'  => 'admin.puzzles.index',
+      'show'  => 'admin.puzzles.show'
+    ]
+  ]);
+
 
 });
 

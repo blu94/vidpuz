@@ -18,7 +18,8 @@ class CreatePuzzlesTable extends Migration
             $table->integer('user_id');
             $table->dateTime('start_at');
             $table->integer('duration');
-            $table->longText('description');
+            $table->integer('asset_id')->index()->unsigned();
+            $table->integer('play_time')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

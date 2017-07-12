@@ -115,27 +115,29 @@
 
         {{-- edit password --}}
 
-        {!! Form::open(['method' => 'POST', 'class' => 'ui form']) !!}
+        @if ($user->id == Auth::user()->id)
+          {!! Form::open(['method' => 'POST', 'class' => 'ui form']) !!}
 
-          <h4 class="ui dividing header">Edit Password</h4>
-          <div class="field">
-            <label>Password</label>
-            {!! Form::text('password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'Password']) !!}
-          </div>
+            <h4 class="ui dividing header">Edit Password</h4>
+            <div class="field">
+              <label>Password</label>
+              {!! Form::text('password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'Password']) !!}
+            </div>
 
-          <div class="field">
-            <label>New Password</label>
-            {!! Form::text('new_password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'New Password']) !!}
-          </div>
+            <div class="field">
+              <label>New Password</label>
+              {!! Form::text('new_password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'New Password']) !!}
+            </div>
 
-          <div class="field">
-            <label>Retype Password</label>
-            {!! Form::text('retype_password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'Retype Password']) !!}
-          </div>
+            <div class="field">
+              <label>Retype Password</label>
+              {!! Form::text('retype_password', null, ['class' => '', 'required' => 'required', 'placeholder' => 'Retype Password']) !!}
+            </div>
 
-          {!! Form::submit('Update', ['class' => 'ui button change_password_submit_btn']) !!}
+            {!! Form::submit('Update', ['class' => 'ui button change_password_submit_btn']) !!}
 
-        {!! Form::close() !!}
+          {!! Form::close() !!}
+        @endif
 
         {{-- edit password --}}
       </div>

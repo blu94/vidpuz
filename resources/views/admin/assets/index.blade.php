@@ -51,7 +51,7 @@
               @endif
 
             </a>
-            <a href="#" class="play_button">PLAY</a>
+            <a href="{{route('admin.puzzles.show', $asset->id)}}" class="play_button">PLAY</a>
             <div class="bulk_action_checkbox_container">
               <span class="tick_symbol color_white">&#x2714;</span>
               <input type="checkbox" name="bulk_action_checkbox[]" class="bulk_action_checkbox" value="{{$asset->id}}">

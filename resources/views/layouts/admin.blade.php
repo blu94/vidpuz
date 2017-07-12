@@ -34,9 +34,9 @@
 
     {{-- header --}}
     <header class="header_section">
-      <span class="logo_title font_size18 color_white">
+      <a href="{{ route('admin.index') }}" class="logo_title font_size18 color_white">
         VIDEO PUZZLE
-      </span>
+      </a>
       <div class="header_operation_div sidebar_icon sidebar_trigger">
         <div class="clear-menu-btn">
           <input type="checkbox">
