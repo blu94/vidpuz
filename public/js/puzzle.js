@@ -1,15 +1,13 @@
 // puzzle script here
 $(document).ready(function() {
 
-  // drag video preview container
-  // $( ".video_preview_wrapper" ).draggable({
-  //   containment: '.body_container'
-  // });
-
+  // get video height and width and set video height and width
   var videoHeight = $('#v').height();
   var videoWidth = $('#v').width();
   $('#v').width(videoWidth * 2);
   $('#v').height(videoHeight * 2);
+
+
 
   // initialize puzzle
   for (var i = 0; i < matrix_x; i++) {
@@ -20,37 +18,6 @@ $(document).ready(function() {
 
 
   function create_pieaces (x, y, matrix_x, matrix_y) {
-    // var clipping_path = "";
-    // clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
-    //
-    // if((x == 0) && (y == 0)) {
-    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
-    // }
-    // else if((x == 0) && (y < (matrix_y -1))) {
-    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
-    // }
-    // else if((x < (matrix_x -1)) && (y == 0)) {
-    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
-    // }
-    // else if((x < (matrix_x -1)) && (y < (matrix_y -1))) {
-    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
-    // }
-    // else if((x == (matrix_x -1)) && (y < (matrix_y -1))) {
-    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
-    //   if((x == (matrix_x -1)) && (y == 0)) {
-    //     clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 0, 49% 0, 67% 0, 67% 18%, 67% 33%, 67% 49%, 67% 67%, 49% 67%, 33% 82%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
-    //   }
-    // }
-    // else if((x < (matrix_x -1)) && (y == (matrix_y -1))) {
-    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
-    //   if((x == 0) && (y == (matrix_y -1))) {
-    //     clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 18%, 82% 33%, 67% 49%, 67% 67%, 49% 67%, 35% 67%, 18% 67%, 0 67%, 0 49%, 0 33%, 0 18%);";
-    //   }
-    // }
-    // else if((x == (matrix_x -1)) && (y == (matrix_y -1))) {
-    //   clipping_path = "-webkit-clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 28%, 67% 37%, 68% 46%, 67% 67%, 43% 67%, 35% 67%, 27% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);clip-path: polygon(0 0, 18% 0, 33% 15%, 49% 0, 67% 0, 67% 28%, 67% 37%, 68% 46%, 67% 67%, 43% 67%, 35% 67%, 27% 67%, 0 67%, 0 49%, 15% 33%, 0 18%);";
-    // }
-
 
     var videoHeight = $('#v').height();
     var videoWidth = $('#v').width();
@@ -62,49 +29,49 @@ $(document).ready(function() {
     var convas_rate_height = 0;
     var canvas_location_x = 0;
     var canvas_location_y = 0;
-    clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+    clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 19.5%);clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 19.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
     convas_rate_width = 1;
     convas_rate_height = 1;
     canvas_location_x = 1.25;
     canvas_location_y = 1.25;
 
     if((x == 0) && (y == 0)) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 19.5%);clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 19.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       convas_rate_width = 1;
       convas_rate_height = 1;
       canvas_location_x = 1.25;
       canvas_location_y = 1.25;
     }
     else if((x == 0) && (y < (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 19.5%, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 19.5%);clip-path: polygon(0 0, 19.5% 0, 40% 19.5%, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 0 40%, 0 19.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       convas_rate_width = 1.25;
       convas_rate_height = 1.25;
       canvas_location_x = 1.55;
       canvas_location_y = 1.55;
     }
     else if((x < (matrix_x -1)) && (y == 0)) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 19.5% 40%, 0 19.5%);clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 19.5% 40%, 0 19.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       convas_rate_width = 1;
       convas_rate_height = 1;
       canvas_location_x = 1.25;
       canvas_location_y = 1.25;
     }
     else if((x < (matrix_x -1)) && (y < (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 20%, 60% 0, 80.5% 0, 80.5% 20%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 19.5%, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 19.5% 40%, 0 19.5%);clip-path: polygon(0 0, 19.5% 0, 40% 19.5%, 60% 0, 80.5% 0, 80.5% 19.5%, 100% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 19.5% 40%, 0 19.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       convas_rate_width = 1.25;
       convas_rate_height = 1.25;
       canvas_location_x = 1.55;
       canvas_location_y = 1.55;
     }
     else if((x == (matrix_x -1)) && (y < (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 25% 0, 50% 20%, 75% 0, 100% 0, 100% 26%, 100% 40%, 100% 54%, 100% 80.5%, 75% 80.5%, 50% 100%, 25% 80.5%, 0 80.5%, 0 60%, 25% 40%, 0 20%);clip-path: polygon(0 0, 25% 0, 50% 20%, 75% 0, 100% 0, 100% 26%, 100% 40%, 100% 54%, 100% 80.5%, 75% 80.5%, 50% 100%, 25% 80.5%, 0 80.5%, 0 60%, 25% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 24.5% 0, 50% 19.5%, 75% 0, 100% 0, 100% 26%, 100% 40%, 100% 54%, 100% 80.5%, 75% 80.5%, 50% 100%, 24.5% 80.5%, 0 80.5%, 0 60%, 24.5% 40%, 0 19.5%);clip-path: polygon(0 0, 24.5% 0, 50% 19.5%, 75% 0, 100% 0, 100% 26%, 100% 40%, 100% 54%, 100% 80.5%, 75% 80.5%, 50% 100%, 24.5% 80.5%, 0 80.5%, 0 60%, 24.5% 40%, 0 19.5%); width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       convas_rate_width = 1.25;
       convas_rate_height = 1;
       canvas_location_x = 1.25;
       canvas_location_y = 1.25;
 
       if((x == (matrix_x -1)) && (y == 0)) {
-        clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 80.5% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%);clip-path: polygon(0 0, 20% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 20%, 80.5% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 20% 80.5%, 0 80.5%, 0 60%, 20% 40%, 0 20%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+        clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 80.5% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 19.5% 40%, 0 19.5%);clip-path: polygon(0 0, 19.5% 0, 40% 0, 60% 0, 80.5% 0, 80.5% 19.5%, 80.5% 40%, 80.5% 60%, 80.5% 80.5%, 60% 80.5%, 40% 100%, 19.5% 80.5%, 0 80.5%, 0 60%, 19.5% 40%, 0 19.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
         convas_rate_width = 1;
         convas_rate_height = 1;
         canvas_location_x = 1.25;
@@ -112,11 +79,11 @@ $(document).ready(function() {
       }
     }
     else if((x < (matrix_x -1)) && (y == (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 20% 50%, 0 25%);clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 20% 50%, 0 25%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 24.5%, 60% 0, 80.5% 0, 80.5% 24.5%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 24.5% 100%, 0 100%, 0 75%, 19.5% 50%, 0 24.5%);clip-path: polygon(0 0, 19.5% 0, 40% 24.5%, 60% 0, 80.5% 0, 80.5% 24.5%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 24.5% 100%, 0 100%, 0 75%, 19.5% 50%, 0 24.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
       convas_rate_width = 1;
       convas_rate_height = 1.25;
       if((x == 0) && (y == (matrix_y -1))) {
-        clipping_path = "-webkit-clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 0 50%, 0 25%);clip-path: polygon(0 0, 20% 0, 40% 25%, 60% 0, 80.5% 0, 80.5% 25%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 25% 100%, 0 100%, 0 75%, 0 50%, 0 25%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
+        clipping_path = "-webkit-clip-path: polygon(0 0, 19.5% 0, 40% 24.5%, 60% 0, 80.5% 0, 80.5% 24.5%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 24.5% 100%, 0 100%, 0 75%, 0 50%, 0 24.5%);clip-path: polygon(0 0, 19.5% 0, 40% 24.5%, 60% 0, 80.5% 0, 80.5% 24.5%, 100% 50%, 80.5% 75%, 80.5% 100%, 54% 100%, 39% 100%, 24.5% 100%, 0 100%, 0 75%, 0 50%, 0 24.5%); width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
         convas_rate_width = 1;
         convas_rate_height = 1.25;
         canvas_location_x = 1.25;
@@ -124,7 +91,7 @@ $(document).ready(function() {
       }
     }
     else if((x == (matrix_x -1)) && (y == (matrix_y -1))) {
-      clipping_path = "-webkit-clip-path: polygon(0 0, 25% 0, 50% 25%, 75% 0, 100% 0, 100% 20%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 25% 100%, 0 100%, 0 75%, 25% 50%, 0 25%);clip-path: polygon(0 0, 25% 0, 50% 25%, 75% 0, 100% 0, 100% 20%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 25% 100%, 0 100%, 0 75%, 25% 50%, 0 25%);; width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
+      clipping_path = "-webkit-clip-path: polygon(0 0, 24.5% 0, 50% 24.5%, 75% 0, 100% 0, 100% 19.5%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 24.5% 100%, 0 100%, 0 75%, 24.5% 50%, 0 24.5%);clip-path: polygon(0 0, 24.5% 0, 50% 24.5%, 75% 0, 100% 0, 100% 19.5%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 24.5% 100%, 0 100%, 0 75%, 24.5% 50%, 0 24.5%);; width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
       convas_rate_width = 1.25;
       convas_rate_height = 1.25;
       canvas_location_x = 1.25;
@@ -216,4 +183,43 @@ $(document).ready(function() {
     }
   });
 
+  // add preview box
+  var canvas = document.getElementById('target_video');
+  var ctx = canvas.getContext('2d');
+  var video = document.getElementById('v');
+
+  // set canvas size = video size when known
+  video.addEventListener('loadedmetadata', function() {
+    canvas.width = (videoWidth / 0.8);
+    canvas.height = (videoHeight / 0.8);
+  });
+
+  video.addEventListener('play', function() {
+    var $this = this; //cache
+    (function loop() {
+      if (!$this.paused && !$this.ended) {
+        ctx.drawImage($this, 0, 0, (videoWidth / 0.8), (videoHeight / 0.8));
+        setTimeout(loop, 1000 / 30); // drawing at 30fps
+      }
+    })();
+  }, 0);
+
+  $('.video_preview_wrapper').draggable({
+    containment: '.body_container'
+  }).css({
+    'width': (videoWidth / 0.8),
+    'height' : (videoHeight / 0.8),
+    'right' : (videoWidth / 0.8)
+  }).resizable({
+    maxWidth: (videoWidth / 0.8),
+    maxHeight: (videoHeight / 0.8),
+    minWidth: (videoWidth / 0.8) - 50,
+    minHeight: (videoHeight / 0.8) - 50,
+    aspectRatio: true
+  });
+
+
+  $('.close_preview_button').click(function() {
+    $('.video_preview_wrapper').fadeOut();
+  });
 });
