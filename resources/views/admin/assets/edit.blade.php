@@ -65,10 +65,11 @@
       </div>
 
       <div class="input_container no_pad_left_right col-md-12 col-sm-12">
-
         {!! Form::submit('UPDATE', ['class' => 'ui blue button pull-right margin_left10', 'name'=>'operation_btn']) !!}
 
-        {!! Form::submit('DELETE', ['class' => 'ui red button pull-right', 'name'=>'operation_btn']) !!}
+        {!! Form::submit('DELETE', ['class' => 'ui red button pull-right margin_left10', 'name'=>'operation_btn']) !!}
+
+        <a href="{{route('admin.puzzles.show', $asset->id)}}" class="ui blue button pull-right">PLAY</a>
       </div>
 
     {!! Form::close() !!}

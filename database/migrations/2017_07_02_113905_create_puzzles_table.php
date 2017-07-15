@@ -16,10 +16,8 @@ class CreatePuzzlesTable extends Migration
         Schema::create('puzzles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->dateTime('start_at');
-            $table->integer('duration');
             $table->integer('asset_id')->index()->unsigned();
-            $table->integer('play_time')->default(1);
+            $table->time('duration')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

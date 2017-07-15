@@ -293,30 +293,15 @@ body {
   display: block;
   position: relative;
   z-index: 10;
-  float: left;
-  width: 18%;
+  float: left !important;
+  width: 18% !important;
   padding-top: 18%;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   background-color: grey;
-  margin: 15px 1%;
+  margin: 15px 1% !important;
   overflow: hidden;
-}
-.assets_item_container .asset_thumnail {
-  display: block;
-  position: absolute;
-  z-index: 10;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background-color: #fbfbfb;
-  transition: all .5s ease-in-out;
-}
-.assets_item_container .asset_thumnail:hover {
-  transform: scale(1.3);
 }
 .user_thumbnail {
   display: block;
@@ -743,6 +728,20 @@ input:checked + .slider:before {
   -webkit-box-sizing: border-box;
   padding: 10px;
 }
+.puzzle_operation_wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 10px;
+  margin-top: 10px;
+  height: 50px;
+}
 .puzzle_wrapper {
   display: block;
   position: relative;
@@ -750,7 +749,7 @@ input:checked + .slider:before {
   float: left;
   width: 100%;
   height: 400px;
-  margin: 20px auto;
+  margin: 0 auto 20px;
   background-color: #FBFBFB;
 }
 .puzzle_grids_wrapper {
@@ -820,6 +819,42 @@ input:checked + .slider:before {
   top: 30px;
   right: 20px;
 }
+.ellipsis_content {
+  display: block;
+  float: left;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.volume_slider_wrapper {
+  display: flex;
+  align-items: center;
+  float: left;
+  padding: 0;
+  width: 15%;
+  height: 100%;
+  padding: 0 10px;
+}
+.volume_btn {
+  display: block;
+  float: left;
+  width: 10% !important;
+}
+.volume_range_slider {
+  display: block;
+  float: left;
+  width: 90% !important;
+}
+.volume_btn {
+
+}
+.timer_wrapper, .best_record_wrapper {
+  display: block;
+}
+.timer_wrapper .detail, .best_record_wrapper .detail {
+  margin: 0 !important;
+}
+
 /*body*/
 
 /*hide scrollbar*/

@@ -59,7 +59,7 @@ Route::group(['middleware'=>'admin'], function(){
     ]
   ]);
 
-  // Route::get('admin/puzzles/play/{id}', ['as'=>'admin.puzzles.play', 'uses'=>'admin\AdminPuzzleController@play']);
+  Route::post('admin/puzzles/completepuzzle', ['as'=>'admin.puzzles.completepuzzle', 'uses'=>'admin\AdminPuzzleController@completepuzzle']);
 
   Route::resource('/admin/puzzles', 'admin\AdminPuzzleController', [
     'names'=> [

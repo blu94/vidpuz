@@ -192,6 +192,9 @@ a, a:hover {
 .margin_left10 {
   margin-left: 10px !important;
 }
+.margin_leftauto {
+  margin-left: auto !important;
+}
 
 
 /*lightbox*/

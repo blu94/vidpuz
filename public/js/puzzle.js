@@ -4,8 +4,10 @@ $(document).ready(function() {
   // get video height and width and set video height and width
   var videoHeight = $('#v').height();
   var videoWidth = $('#v').width();
-  $('#v').width(videoWidth * 2);
-  $('#v').height(videoHeight * 2);
+  // $('#v').width(videoWidth * 2);
+  // $('#v').height(videoHeight * 2);
+  $('#v').width(600);
+  $('#v').height(300);
 
 
 
@@ -102,7 +104,7 @@ $(document).ready(function() {
 
     // randomize the pieaces
     var random_x_coord = Math.floor((Math.random() * 90) + 1);
-    var random_y_coord = Math.floor((Math.random() * 400) + 1);
+    var random_y_coord = Math.floor((Math.random() * 250) + 1);
 
     $(".puzzle_wrapper").append("<div id='pieaces_"+x+y+"' data-number='"+x+y+"' class='canvas_pieces' style='"+clipping_path+" left: "+random_x_coord+"%; top:"+random_y_coord+"px;'><canvas id='target_canvas"+x+y+"'></canvas></div>");
 
@@ -207,6 +209,7 @@ $(document).ready(function() {
   $('.video_preview_wrapper').draggable({
     containment: '.body_container'
   }).css({
+    'display': 'none',
     'width': (videoWidth / 0.8),
     'height' : (videoHeight / 0.8),
     'right' : (videoWidth / 0.8)
@@ -218,8 +221,58 @@ $(document).ready(function() {
     aspectRatio: true
   });
 
-
+  // close preview button
   $('.close_preview_button').click(function() {
     $('.video_preview_wrapper').fadeOut();
   });
+
+  // video volume
+  $('#volume_range').range({
+    min: 0,
+    max: 10,
+    start: 0,
+    onChange: function(value) {
+
+      if (value == 0) {
+        $('.volume_btn').removeClass('up');
+        $('.volume_btn').removeClass('down');
+        $('.volume_btn').removeClass('off');
+        $('.volume_btn').addClass('off');
+      }
+      else if (value > 0 && value < 10) {
+        $('.volume_btn').removeClass('up');
+        $('.volume_btn').removeClass('down');
+        $('.volume_btn').removeClass('off');
+        $('.volume_btn').addClass('down');
+      }
+      else if (value == 10) {
+        $('.volume_btn').removeClass('up');
+        $('.volume_btn').removeClass('down');
+        $('.volume_btn').removeClass('off');
+        $('.volume_btn').addClass('up');
+      }
+      $('.source_video').prop("volume", (value / 10));
+    }
+  });
+
+  // start stopwatch
+  var taken_time = $('.timer_wrapper .duration').runner({
+    autostart: true,
+    format: function(value) {
+      var ms = value % 1000;
+      value = (value - ms) / 1000;
+      var secs = value % 60;
+      value = (value - secs) / 60;
+      var mins = value % 60;
+      var hrs = (value - mins) / 60;
+
+      return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+    }
+  });
+
+  function pad(d) {
+    return (d < 10) ? '0' + d.toString() : d.toString();
+  }
+
+
 });

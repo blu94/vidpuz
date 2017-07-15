@@ -172,5 +172,9 @@ $(document).ready(function() {
 
   });
 
-  
+  $('.preview_trigger_btn').click(function() {
+    $('.video_preview_wrapper').fadeIn();
+  });
+
+
 });
