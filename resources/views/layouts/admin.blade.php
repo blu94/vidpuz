@@ -33,8 +33,8 @@
     @yield('styles')
 
     {{-- header --}}
-    <header class="header_section">
-      <a href="{{ route('admin.index') }}" class="logo_title font_size18 color_white">
+    <header class="header_section bg_neonblue">
+      <a href="{{ route('admin.index') }}" class="logo_title text_shadow_neon_blue font_size18 color_white">
         VIDEO PUZZLE
       </a>
       <div class="header_operation_div sidebar_icon sidebar_trigger">
@@ -48,7 +48,7 @@
       </div>
 
       {{-- sidebar --}}
-      <div class="sidebar">
+      <div class="sidebar bg_neonblue1">
         <div class="profile_div redirect_to_page" data-redirect-url='{{route('admin.users.edit', Auth::user()->id)}}'>
 
 

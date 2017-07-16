@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\user;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,47 +9,9 @@ use App\Puzzle;
 use Auth;
 use DB;
 
-class AdminPuzzleController extends Controller
+class UserPuzzleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        $all_puzzle = Puzzle::whereNotNull('duration')->orderBy('duration', 'asc')->limit(1)->first();
-        return $all_puzzle;
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //
     public function show($id)
     {
         //
@@ -88,43 +50,9 @@ class AdminPuzzleController extends Controller
             'asset_id' => $asset->id,
           ]);
 
-          return view('admin.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration'));
+          return view('user.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration'));
         }
         return redirect()->back();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function completepuzzle (Request $request) {

@@ -77,4 +77,40 @@ Route::group(['middleware'=>'user'], function(){
       'index'  => 'user.index'
     ]
   ]);
+
+  Route::post('user/assets/store_asset', ['as'=>'user.assets.store_asset', 'uses'=>'user\UserAssetController@store_asset']);
+  Route::post('user/assets/update_asset', ['as'=>'user.assets.update_asset', 'uses'=>'user\UserAssetController@update_asset']);
+  Route::post('user/assets/bulk_action', ['as'=>'user.assets.bulk_action', 'uses'=>'user\UserAssetController@bulk_action']);
+  Route::post('user/assets/changeprofileimg', ['as'=>'user.assets.changeprofileimg', 'uses'=>'user\UserAssetController@changeprofileimg']);
+
+
+  Route::resource('/user/assets', 'user\UserAssetController', [
+    'names'=> [
+      'index'  => 'user.assets.index',
+      'create'  => 'user.assets.create',
+      'show'  => 'user.assets.show',
+      'edit'  => 'user.assets.edit',
+      'update'  => 'user.assets.update',
+      'store'  => 'user.assets.store'
+    ]
+  ]);
+
+  Route::resource('/user/users', 'user\UserUsersController', [
+    'names'=> [
+      'index'  => 'user.users.index',
+      'create'  => 'user.users.create',
+      'edit'  => 'user.users.edit',
+      'store'  => 'user.users.store',
+      'update'  => 'user.users.update'
+    ]
+  ]);
+
+  Route::post('user/puzzles/completepuzzle', ['as'=>'user.puzzles.completepuzzle', 'uses'=>'user\UserPuzzleController@completepuzzle']);
+
+  Route::resource('/user/puzzles', 'user\UserPuzzleController', [
+    'names'=> [
+      'index'  => 'user.puzzles.index',
+      'show'  => 'user.puzzles.show'
+    ]
+  ]);
 });

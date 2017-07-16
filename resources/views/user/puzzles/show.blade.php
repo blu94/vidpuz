@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.user')
 
 @section('page_title')
   {{$asset->title}}
@@ -196,7 +196,7 @@
       $.ajax({
         type: 'POST',
         data: { 'puzzle_id': puzzle_id, 'duration': duration },
-        url: '{{route('admin.puzzles.completepuzzle')}}',
+        url: '{{route('user.puzzles.completepuzzle')}}',
         success: function(response){
           // alert(response);
         }

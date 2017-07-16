@@ -12,7 +12,7 @@ body {
   position: fixed;
   z-index: 10000;
   /*border-bottom: 1pt solid #2ab5d3;*/
-  background-color: #8cd2e1;
+
   /*background-color: #6fc6b0;*/
 }
 .header_section .logo_title {
@@ -21,9 +21,9 @@ body {
   letter-spacing: 3px;
   font-family: 'skarpalt';
   font-weight: bold;
-  Text-shadow: 3px 3px 3px #00b4ff;
   color: white;
 }
+
 .sidebar_icon {
   display: flex;
   align-items: center;
@@ -42,7 +42,6 @@ body {
   top: 0;
   z-index: 10002;
   right: -250px;
-  background-color: #94dae9;
   transition: all 1s;
 }
 
@@ -794,6 +793,13 @@ input:checked + .slider:before {
 }
 .canvas_pieces {
   position: absolute;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
 }
 #target_video {
   display: block;
@@ -823,6 +829,7 @@ input:checked + .slider:before {
   display: block;
   float: left;
   width: 100%;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -854,7 +861,46 @@ input:checked + .slider:before {
 .timer_wrapper .detail, .best_record_wrapper .detail {
   margin: 0 !important;
 }
+.congratulation_lightbox {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.congratulation_wrapper {
+  display: block;
+  float: left;
+  min-width: 350px;
+  height: 350px;
 
+}
+.congratulation_wrapper .congratulations_title {
+  display: block;
+  text-align: center;
+  line-height: 200%;
+}
+.congratulation_wrapper .congratulations_title .congratulations_text {
+  font-family: 'pale_blue_eyes';
+}
+.congratulation_wrapper .puzzle_thumbnail_wrapper {
+  display: flex;
+  float: left;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.congratulation_wrapper .puzzle_thumbnail_wrapper img {
+  display: block;
+  float: left;
+  /*width: 100%;*/
+  height: 300px;
+  /*object-fit: contain;*/
+}
+.congratulation_wrapper .puzzle_thumbnail_wrapper .confirm_complete {
+  display: block;
+  position: absolute;
+  border: 0;
+  padding: 15px 25px;
+  border-radius: 5px;
+  font-family: 'pale_blue_eyes';
+}
 /*body*/
 
 /*hide scrollbar*/
