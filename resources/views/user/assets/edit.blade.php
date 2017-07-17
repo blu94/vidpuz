@@ -78,7 +78,10 @@
       {!! Form::close() !!}
 
     @elseif ($asset->uploader->id != Auth::user()->id)
-      <h2 class="page_title">{{$asset->title}}</h2>
+      <h2 class="page_title" style="display:flex;align-items:center; ">
+        {{$asset->title}}
+        <a href="{{route('user.puzzles.show', $asset->id)}}" class="ui blue button margin_leftauto">PLAY</a>
+      </h2>
 
       <div class="asset_file_wrapper">
         @if ($asset->usage == 'VIDEO')
