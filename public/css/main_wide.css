@@ -102,6 +102,19 @@ body {
   -webkit-box-sizing: border-box;
   padding: 20px 20px 30px;
 }
+.login_page_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  margin: 40px 0;
+  width: 100%;
+}
+.login_form_wrapper {
+  display: block;
+  float: left;
+  width: 40%;
+}
 /*landing page design*/
 
 .header_section {
