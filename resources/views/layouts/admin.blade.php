@@ -35,7 +35,7 @@
     {{-- header --}}
     <header class="header_section bg_neonblue">
       <a href="{{ route('admin.index') }}" class="logo_title text_shadow_neon_blue font_size18 color_white">
-        VIDEO PUZZLE
+        INTERACTIVE VIDEO PUZZLE
       </a>
       <div class="header_operation_div sidebar_icon sidebar_trigger">
         <div class="clear-menu-btn">
@@ -115,6 +115,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js" charset="utf-8"></script>
+
     <script src="{{asset('js/main.js?v='.$version)}}" charset="utf-8"></script>
     @yield('scripts')
   </body>

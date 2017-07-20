@@ -24,6 +24,7 @@ $(document).ready(function() {
       });
   });
 
+
   $('.sidebar_trigger').click(function() {
     $('.sidebar').toggleClass('sidebar_triggered');
 

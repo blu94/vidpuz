@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.landing')
 
 @section('page_title')
   {{$asset->title}}
@@ -20,7 +20,7 @@
     $matrix_y = 3;
   @endphp
 
-  <div class="body_container">
+  <div class="body_container" style='margin: 0;'>
 
     {{-- operation area --}}
     <div class="puzzle_operation_wrapper segment bg_white">
@@ -134,7 +134,7 @@
     var puzzle_matched = 0;
     var matrix_x = {{$matrix_x}};
     var matrix_y = {{$matrix_y}};
-    var puzzle_id = {{$puzzle->id}};
+    var puzzle_id = 0;
   </script>
   <script src="{{asset('js/jquery-ui.min.js?v='.str_random(20))}}"></script>
   <script src="{{asset('js/jquery.runner.js?v='.str_random(20))}}" charset="utf-8"></script>
@@ -189,21 +189,20 @@
     });
 
     function completepuzzle (puzzle_id, duration) {
-      var token = $('meta[name="_token"]').attr('content')
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': token
-        }
-      });
-
-      $.ajax({
-        type: 'POST',
-        data: { 'puzzle_id': puzzle_id, 'duration': duration },
-        url: '{{route('admin.puzzles.completepuzzle')}}',
-        success: function(response){
-          // alert(response);
-        }
-      });
+      // var token = $('meta[name="_token"]').attr('content')
+      // $.ajaxSetup({
+      //   headers: {
+      //     'X-CSRF-TOKEN': token
+      //   }
+      // });
+      //
+      // $.ajax({
+      //   type: 'POST',
+      //   data: { 'puzzle_id': puzzle_id, 'duration': duration },
+      //   url: '{{route('admin.puzzles.completepuzzle')}}',
+      //   success: function(response){
+      //   }
+      // });
     }
   </script>
 @endsection

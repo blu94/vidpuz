@@ -2,6 +2,107 @@ body {
 
 }
 
+/*landing page design*/
+
+.landing_header1 {
+  display: block;
+  float: left;
+  width: 100%;
+  min-height: 100px;
+}
+.landing_header1 .landing_login_bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 10px 0 0;
+}
+.landing_header1 .landing_login_bar .landing_navbar_wrapper {
+  display: block;
+  float: left;
+}
+.landing_header1 .landing_login_bar .landing_navbar_wrapper .header_item {
+  display: block;
+  float: left;
+  color: inherit;
+  padding: 10px 15px;
+  transition: all 1s;
+  margin: 0 10px;
+  border-top: 1px solid transparent;
+}
+.landing_header1 .landing_login_bar .landing_navbar_wrapper .header_item:hover {
+  border-top: 1px solid black;
+}
+.landing_header1 .landing_title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  width: 100%;
+  letter-spacing: 3px;
+  line-height: 120%;
+  font-family: 'skarpalt';
+  font-weight: bold;
+  color: white;
+  font-size: 43pt;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 30px 20px;
+}
+.homepage_slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background-color: #fbfbfb;
+}
+.homepage_slider .carousel {
+  width: 80%;
+  height: 100%;
+}
+.homepage_slider .carousel .carousel-inner {
+  display: block;
+  float: left;
+  width: 100%;
+  height: 100%;
+}
+.homepage_slider .carousel .carousel-inner .item {
+  width: 100%;
+  height: 100%;
+}
+.homepage_slider .carousel .carousel-inner .item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.homepage_slider .carousel .carousel-control {
+  background: transparent !important;
+}
+.landing_item_container {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+.landing_item_container .title {
+  display: block;
+  width: 75%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 20px 20px 30px;
+}
+/*landing page design*/
 
 .header_section {
   display: flex;
@@ -900,6 +1001,16 @@ input:checked + .slider:before {
   padding: 15px 25px;
   border-radius: 5px;
   font-family: 'pale_blue_eyes';
+}
+.user_item_card {
+  display: block;
+  width: 100%;
+  min-height: 0;
+}
+.user_item_card .image img {
+  display: block;
+  object-fit: cover;
+  height: 270px !important;
 }
 /*body*/
 

@@ -35,7 +35,7 @@
     {{-- header --}}
     <header class="header_section bg_lightpurple">
       <a href="{{ route('user.index') }}" class="logo_title text_shadow_purple font_size18 color_white">
-        VIDEO PUZZLE
+        INTERACTIVE VIDEO PUZZLE
       </a>
       <div class="header_operation_div sidebar_icon sidebar_trigger">
         <div class="clear-menu-btn">

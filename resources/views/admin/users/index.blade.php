@@ -29,12 +29,12 @@
           </div>
         </a> --}}
 
-        <div class="card redirect_to_page" data-redirect-url='{{route('admin.users.edit', $user->id)}}'>
+        <div class="card redirect_to_page user_item_card" data-redirect-url='{{route('admin.users.edit', $user->id)}}'>
           <div class="image">
             @if ($user->profileimage() == NULL)
               <img src="http://via.placeholder.com/150x150" alt="" class="">
             @elseif ($user->profileimage() != NULL)
-              <img src="{{$user->profileimage()->path}}" alt="" class="">
+              <img src="{{asset($user->profileimage()->path)}}" alt="" class="">
             @endif
           </div>
           <div class="content">

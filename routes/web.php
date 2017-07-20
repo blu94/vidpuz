@@ -12,9 +12,26 @@
 */
 use App\User;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'LandingController@index');
+
+Route::resource('/landing/video', 'VideoController', [
+  'names'=> [
+    'index'  => 'landing.video.index',
+    'show'  => 'landing.video.show'
+  ]
+]);
+
+Route::resource('/landing/puzzle', 'PuzzleController', [
+  'names'=> [
+    'show'  => 'landing.puzzle.show'
+  ]
+]);
+
+Route::get('/puzzle/{id}', ['as'=>'puzzle', 'uses'=>'LandingController@puzzle']);
 
 Auth::routes();
 

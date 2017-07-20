@@ -305,3 +305,12 @@ a, a:hover {
   -webkit-clip-path: polygon(0 0, 24.5% 0, 50% 24.5%, 75% 0, 100% 0, 100% 19.5%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 24.5% 100%, 0 100%, 0 75%, 24.5% 50%, 0 24.5%);
   clip-path: polygon(0 0, 24.5% 0, 50% 24.5%, 75% 0, 100% 0, 100% 19.5%, 100% 40%, 100% 60%, 100% 100%, 66% 100%, 51% 100%, 24.5% 100%, 0 100%, 0 75%, 24.5% 50%, 0 24.5%);
 }
+
+/*pagination*/
+.pagination_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  float: left;
+}
