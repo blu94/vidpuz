@@ -41,57 +41,65 @@
 
       <div class="assets_container">
         <div class="ui link special cards">
-          @foreach ($assets as $asset)
-            {{-- <div class="assets_item_container">
-              <img src="{{asset($asset->thumbnail_img)}}" class="asset_thumnail redirect_to_page" data-redirect-url='{{route('admin.assets.edit', $asset->id)}}'>
-              <a href="{{route('admin.users.edit', $asset->uploader->id)}}" class="user_thumbnail">
-                @if ($asset->uploader->profileimage() == NULL)
-                  <img src="http://via.placeholder.com/150x150" alt="" class="">
-                @elseif ($asset->uploader->profileimage() != NULL)
-                  <img src="{{$asset->uploader->profileimage()->path}}" alt="" class="">
-                @endif
+          @if (count($assets) > 0)
+            @foreach ($assets as $asset)
+              {{-- <div class="assets_item_container">
+                <img src="{{asset($asset->thumbnail_img)}}" class="asset_thumnail redirect_to_page" data-redirect-url='{{route('admin.assets.edit', $asset->id)}}'>
+                <a href="{{route('admin.users.edit', $asset->uploader->id)}}" class="user_thumbnail">
+                  @if ($asset->uploader->profileimage() == NULL)
+                    <img src="http://via.placeholder.com/150x150" alt="" class="">
+                  @elseif ($asset->uploader->profileimage() != NULL)
+                    <img src="{{$asset->uploader->profileimage()->path}}" alt="" class="">
+                  @endif
 
-              </a>
-              <a href="{{route('admin.puzzles.show', $asset->id)}}" class="play_button">PLAY</a>
-              <div class="bulk_action_checkbox_container">
-                <span class="tick_symbol color_white">&#x2714;</span>
-                <input type="checkbox" name="bulk_action_checkbox[]" class="bulk_action_checkbox" value="{{$asset->id}}">
-              </div>
+                </a>
+                <a href="{{route('admin.puzzles.show', $asset->id)}}" class="play_button">PLAY</a>
+                <div class="bulk_action_checkbox_container">
+                  <span class="tick_symbol color_white">&#x2714;</span>
+                  <input type="checkbox" name="bulk_action_checkbox[]" class="bulk_action_checkbox" value="{{$asset->id}}">
+                </div>
 
-            </div> --}}
+              </div> --}}
 
-            <div class="card assets_item_container">
-              <div class="bulk_action_checkbox_container">
-                <span class="tick_symbol color_white">&#x2714;</span>
-                <input type="checkbox" name="bulk_action_checkbox[]" class="bulk_action_checkbox" value="{{$asset->id}}">
-              </div>
-              <div class="blurring dimmable image">
-                <div class="ui dimmer">
-                  <div class="content">
-                    <div class="center">
-                      <a href="{{route('admin.puzzles.show', $asset->id)}}" class="ui inverted button">Play</a>
+              <div class="card assets_item_container">
+                <div class="bulk_action_checkbox_container">
+                  <span class="tick_symbol color_white">&#x2714;</span>
+                  <input type="checkbox" name="bulk_action_checkbox[]" class="bulk_action_checkbox" value="{{$asset->id}}">
+                </div>
+                <div class="blurring dimmable image">
+                  <div class="ui dimmer">
+                    <div class="content">
+                      <div class="center">
+                        <a href="{{route('admin.puzzles.show', $asset->id)}}" class="ui inverted button">Play</a>
+                      </div>
                     </div>
                   </div>
+                  <img src="{{asset($asset->thumbnail_img)}}" class="">
                 </div>
-                <img src="{{asset($asset->thumbnail_img)}}" class="">
-              </div>
-              <div class="content">
-                <a class="header ellipsis_content" href='{{route('admin.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
-                <div class="meta">
-                  <span class="date">Create {{$asset->created_at->diffForHumans()}}</span>
+                <div class="content">
+                  <a class="header ellipsis_content" href='{{route('admin.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
+                  <div class="meta">
+                    <span class="date">Create {{$asset->created_at->diffForHumans()}}</span>
+                  </div>
+                </div>
+                <div class="content redirect_to_page" data-redirect-url='{{route('admin.users.edit', $asset->uploader->id)}}'>
+                  {{-- <div class="right floated meta">{{$asset->created_at->diffForHumans()}}</div> --}}
+                  @if ($asset->uploader->profileimage() == NULL)
+                    <img src="http://via.placeholder.com/150x150" alt="" class="ui avatar image">
+                  @elseif ($asset->uploader->profileimage() != NULL)
+                    <img src="{{$asset->uploader->profileimage()->path}}" alt="" class="ui avatar image">
+                  @endif
+                  {{$asset->uploader->username}}
                 </div>
               </div>
-              <div class="content redirect_to_page" data-redirect-url='{{route('admin.users.edit', $asset->uploader->id)}}'>
-                {{-- <div class="right floated meta">{{$asset->created_at->diffForHumans()}}</div> --}}
-                @if ($asset->uploader->profileimage() == NULL)
-                  <img src="http://via.placeholder.com/150x150" alt="" class="ui avatar image">
-                @elseif ($asset->uploader->profileimage() != NULL)
-                  <img src="{{$asset->uploader->profileimage()->path}}" alt="" class="ui avatar image">
-                @endif
-                {{$asset->uploader->username}}
-              </div>
-            </div>
-          @endforeach
+            @endforeach
+          @elseif (count($assets) == 0)
+            <p class="description text-center padd_20 col-md-12 col-sm-12">
+              No asset yet.
+            </p>
+          @endif
+
+
         </div>
 
       </div>

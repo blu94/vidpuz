@@ -166,6 +166,7 @@ return [
         Lakshmaji\Thumbnail\ThumbnailServiceProvider::class,
         Folour\Flavy\Provider\FlavyServiceProvider::class,
         Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -233,7 +234,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Thumbnail' => Lakshmaji\Thumbnail\Facade\Thumbnail::class,
         'Flavy' => Folour\Flavy\FlavyFacade::class,
-        'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class
+        'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class
 
     ],
 

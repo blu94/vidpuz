@@ -64,17 +64,20 @@
           </div>
           <div class="ui clearing divider"></div>
           <div class="field">
-            <button class="large fluid ui facebook button">
+            <a class="large fluid ui facebook button" href="{{route('social.login', 'facebook')}}">
               <i class="facebook icon"></i>
               Facebook
-            </button>
+            </a>
           </div>
           <div class="field">
-            <button class="large fluid ui google plus button">
+            <a class="large fluid ui google plus button" href="{{route('social.login', 'google')}}">
               <i class="google plus icon"></i>
               Google Plus
-            </button>
+            </a>
           </div>
+
+          @include('layouts.includes.message')
+
         </div>
 
       </div>

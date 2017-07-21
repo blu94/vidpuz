@@ -204,6 +204,9 @@ a, a:hover {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+.padd_20 {
+  padding: 20px;
+}
 
 .margin_top0 {
   margin-top: 0 !important;

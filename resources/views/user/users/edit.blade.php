@@ -120,8 +120,7 @@
           {{-- edit detail --}}
 
           {{-- edit password --}}
-
-          @if ($user->id == Auth::user()->id)
+          @if ($user->id == Auth::user()->id && count($user->socialProviders) == 0)
             {!! Form::open(['method' => 'POST', 'class' => 'ui form']) !!}
 
               <h4 class="ui dividing header">Edit Password</h4>
@@ -143,6 +142,16 @@
               {!! Form::submit('Update', ['class' => 'ui button change_password_submit_btn']) !!}
 
             {!! Form::close() !!}
+          @elseif ($user->id == Auth::user()->id && count($user->socialProviders) > 0)
+            <div class="ui icon message">
+              <i class="lock icon"></i>
+              <div class="content">
+                <div class="header">
+                  Change Password?
+                </div>
+                <p>Please use forget password function.</p>
+              </div>
+            </div>
           @endif
 
           {{-- edit password --}}

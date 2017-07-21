@@ -18,6 +18,10 @@ use App\User;
 
 Route::get('/', 'LandingController@index');
 
+// facebook login
+Route::get('auth/{provider}', ['as'=> 'social.login', 'uses'=> 'Auth\RegisterController@redirectToProvider']);
+Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
+
 Route::resource('/landing/video', 'VideoController', [
   'names'=> [
     'index'  => 'landing.video.index',

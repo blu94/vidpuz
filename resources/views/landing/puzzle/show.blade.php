@@ -42,7 +42,7 @@
       @php
         if ($personal_best_record_duration != "") {
           echo "<div class='ui label large best_record_wrapper margin_leftauto'>
-            <span class='detail'>Personal Best Record</span>
+            <span class='detail'>Best Record</span>
             <span class='duration'>".$personal_best_record_duration."</span>
           </div>
           <div class='ui label large timer_wrapper'>
