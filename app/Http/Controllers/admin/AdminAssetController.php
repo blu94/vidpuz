@@ -235,7 +235,9 @@ class AdminAssetController extends Controller
             <button class='delete_asset btn btn-danger' data-file-id='".$asset->id."'>REMOVE</button>
           </div>
           <div class='uploaded_file_detail_container'>
-            <input type='text' name='' class='uploaded_file_title col-md-9 col-sm-9' value='".$name."' data-file-id='".$asset->id."'/>
+            <div class='ui input uploaded_file_input_wrapper'>
+              <input type='text' name='' class='uploaded_file_title col-md-9 col-sm-9' value='".$name."' data-file-id='".$asset->id."'/>
+            </div>
 
             <div class='switch_status col-md-3 col-sm-3'>
               <span class='switch_title' data-file-id='".$asset->id."'>
@@ -246,7 +248,9 @@ class AdminAssetController extends Controller
                 <div class='slider round'></div>
               </label>
             </div>
-            <textarea name='name' rows='8' cols='80' class='uploaded_file_description col-md-12 col-sm-12' data-file-id='".$asset->id."'></textarea>
+            <div class='ui input uploaded_file_input_wrapper'>
+              <textarea name='name' rows='8' cols='80' class='uploaded_file_description col-md-12 col-sm-12' data-file-id='".$asset->id."'></textarea>
+            </div>
             <div class='col-md-12 col-sm-12 submit_btn_container'>
               <button type='button' name='button' class='btn submit_file_changes_btn pull-right' data-file-id='".$asset->id."' data-update-url='".route('admin.assets.update_asset')."'>SAVED</button>
             </div>
@@ -329,5 +333,11 @@ class AdminAssetController extends Controller
       ]);
 
       echo $path;
+    }
+
+    public function removeuploadedasset ($id) {
+      $asset = Asset::findOrFail($id);
+      $asset->delete();
+      return 'success';
     }
 }

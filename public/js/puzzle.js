@@ -12,14 +12,16 @@ $(document).ready(function() {
 
 
   // initialize puzzle
+  var hints_counter = 0;
   for (var i = 0; i < matrix_x; i++) {
     for (var j = 0; j < matrix_y; j++) {
-      create_pieaces (i, j, matrix_x, matrix_y);
+      hints_counter+=1;
+      create_pieaces (i, j, matrix_x, matrix_y, hints_counter);
     }
   }
 
 
-  function create_pieaces (x, y, matrix_x, matrix_y) {
+  function create_pieaces (x, y, matrix_x, matrix_y, hints_counter) {
 
     var videoHeight = $('#v').height();
     var videoWidth = $('#v').width();
@@ -28,12 +30,14 @@ $(document).ready(function() {
 
     var extra_styles = "";
     var pieces_class = "";
+    var alignment_of_hints = "";
     var convas_rate_width = 0;
     var convas_rate_height = 0;
     var canvas_location_x = 0;
     var canvas_location_y = 0;
     extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
     pieces_class = "pieces_top_left";
+    alignment_of_hints = "padding_20per_btm_rgt";
     convas_rate_width = 1;
     convas_rate_height = 1;
     canvas_location_x = 1.25;
@@ -42,6 +46,7 @@ $(document).ready(function() {
     if((x == 0) && (y == 0)) {
       extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       pieces_class = "pieces_top_left";
+      alignment_of_hints = "padding_20per_btm_rgt";
       convas_rate_width = 1;
       convas_rate_height = 1;
       canvas_location_x = 1.25;
@@ -50,6 +55,7 @@ $(document).ready(function() {
     else if((x == 0) && (y < (matrix_y -1))) {
       extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       pieces_class = "pieces_center_left";
+      alignment_of_hints = "padding_20per_btm_rgt";
       convas_rate_width = 1.25;
       convas_rate_height = 1.25;
       canvas_location_x = 1.55;
@@ -58,6 +64,7 @@ $(document).ready(function() {
     else if((x < (matrix_x -1)) && (y == 0)) {
       extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       pieces_class = "pieces_top_center";
+      alignment_of_hints = "padding_20per_btm_rgt";
       convas_rate_width = 1;
       convas_rate_height = 1;
       canvas_location_x = 1.25;
@@ -66,6 +73,7 @@ $(document).ready(function() {
     else if((x < (matrix_x -1)) && (y < (matrix_y -1))) {
       extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       pieces_class = "pieces_center_center";
+      alignment_of_hints = "padding_20per_btm_rgt";
       convas_rate_width = 1.25;
       convas_rate_height = 1.25;
       canvas_location_x = 1.55;
@@ -74,15 +82,17 @@ $(document).ready(function() {
     else if((x == (matrix_x -1)) && (y < (matrix_y -1))) {
       extra_styles = "width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
       pieces_class = "pieces_center_right";
+      alignment_of_hints = "padding_20per_btm";
       convas_rate_width = 1.25;
       convas_rate_height = 1;
       canvas_location_x = 1.25;
       canvas_location_y = 1.25;
 
       if((x == (matrix_x -1)) && (y == 0)) {
-        extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
+        extra_styles = "width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1.25)+"px;";
         pieces_class = "pieces_top_right";
-        convas_rate_width = 1;
+        alignment_of_hints = "padding_20per_btm";
+        convas_rate_width = 1.25;
         convas_rate_height = 1;
         canvas_location_x = 1.25;
         canvas_location_y = 1.25;
@@ -91,11 +101,13 @@ $(document).ready(function() {
     else if((x < (matrix_x -1)) && (y == (matrix_y -1))) {
       extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
       pieces_class = "pieces_bottom_center";
+      alignment_of_hints = "padding_20per_rgt";
       convas_rate_width = 1;
       convas_rate_height = 1.25;
       if((x == 0) && (y == (matrix_y -1))) {
         extra_styles = "width:"+((videoWidth/matrix_x) * 1.25)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
         pieces_class = "pieces_bottom_left";
+        alignment_of_hints = "padding_20per_rgt";
         convas_rate_width = 1;
         convas_rate_height = 1.25;
         canvas_location_x = 1.25;
@@ -105,6 +117,7 @@ $(document).ready(function() {
     else if((x == (matrix_x -1)) && (y == (matrix_y -1))) {
       extra_styles = "width:"+((videoWidth/matrix_x) * 1)+"px; height:"+((videoHeight/matrix_y) * 1)+"px;";
       pieces_class = "pieces_bottom_right";
+      alignment_of_hints = "";
       convas_rate_width = 1.25;
       convas_rate_height = 1.25;
       canvas_location_x = 1.25;
@@ -117,7 +130,7 @@ $(document).ready(function() {
     var random_x_coord = Math.floor((Math.random() * 90) + 1);
     var random_y_coord = Math.floor((Math.random() * 250) + 1);
 
-    $(".puzzle_wrapper").append("<div id='pieaces_"+x+y+"' data-number='"+x+y+"' class='canvas_pieces "+pieces_class+"' style='"+extra_styles+" left: "+random_x_coord+"%; top:"+random_y_coord+"px;'><canvas id='target_canvas"+x+y+"'></canvas></div>");
+    $(".puzzle_wrapper").append("<div id='pieaces_"+x+y+"' data-number='"+x+y+"' class='canvas_pieces "+pieces_class+"' style='"+extra_styles+" left: "+random_x_coord+"%; top:"+random_y_coord+"px;'><span class='hints_container "+alignment_of_hints+"'>"+hints_counter+"</span><canvas id='target_canvas"+x+y+"'></canvas></div>");
 
     var v = document.getElementById('v');
     var canvas = document.getElementById('target_canvas'+x+y);
@@ -284,6 +297,14 @@ $(document).ready(function() {
       $(this).children('.play_pause_btn_title').text('Pause');
       $('#v')[0].play();
     }
+  });
+
+  // show hints
+  $('.hints_container').fadeOut();
+  $('.show_hints').on('mousedown', function() {
+    $('.hints_container').fadeIn().css({'display':'flex'});
+  }).on('mouseup mouseleave', function() {
+    $('.hints_container').fadeOut();
   });
 
   // start stopwatch

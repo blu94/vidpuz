@@ -190,7 +190,9 @@ class UserAssetController extends Controller
             <button class='delete_asset btn btn-danger' data-file-id='".$asset->id."'>REMOVE</button>
           </div>
           <div class='uploaded_file_detail_container'>
-            <input type='text' name='' class='uploaded_file_title col-md-9 col-sm-9' value='".$name."' data-file-id='".$asset->id."'/>
+            <div class='ui input uploaded_file_input_wrapper'>
+              <input type='text' name='' class='uploaded_file_title col-md-9 col-sm-9' value='".$name."' data-file-id='".$asset->id."'/>
+            </div>
 
             <div class='switch_status col-md-3 col-sm-3'>
               <span class='switch_title' data-file-id='".$asset->id."'>
@@ -284,5 +286,11 @@ class UserAssetController extends Controller
       ]);
 
       echo $path;
+    }
+
+    public function removeuploadedasset ($id) {
+      $asset = Asset::findOrFail($id);
+      $asset->delete();
+      return 'success';
     }
 }

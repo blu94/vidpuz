@@ -49,6 +49,7 @@
       }
     });
 
+    var del_item_url = '{{route('admin.assets.removeuploadedasset', '%item_id%')}}';
 
 
   </script>

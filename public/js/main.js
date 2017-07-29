@@ -177,5 +177,23 @@ $(document).ready(function() {
     $('.video_preview_wrapper').fadeIn();
   });
 
+  $(document).on('click', '.delete_asset', function() {
+    var item_id = $(this).data('file-id');
+    $('#file_item'+item_id).fadeOut(300, function() { $(this).remove(); });
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+      }
+    });
+
+    $.ajax({
+      type: 'GET',
+      data: { 'item_id': item_id },
+      url: del_item_url.replace('%item_id%', item_id),
+      success: function(response){
+      }
+    });
+  });
 
 });

@@ -17,6 +17,7 @@
     <meta name="wide_style" content="{{asset('css/main_wide.css')}}">
     <meta name="medium_style" content="{{asset('css/main_medium.css')}}">
     <meta name="small_style" content="{{asset('css/main_small.css')}}">
+    <meta name="token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('css/main.css?v='.$version)}}">
     <link rel="stylesheet" id='responsive_stylesheet' href="{{asset('css/main_wide.css?v='.$version)}}">
 

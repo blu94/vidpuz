@@ -49,7 +49,7 @@
       }
     });
 
-
+    var del_item_url = '{{route('user.assets.removeuploadedasset', '%item_id%')}}';
 
   </script>
 @endsection
