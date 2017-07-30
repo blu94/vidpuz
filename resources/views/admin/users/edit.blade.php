@@ -8,7 +8,7 @@
   <div class="body_container">
     @include('layouts.includes.message')
     <div class="user_profile_container col-md-12 col-sm-12">
-      <div class="profile_img col-md-2 col-sm-12">
+      <div class="profile_img col-md-2 col-sm-2">
         @if ($user->profileimage() == NULL)
           <img src="http://via.placeholder.com/150x150" class="edit_profile_image" alt="">
         @elseif ($user->profileimage() != NULL)

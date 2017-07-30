@@ -134,7 +134,7 @@
 
 
     {{-- source video --}}
-    <video id="v" loop="" autoplay="" class="source_video">
+    <video id="v" loop="" autoplay muted class="source_video">
       @php
         $format = "mp4";
         if (strtolower($asset->format) == 'ogv') {

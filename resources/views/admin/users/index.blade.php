@@ -7,7 +7,7 @@
 @section('content')
   <div class="body_container">
     <span class="page_title">USERS</span>
-    <div class="all_user_wrapper ui link cards">
+    <div class="all_user_wrapper ui four doubling cards">
 
       {{-- add new member button --}}
       <a href="{{route('admin.users.create')}}" class="card">

@@ -1,6 +1,11 @@
 // puzzle script here
 $(document).ready(function() {
+  $('#v').get(0).play();
 
+  // drag up and down prevent scroll on mobile
+  $(".puzzle_wrapper").bind('touchmove', function(e) {
+    e.preventDefault();
+  }, false);
   // get video height and width and set video height and width
   var videoHeight = $('#v').height();
   var videoWidth = $('#v').width();
@@ -197,7 +202,8 @@ $(document).ready(function() {
     // Draw the pixels onto the visible canvas
     c.putImageData(idata,0,0);
     // Start over!
-    setTimeout(draw,10,v,c,bc,w,h,x,y,matrix_x, matrix_y);
+    // setTimeout(draw,30,v,c,bc,w,h,x,y,matrix_x, matrix_y);
+    window.requestAnimationFrame(function(timestamp) { draw(v,c,bc,w,h,x,y,matrix_x,matrix_y);})
   }
 
   // drag individual pieace
@@ -225,7 +231,8 @@ $(document).ready(function() {
     (function loop() {
       if (!$this.paused && !$this.ended) {
         ctx.drawImage($this, 0, 0, (videoWidth / 0.8), (videoHeight / 0.8));
-        setTimeout(loop, 1000 / 30); // drawing at 30fps
+        // requestAnimationFrame(loop); // drawing at 30fps
+        // setTimeout(loop, 1000 / 30); // drawing at 30fps
       }
     })();
   }, 0);
