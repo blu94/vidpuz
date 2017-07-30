@@ -213,6 +213,9 @@
              // when puzzle complete
              if(finish_puzzle == puzzle_matched) {
                $('.timer_wrapper .duration').runner('stop');
+               $('.play_pause_btn_video').children('.icon').removeClass('pause');
+               $('.play_pause_btn_video').children('.icon').removeClass('play');
+               $('.play_pause_btn_video').children('.icon').addClass('play');
                $('#v')[0].pause();
 
                // get complete duration
