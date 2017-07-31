@@ -48,9 +48,7 @@
 
         </div>
 
-        <a href="{{ url('/') }}" class="landing_title text_shadow_neon_blue">
-          INTERACTIVE VIDEO PUZZLE
-        </a>
+        <a href="{{ url('/') }}" class="landing_title text_shadow_neon_blue">INTERACTIVE VIDEO PUZZLE</a>
 
 
       </div>

@@ -38,18 +38,16 @@ body {
   border-top: 1px solid black;
 }
 .landing_header1 .landing_title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  float: left;
+  display: block;
   width: 100%;
+  float: left;
+  text-align: center;
   letter-spacing: 3px;
-  line-height: 120%;
-  font-family: 'skarpalt';
+  /*font-family: 'skarpalt';*/
+  font-family: 'avenirlt';
   font-weight: bold;
   color: white;
-  font-size: 23pt;
+  font-size: 20pt;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -821,16 +819,22 @@ input:checked + .slider:before {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  float: left;
   width: 100%;
-  height: 100%;
+  height: 340px;
   color: #333;
 }
 .add_icon_container .add_icon {
-  display: flex;
+  display: -webkit-box;   /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox;  /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex;  
   align-items: center;
   justify-content: center;
-  float: left;
-  padding: 15px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 0;
   height: 150px;
   width: 150px;
   font-size: 100pt;

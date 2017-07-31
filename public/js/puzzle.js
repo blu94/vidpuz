@@ -231,7 +231,7 @@ $(document).ready(function() {
     (function loop() {
       if (!$this.paused && !$this.ended) {
         ctx.drawImage($this, 0, 0, (videoWidth / 0.8), (videoHeight / 0.8));
-        // requestAnimationFrame(loop); // drawing at 30fps
+        requestAnimationFrame(loop); // drawing at 30fps
         // setTimeout(loop, 1000 / 30); // drawing at 30fps
       }
     })();
@@ -282,6 +282,7 @@ $(document).ready(function() {
         $('.volume_btn').removeClass('off');
         $('.volume_btn').addClass('up');
       }
+      $(".source_video").prop('muted', false);
       $('.source_video').prop("volume", (value / 10));
     }
   });
@@ -308,9 +309,9 @@ $(document).ready(function() {
 
   // show hints
   $('.hints_container').fadeOut();
-  $('.show_hints').on('mousedown', function() {
+  $('.show_hints').on('mousedown touchstart', function() {
     $('.hints_container').fadeIn().css({'display':'flex'});
-  }).on('mouseup mouseleave', function() {
+  }).on('mouseup mouseleave touchend', function() {
     $('.hints_container').fadeOut();
   });
 
