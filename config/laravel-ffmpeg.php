@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'default_disk' => 'local',
+    'default_disk' => 'C:/',
 
-    'ffmpeg.binaries' => 'C:/FFmpeg/bin/ffmpeg.exe',
+    'ffmpeg.binaries' => 'C:/ffmpeg/bin/ffmpeg',
     'ffmpeg.threads'  => 12,
 
-    'ffprobe.binaries' => 'C:/FFmpeg/bin/ffprobe.exe',
+    'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe',
 
     'timeout' => 3600,
 ];

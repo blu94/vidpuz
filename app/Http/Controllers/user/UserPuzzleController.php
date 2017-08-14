@@ -48,41 +48,45 @@ class UserPuzzleController extends Controller
         $asset = Asset::select(
           '*',
           DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
-        )->findOrFail($id);
-        if ($asset->usage == 'VIDEO') {
+        )->where('assets.is_public', 1)->where('assets.id', $id)->first();
 
-          // find incomplete puzzle
-          $find_incomplete_puzzle = Puzzle::where('user_id', Auth::user()->id)
-          ->where('asset_id', $asset->id)
-          ->whereNull('duration')
-          ->get();
+        if (count($asset) > 0) {
+          if ($asset->usage == 'VIDEO') {
 
-          // delete incomplete record
-          foreach ($find_incomplete_puzzle as $delete_target) {
-            $delete_target->forcedelete();
+            // find incomplete puzzle
+            $find_incomplete_puzzle = Puzzle::where('user_id', Auth::user()->id)
+            ->where('asset_id', $asset->id)
+            ->whereNull('duration')
+            ->get();
+
+            // delete incomplete record
+            foreach ($find_incomplete_puzzle as $delete_target) {
+              $delete_target->forcedelete();
+            }
+
+            // get personal best record
+            $personal_best_record_duration = "";
+            $personal_best_record = Puzzle::whereNotNull('duration')
+            ->where('user_id', Auth::user()->id)
+            ->where('asset_id', $asset->id)
+            ->orderBy('duration', 'asc')
+            ->limit(1)
+            ->first();
+            if ($personal_best_record != NULL) {
+              $personal_best_record_duration = $personal_best_record->duration;
+            }
+
+
+            $puzzle = Puzzle::create([
+              'user_id' => Auth::user()->id,
+              'asset_id' => $asset->id,
+            ]);
+
+            return view('user.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape'));
           }
-
-          // get personal best record
-          $personal_best_record_duration = "";
-          $personal_best_record = Puzzle::whereNotNull('duration')
-          ->where('user_id', Auth::user()->id)
-          ->where('asset_id', $asset->id)
-          ->orderBy('duration', 'asc')
-          ->limit(1)
-          ->first();
-          if ($personal_best_record != NULL) {
-            $personal_best_record_duration = $personal_best_record->duration;
-          }
-
-
-          $puzzle = Puzzle::create([
-            'user_id' => Auth::user()->id,
-            'asset_id' => $asset->id,
-          ]);
-
-          return view('user.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape'));
         }
-        return redirect()->back();
+
+        return redirect('/user/');
     }
 
     public function completepuzzle (Request $request) {

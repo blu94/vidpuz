@@ -85,56 +85,34 @@ class PuzzleController extends Controller
             $y_number = 5;
           }
         }
-        // if ($corner['shape'] != NULL) {
-        //
-        //   if ($corner['shape'] == 1) {
-        //     $corner_css = "css/sharpcorner.css";
-        //   }
-        //   elseif ($corner['shape'] == 0) {
-        //     $corner_css = "css/roundcorner.css";
-        //   }
-        // }
-
-
 
         $asset = Asset::select(
           '*',
           DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
-        )->findOrFail($id);
-        if ($asset->usage == 'VIDEO') {
+        )->where('assets.is_public', 1)->where('assets.id', $id)->first();
 
-          // // find incomplete puzzle
-          // $find_incomplete_puzzle = Puzzle::where('user_id', Auth::user()->id)
-          // ->where('asset_id', $asset->id)
-          // ->whereNull('duration')
-          // ->get();
-          //
-          // // delete incomplete record
-          // foreach ($find_incomplete_puzzle as $delete_target) {
-          //   $delete_target->forcedelete();
-          // }
+        if (count($asset) > 0) {
+          if ($asset->usage == 'VIDEO') {
 
-          // get personal best record
-          $personal_best_record_duration = "";
-          $personal_best_record = Puzzle::whereNotNull('duration')
-          // ->where('user_id', Auth::user()->id)
-          ->where('asset_id', $asset->id)
-          ->orderBy('duration', 'asc')
-          ->limit(1)
-          ->first();
-          if ($personal_best_record != NULL) {
-            $personal_best_record_duration = $personal_best_record->duration;
+            // get personal best record
+            $personal_best_record_duration = "";
+            $personal_best_record = Puzzle::whereNotNull('duration')
+            // ->where('user_id', Auth::user()->id)
+            ->where('asset_id', $asset->id)
+            ->orderBy('duration', 'asc')
+            ->limit(1)
+            ->first();
+            if ($personal_best_record != NULL) {
+              $personal_best_record_duration = $personal_best_record->duration;
+            }
+
+            return view('landing.puzzle.show', compact('asset', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape'));
           }
-
-
-          // $puzzle = Puzzle::create([
-          //   'user_id' => Auth::user()->id,
-          //   'asset_id' => $asset->id,
-          // ]);
-
-          return view('landing.puzzle.show', compact('asset', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape'));
         }
-        return redirect()->back();
+        else {
+          return redirect('/');
+        }
+
     }
 
     /**

@@ -29,6 +29,7 @@ class LandingController extends Controller
           DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
         )
         ->where('assets.usage', 'VIDEO')
+        ->where('is_public', 1)
         ->orderBy('number', 'DESC')
         ->get();
 
@@ -39,6 +40,7 @@ class LandingController extends Controller
         )
         ->whereMonth('created_at', $current_month)
         ->where('usage', 'VIDEO')
+        ->where('is_public', 1)
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
 

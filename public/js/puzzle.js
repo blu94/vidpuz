@@ -1,5 +1,24 @@
 // puzzle script here
 $(document).ready(function() {
+
+  function adjustStyle(width) {
+    width = parseInt(width);
+    if (width < 701) {
+    } else if (width < 1100) {
+      show_hints_mobile();
+    } else {
+      show_hints_desk();
+    }
+  }
+
+  // responsive
+  $(function() {
+      adjustStyle(screen.width);
+      $(window).resize(function() {
+        adjustStyle(screen.width);
+      });
+  });
+
   $('#v').get(0).play();
 
   // drag up and down prevent scroll on mobile
@@ -309,11 +328,23 @@ $(document).ready(function() {
 
   // show hints
   $('.hints_container').fadeOut();
-  $('.show_hints').on('mousedown touchstart', function() {
-    $('.hints_container').fadeIn().css({'display':'flex'});
-  }).on('mouseup mouseleave touchend', function() {
-    $('.hints_container').fadeOut();
-  });
+
+  function show_hints_desk () {
+    $('.show_hints').on('mousedown', function() {
+      $('.hints_container').fadeIn().css({'display':'flex'});
+    }).on('mouseup mouseleave', function() {
+      $('.hints_container').fadeOut();
+    });
+  }
+
+  function show_hints_mobile () {
+    $('.show_hints').on('touchstart', function() {
+      $('.hints_container').fadeIn().css({'display':'flex'});
+    }).on('touchend', function() {
+      $('.hints_container').fadeOut();
+    });
+  }
+
 
   // start stopwatch
   var taken_time = $('.timer_wrapper .duration').runner({

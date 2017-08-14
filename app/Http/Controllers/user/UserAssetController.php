@@ -11,6 +11,9 @@ use App\Tag;
 use App\Taggable;
 use Auth;
 use DB;
+use FFMpeg\FFMpeg;
+use FFMpeg\FFProbe;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 class UserAssetController extends Controller
 {
@@ -71,14 +74,9 @@ class UserAssetController extends Controller
 
         // get available tag
         $all_tag = Tag::all();
-        $all_tag_array = [];
-        foreach ($all_tag as $tag) {
-          array_push($all_tag_array, $tag->title);
-        }
-        $all_tag_value = "['".implode("','", $all_tag_array)."']";
 
         if($asset->usage == 'VIDEO') {
-          return view('user.assets.edit', compact('asset', 'tag_value', 'all_tag_value'));
+          return view('user.assets.edit', compact('asset', 'tag_value', 'all_tag'));
         }
         return redirect()->back();
     }
@@ -158,59 +156,76 @@ class UserAssetController extends Controller
 
         $extension = pathinfo($path, PATHINFO_EXTENSION);
 
+        $format = "mp4";
+        if (strtolower($extension) == 'ogv') {
+          $format = 'ogg';
+        }
+        elseif (strtolower($extension) == 'mp4') {
+          $format = "mp4";
+        }
 
+        $video_duration = intval($this->getDuration(public_path($path)));
 
-        $asset = Asset::create([
-          'title' => $name,
-          'path' => $path,
-          'format' => $extension,
-          'usage' => 'VIDEO',
-          'user_id' => Auth::user()->id
-        ]);
+        $tensec_width = 20;
+        if ($video_duration > 20) {
+          $tensec_width = (20 / $video_duration) * 100;
+          if ($tensec_width < 1) {
+            $tensec_width = 2;
+          }
+        }
+        elseif ($video_duration < 20) {
+          $tensec_width = 100;
+        }
 
-        // create thumbnail
-        $thumbnail_name =  md5($name).'_thumbnail.jpg';
-        $thumbnail_path = '/assets/' . $thumbnail_name;
-        Flavy::thumbnail(public_path() . $path, public_path() . $thumbnail_path, 1);
-        $thumbnail_rec = Asset::create([
-          'title' => $thumbnail_name,
-          'path' => $thumbnail_path,
-          'format' => 'jpg',
-          'usage' => 'VIDEO_THUMBNAIL',
-          'is_public' => 1,
-          'user_id' => Auth::user()->id,
-          'assetable_id' => $asset->id,
-          'assetable_type' => 'App\Asset'
-        ]);
+        return json_encode(array('name'=>$name, 'url'=>$path, 'format'=>$format, 'tensecwidth'=>$tensec_width, 'videolength'=>$video_duration));
 
-        //
-        echo "<div class='uploaded_file_container' id='file_item".$asset->id."' data-file-id='".$asset->id."'>
-          <div class='uploaded_file_thumbnail'>
-            <img src='".asset($thumbnail_path)."' class='uploaded_file_thumbnail' title=''/>
-            <button class='delete_asset btn btn-danger' data-file-id='".$asset->id."'>REMOVE</button>
-          </div>
-          <div class='uploaded_file_detail_container'>
-            <div class='ui input uploaded_file_input_wrapper'>
-              <input type='text' name='' class='uploaded_file_title col-md-9 col-sm-9' value='".$name."' data-file-id='".$asset->id."'/>
-            </div>
+    }
 
-            <div class='switch_status col-md-3 col-sm-3'>
-              <span class='switch_title' data-file-id='".$asset->id."'>
-                Public
-              </span>
-              <label class='switch'>
-                <input type='checkbox' class='switch_checkbox' data-file-id='".$asset->id."' checked>
-                <div class='slider round'></div>
-              </label>
-            </div>
-            <textarea name='name' rows='8' cols='80' class='uploaded_file_description col-md-12 col-sm-12' data-file-id='".$asset->id."'></textarea>
-            <div class='col-md-12 col-sm-12 submit_btn_container'>
-              <button type='button' name='button' class='btn submit_file_changes_btn pull-right' data-file-id='".$asset->id."' data-update-url='".route('user.assets.update_asset')."'>SAVED</button>
-            </div>
-          </div>
+    public function save_asset(Request $request)
+    {
+      // return $request->all();
+      set_time_limit(0);
+      $file = public_path($request->url);
 
-        </div>";
+      $ffmpeg = FFMpeg::create();
 
+      $video = $ffmpeg->open($file);
+
+      $video->filters()->clip(\FFMpeg\Coordinate\TimeCode::fromSeconds($request->starttime), \FFMpeg\Coordinate\TimeCode::fromSeconds(20));
+
+      $export_as = 'assets/export'.md5($request->url).date('YmdHis').'.ogv';
+      $video->save(new \FFMpeg\Format\Video\Ogg(), $export_as);
+
+      if ($request->video_name == '') {
+        $request->video_name = str_replace("assets/export","",$export_as);
+        $request->video_name = str_replace(".ogv","",$request->video_name);
+      }
+      $asset = Asset::create([
+        'title' => $request->video_name,
+        'path' => $export_as,
+        'format' => 'ogg',
+        'usage' => 'VIDEO',
+        'user_id' => Auth::user()->id
+      ]);
+
+      // // create thumbnail
+      $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.jpg';
+      $thumbnail_path = '/assets/' . $thumbnail_name;
+      Flavy::thumbnail(public_path() . '/' . $export_as, public_path() . $thumbnail_path, 1);
+      $thumbnail_rec = Asset::create([
+        'title' => $thumbnail_name,
+        'path' => $thumbnail_path,
+        'format' => 'jpg',
+        'usage' => 'VIDEO_THUMBNAIL',
+        'is_public' => 1,
+        'user_id' => Auth::user()->id,
+        'assetable_id' => $asset->id,
+        'assetable_type' => 'App\Asset'
+      ]);
+
+      unlink($file);
+
+      return redirect('user/assets');
     }
 
     public function update_asset(Request $request)
@@ -292,5 +307,12 @@ class UserAssetController extends Controller
       $asset = Asset::findOrFail($id);
       $asset->delete();
       return 'success';
+    }
+
+    public function getDuration($full_video_path)
+    {
+      $ffprobe = FFProbe::create();
+      $duration = $ffprobe->format($full_video_path)->get('duration');
+      return $duration;
     }
 }

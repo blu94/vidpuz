@@ -64,7 +64,18 @@
 
         <div class="input_container no_pad_left_right col-md-6 col-sm-12">
           {!! Form::label('tag', 'Tag', ['class'=>'input_label font_size12']) !!}
-          {!! Form::text('tag', $tag_value, ['class' => 'form-control tag_input']) !!}
+          <div class="ui fluid multiple search selection dropdown tags_input">
+            {!! Form::hidden('tag', $tag_value) !!}
+            <i class="dropdown icon"></i>
+            <div class="default text">Select a tag</div>
+            <div class="menu">
+              @foreach ($all_tag as $tag)
+                <div class="item">
+                  {{$tag->title}}
+                </div>
+              @endforeach
+            </div>
+          </div>
         </div>
 
         <div class="input_container no_pad_left_right col-md-12 col-sm-12">
@@ -118,13 +129,16 @@
   <script src="{{asset('js/jquery-ui.min.js')}}" charset="utf-8"></script>
   <script src="{{asset('js/bootstrap-tokenfield.min.js')}}" charset="utf-8"></script>
   <script type="text/javascript">
-  $('.tag_input').tokenfield({
-    autocomplete: {
-      source: {!!$all_tag_value!!},
-      delay: 100
-    },
-    showAutocompleteOnFocus: true
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
   });
+
+  $('.tags_input').dropdown({
+      allowAdditions: true,
+    });
 
   $('.tag_input').on('tokenfield:createtoken', function (event) {
   	var existingTokens = $(this).tokenfield('getTokens');

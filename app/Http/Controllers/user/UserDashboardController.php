@@ -20,6 +20,7 @@ class UserDashboardController extends Controller
       ->where('usage', 'VIDEO')
       ->whereDate('created_at', '<=', date('Y-m-d'))
       ->whereDate('created_at', '>=', date('Y-m-d', strtotime('-6 days')))
+      ->where('is_public', 1)
       ->orderBy('created_at', 'desc')
       ->paginate(10,['*'], 'assets_in_1_week');
 

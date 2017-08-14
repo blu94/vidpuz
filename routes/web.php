@@ -56,6 +56,7 @@ Route::group(['middleware'=>'admin'], function(){
   Route::post('admin/assets/store_asset', ['as'=>'admin.assets.store_asset', 'uses'=>'admin\AdminAssetController@store_asset']);
   Route::post('admin/assets/update_asset', ['as'=>'admin.assets.update_asset', 'uses'=>'admin\AdminAssetController@update_asset']);
   Route::post('admin/assets/bulk_action', ['as'=>'admin.assets.bulk_action', 'uses'=>'admin\AdminAssetController@bulk_action']);
+  Route::post('admin/assets/save_asset', ['as'=>'admin.assets.save_asset', 'uses'=>'admin\AdminAssetController@save_asset']);
   Route::post('admin/assets/changeprofileimg', ['as'=>'admin.assets.changeprofileimg', 'uses'=>'admin\AdminAssetController@changeprofileimg']);
   Route::post('admin/puzzles/completepuzzle', ['as'=>'admin.puzzles.completepuzzle', 'uses'=>'admin\AdminPuzzleController@completepuzzle']);
 
@@ -104,6 +105,7 @@ Route::group(['middleware'=>'user'], function(){
   Route::post('user/assets/store_asset', ['as'=>'user.assets.store_asset', 'uses'=>'user\UserAssetController@store_asset']);
   Route::post('user/assets/update_asset', ['as'=>'user.assets.update_asset', 'uses'=>'user\UserAssetController@update_asset']);
   Route::post('user/assets/bulk_action', ['as'=>'user.assets.bulk_action', 'uses'=>'user\UserAssetController@bulk_action']);
+  Route::post('user/assets/save_asset', ['as'=>'user.assets.save_asset', 'uses'=>'user\UserAssetController@save_asset']);
   Route::post('user/assets/changeprofileimg', ['as'=>'user.assets.changeprofileimg', 'uses'=>'user\UserAssetController@changeprofileimg']);
 
   // delete uploaded asset when upload done
