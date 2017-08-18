@@ -210,7 +210,7 @@
 
              // Move draggable into droppable
              draggable.appendTo(droppable);
-             draggable.css({top: '0px', left: '0px'});
+             draggable.css({top: '0px', left: '0px', 'z-index':1});
 
              // match then add counter
              puzzle_matched+=1;

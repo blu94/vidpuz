@@ -19,6 +19,14 @@ $(document).ready(function() {
       });
   });
 
+  // shuffle array
+  function shuffle(a) {
+    for (let i = a.length; i; i--) {
+        let j = Math.floor(Math.random() * i);
+        [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+  }
+
   $('#v').get(0).play();
 
   // drag up and down prevent scroll on mobile
@@ -37,15 +45,54 @@ $(document).ready(function() {
 
   // initialize puzzle
   var hints_counter = 0;
+  var x_coord_array = [];
+  var y_coord_array = [];
+  var coord_array = [];
+  for (var x = 0; x < matrix_x; x++) {
+    var gap = 12;
+    var gap_align = 1.25;
+    if (matrix_x >= 8) {
+      gap = gap - 2.5;
+      gap_align = gap_align+0.25;
+    }
+    if (matrix_x >= 10) {
+      gap = gap - 2.5;
+      gap_align = gap_align+0.75;
+    }
+    x_coord_array.push((x+gap_align) * gap);
+  }
+  for (var y = 0; y < matrix_y; y++) {
+    var gap = 125;
+    if (matrix_y >= 4) {
+      gap = gap - 30;
+    }
+    if (matrix_y >= 5) {
+      gap = gap - 20;
+    }
+    y_coord_array.push((y * gap) + 10);
+  }
+  shuffle(x_coord_array);
+  shuffle(y_coord_array);
+
+  for (var x = 0; x < x_coord_array.length; x++) {
+    for (var y = 0; y < y_coord_array.length; y++) {
+      coord_array.push([x_coord_array[x], y_coord_array[y]]);
+    }
+  }
+  shuffle(coord_array);
+  console.log(coord_array);
+
+
+
   for (var i = 0; i < matrix_x; i++) {
     for (var j = 0; j < matrix_y; j++) {
       hints_counter+=1;
-      create_pieaces (i, j, matrix_x, matrix_y, hints_counter);
+      create_pieaces (i, j, matrix_x, matrix_y, hints_counter, coord_array);
     }
   }
 
 
-  function create_pieaces (x, y, matrix_x, matrix_y, hints_counter) {
+  function create_pieaces (x, y, matrix_x, matrix_y, hints_counter, coord_array) {
 
     var videoHeight = $('#v').height();
     var videoWidth = $('#v').width();
@@ -151,8 +198,9 @@ $(document).ready(function() {
 
 
     // randomize the pieaces
-    var random_x_coord = Math.floor((Math.random() * 90) + 1);
-    var random_y_coord = Math.floor((Math.random() * 250) + 1);
+    var random_x_coord = coord_array[(hints_counter-1)][0];
+    var random_y_coord = coord_array[(hints_counter-1)][1];
+    console.log(hints_counter);
 
     $(".puzzle_wrapper").append("<div id='pieaces_"+x+y+"' data-number='"+x+y+"' class='canvas_pieces "+pieces_class+"' style='"+extra_styles+" left: "+random_x_coord+"%; top:"+random_y_coord+"px;'><span class='hints_container "+alignment_of_hints+"'>"+hints_counter+"</span><canvas id='target_canvas"+x+y+"'></canvas></div>");
 
