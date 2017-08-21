@@ -30,6 +30,13 @@ $(document).ready(function() {
 
   });
 
+  $('#markasread').click(function() {
+    if($(this).data('num-notify') > 0) {
+
+      $.get('/notificationsread');
+    }
+  });
+
   $(document).on('change keyup', '.switch_checkbox, .uploaded_file_title, .uploaded_file_description, .uploaded_file_tag', function() {
     var file_id = $(this).data('file-id');
     $(".submit_file_changes_btn[data-file-id='"+file_id+"']").addClass('bg_lightblue');

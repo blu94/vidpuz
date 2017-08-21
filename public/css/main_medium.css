@@ -343,6 +343,10 @@ body {
   -webkit-box-sizing: border-box;
   padding: 10px 20px;
 }
+.clear_left_right_forbody {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 .page_title {
   display: block;
   width: 100%;
@@ -1137,12 +1141,63 @@ input:checked + .slider:before {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
+.notifications_wrapper {
+  display: block;
+  float: left;
+  width: 100%;
+}
+.notification_item {
+  display: flex;
+  align-items: center;
+  float: left;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all .5s;
+}
+.notification_item:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.unread_notification_item {
+  background-color: rgba(100, 100, 100, 0.15);
+}
+.notification_icon {
+}
+.notification_creator_img {
+  display: block;
+  width: 45px;
+  height: 45px;
+  border-radius: 45px;
+  overflow: hidden;
+  background-color: grey;
+  margin-left: 15px;
+}
+.notification_creator_img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.notification_description {
+  flex: 1;
+  margin: 0 20px;
+  color: rgba(0,0,0,.87);
+}
+.notification_time {
+  color: rgba(0,0,0,.87);
+}
 /*body*/
 
 /*hide scrollbar*/
 .edit_profile_lightbox_wrapper::-webkit-scrollbar {
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
+}
+.nav_container::-webkit-scrollbar {
+  display: none;
 }
 /*hide scrollbar*/
 

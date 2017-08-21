@@ -1,6 +1,13 @@
 // puzzle script here
 $(document).ready(function() {
 
+  var divide = 1;
+  var addgap = 0;
+  if (screen.width < 1100) {
+    show_hints_mobile();
+    divide = 3;
+    addgap = 3;
+  }
   function adjustStyle(width) {
     width = parseInt(width);
     if (width < 701) {
@@ -48,16 +55,23 @@ $(document).ready(function() {
   var x_coord_array = [];
   var y_coord_array = [];
   var coord_array = [];
+
+  // responsive align puzzle
+  var mobile_gap_align_divide = 1;
+  if (divide == 3) {
+    mobile_gap_align_divide = 100;
+  }
+
   for (var x = 0; x < matrix_x; x++) {
-    var gap = 12;
-    var gap_align = 1.25;
+    var gap = 12+addgap;
+    var gap_align = 1.25/divide;
     if (matrix_x >= 8) {
       gap = gap - 2.5;
-      gap_align = gap_align+0.25;
+      gap_align = (gap_align+0.25)/mobile_gap_align_divide;
     }
     if (matrix_x >= 10) {
       gap = gap - 2.5;
-      gap_align = gap_align+0.75;
+      gap_align = (gap_align+0.75)/mobile_gap_align_divide;
     }
     x_coord_array.push((x+gap_align) * gap);
   }

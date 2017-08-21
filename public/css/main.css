@@ -13,11 +13,20 @@
   src: url('../fonts/avenir/AvenirLTStd-Light.otf') format('opentype');
 }
 
+@font-face {
+  font-family: 'avenirblack';
+  src: url('../fonts/avenir/AvenirLTStd-Black.otf') format('opentype');
+}
+
 body {
   font-family: 'avenirlt' !important;
 }
 a, a:hover {
   text-decoration: none !important;
+}
+
+.avenirblack {
+  font-family: 'avenirblack';
 }
 
 .font_size8 {

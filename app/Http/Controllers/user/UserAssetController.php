@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Notifications\NewVideoUpload;
 use Flavy;
 use App\Asset;
 use App\Tag;
@@ -14,6 +15,7 @@ use DB;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use App\User;
 
 class UserAssetController extends Controller
 {
@@ -222,6 +224,12 @@ class UserAssetController extends Controller
         'assetable_id' => $asset->id,
         'assetable_type' => 'App\Asset'
       ]);
+
+      // add notification
+      $all_admins = User::where('role_id', 1)->get();
+      foreach ($all_admins as $admin) {
+        $admin->notify(new NewVideoUpload($asset, Auth::user()));
+      }
 
       unlink($file);
 

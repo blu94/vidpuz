@@ -21,7 +21,7 @@
     $matrix_y = $y_number;
   @endphp
 
-  <div class="body_container">
+  <div class="body_container clear_left_right_forbody">
 
     {{-- operation area --}}
     <div class="puzzle_operation_wrapper segment bg_white">

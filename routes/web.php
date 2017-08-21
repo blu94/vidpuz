@@ -22,6 +22,12 @@ Route::get('/', 'LandingController@index');
 Route::get('auth/{provider}', ['as'=> 'social.login', 'uses'=> 'Auth\RegisterController@redirectToProvider']);
 Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');
 
+// read notifications
+Route::get('notificationsread', function() {
+  Auth::user()->unreadNotifications->markAsRead();
+});
+
+
 Route::resource('/landing/video', 'VideoController', [
   'names'=> [
     'index'  => 'landing.video.index',
@@ -89,6 +95,12 @@ Route::group(['middleware'=>'admin'], function(){
     'names'=> [
       'index'  => 'admin.puzzles.index',
       'show'  => 'admin.puzzles.show'
+    ]
+  ]);
+
+  Route::resource('/admin/notifications', 'admin\AdminNotificationController', [
+    'names'=> [
+      'index'  => 'admin.notifications.index'
     ]
   ]);
 
