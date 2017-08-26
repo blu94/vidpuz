@@ -32,7 +32,16 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/user';
+
+    protected function authenticated() {
+      if ( Auth::user()->isAdmin() ) {
+        return redirect('/admin');
+      }
+      else if ( Auth::user()->isUser() ) {
+        return redirect('/user');
+      }
+    }
 
     /**
      * Create a new controller instance.
@@ -53,7 +62,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'givenname' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -68,7 +79,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'surname' => $data['surname'],
+            'givenname' => $data['givenname'],
+            'username' => $data['username'],
+            'is_active' => 1,
+            'role_id' => 2,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

@@ -74,7 +74,7 @@
                   <div class="ui dimmer">
                     <div class="content">
                       <div class="center">
-                        <a href="{{route('user.puzzles.show', $asset->id)}}" class="ui inverted button">Play</a>
+                        <a href="{{route('user.puzzles.show', $asset->id)}}" class="ui inverted purple button">Play</a>
                       </div>
                     </div>
                   </div>
@@ -120,7 +120,7 @@
                 <div class="ui dimmer">
                   <div class="content">
                     <div class="center">
-                      <a href="{{route('user.puzzles.show', $asset->id)}}" class="ui inverted button">Play</a>
+                      <a href="{{route('user.puzzles.show', $asset->id)}}" class="ui inverted purple button">Play</a>
                     </div>
                   </div>
                 </div>

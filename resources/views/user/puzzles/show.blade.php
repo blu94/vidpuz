@@ -26,12 +26,12 @@
     {{-- operation area --}}
     <div class="puzzle_operation_wrapper segment bg_white">
       {!! Form::open(['method' => 'get', 'action' => ['user\UserPuzzleController@show', $asset->id], 'class' => 'ui icon buttons submit_style']) !!}
-        <button type='button' class="ui button icon play_pause_btn_video" title='Play or pause'>
+        <button type='button' class="ui button icon play_pause_btn_video purple" title='Play or pause'>
           <i class="pause icon"></i>
           {{-- <span class="play_pause_btn_title">Pause</span> --}}
         </button>
 
-        <div class="ui top left pointing dropdown button" title='Puzzle type'>
+        <div class="ui top left pointing dropdown button purple" title='Puzzle type'>
           <i class="puzzle icon"></i>
           <div class="menu">
             <div class="item ui radio checkbox plain_button">
@@ -45,7 +45,7 @@
           </div>
         </div>
 
-        <div class="ui top left pointing dropdown button" title='Number of pieaces'>
+        <div class="ui top left pointing dropdown button purple" title='Number of pieaces'>
           {{$y_number}}x{{$x_number}}
           <div class="menu">
             <div class="item ui radio checkbox plain_button">
@@ -63,11 +63,11 @@
           </div>
         </div>
 
-        <button type='button' class="ui small button icon preview_trigger_btn" title='Preview'>
+        <button type='button' class="ui small button icon preview_trigger_btn purple" title='Preview'>
           <i class="film icon"></i>
         </button>
 
-        <button type="button" class="ui small button icon show_hints" title='Hints'>
+        <button type="button" class="ui small button icon show_hints purple" title='Hints'>
           <i class="idea icon"></i>
         </button>
       {!! Form::close() !!}

@@ -62,7 +62,7 @@
       <div class="input_container no_pad_left_right col-md-6 col-sm-12">
         {!! Form::label('tag', 'Tag', ['class'=>'input_label font_size12']) !!}
         <div class="ui fluid multiple search selection dropdown tags_input">
-          {!! Form::hidden('tag', $tag_value) !!}
+          {!! Form::hidden('tag', null) !!}
           <i class="dropdown icon"></i>
           <div class="default text">Select a tag</div>
           <div class="menu">

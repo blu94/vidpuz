@@ -69,10 +69,14 @@
                 <span class="title">DASHBOARD</span>
               </li>
             </a>
-            <a href="#">
+            <a href="{{route('user.notifications.index')}}" id="markasread" data-num-notify='{{count(Auth::user()->unreadnotifications)}}'>
               <li>
                 <img src="{{asset('icon/notification_neon_blue.svg')}}" alt="">
                 <span class="title">NOTIFICATION</span>
+                @if (count(Auth::user()->unreadnotifications) > 0)
+                  <span class="badge margin_left10">{{count(Auth::user()->unreadnotifications)}}</span>
+                @endif
+
               </li>
             </a>
             {{-- <a href="{{route('user.users.index')}}">

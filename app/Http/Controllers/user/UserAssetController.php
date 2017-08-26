@@ -69,7 +69,7 @@ class UserAssetController extends Controller
 
         $tag_array = [];
         foreach ($taggable as $asset_tag) {
-          array_push($tag_array, $asset_tag->tag->title);
+          array_push($tag_array, $asset_tag->title);
         }
         $tag_value = implode(",", $tag_array);
 
@@ -106,34 +106,37 @@ class UserAssetController extends Controller
           // update tag
           Taggable::where('taggable_id', $asset->id)->where('taggable_type', 'LIKE', 'App%%Asset')->delete();
 
-          $tag_array = explode(',', $request->tag);
+          if ($request->tag != NULL) {
+            $tag_array = explode(',', $request->tag);
 
-          foreach ($tag_array as $tag) {
-            $find_tag = Tag::where('title', $tag)->first();
+            foreach ($tag_array as $tag) {
+              $find_tag = Tag::where('title', $tag)->first();
 
-            if(count($find_tag) == 0) {
-              $insert_tag = Tag::create([
-                'title' => $tag,
-                'user_id' => Auth::user()->id,
-                'is_active' => 1
-              ]);
+              if(count($find_tag) == 0) {
+                $insert_tag = Tag::create([
+                  'title' => $tag,
+                  'user_id' => Auth::user()->id,
+                  'is_active' => 1
+                ]);
 
-              $connect_tag = Taggable::create([
-                'tag_id' => $insert_tag->id,
-                'taggable_id' => $asset->id,
-                'taggable_type' => 'App\Asset'
-              ]);
-            }
-            else if(count($find_tag) > 0) {
+                $connect_tag = Taggable::create([
+                  'tag_id' => $insert_tag->id,
+                  'taggable_id' => $asset->id,
+                  'taggable_type' => 'App\Asset'
+                ]);
+              }
+              else if(count($find_tag) > 0) {
 
-              $connect_tag = Taggable::create([
-                'tag_id' => $find_tag->id,
-                'taggable_id' => $asset->id,
-                'taggable_type' => 'App\Asset'
-              ]);
+                $connect_tag = Taggable::create([
+                  'tag_id' => $find_tag->id,
+                  'taggable_id' => $asset->id,
+                  'taggable_type' => 'App\Asset'
+                ]);
 
+              }
             }
           }
+
 
           Session::flash('success_message', 'Asset update sucessfully.');
           return redirect()->back();

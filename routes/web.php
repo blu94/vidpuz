@@ -153,4 +153,10 @@ Route::group(['middleware'=>'user'], function(){
       'show'  => 'user.puzzles.show'
     ]
   ]);
+
+  Route::resource('/user/notifications', 'user\UserNotificationController', [
+    'names'=> [
+      'index'  => 'user.notifications.index'
+    ]
+  ]);
 });
