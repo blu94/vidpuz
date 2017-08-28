@@ -3,11 +3,6 @@ $(document).ready(function() {
 
   var divide = 1;
   var addgap = 0;
-  if (screen.width < 1100) {
-    show_hints_mobile();
-    divide = 3;
-    addgap = 3;
-  }
   function adjustStyle(width) {
     width = parseInt(width);
     if (width < 701) {
@@ -57,33 +52,22 @@ $(document).ready(function() {
   var coord_array = [];
 
   // responsive align puzzle
-  var mobile_gap_align_divide = 1;
-  if (divide == 3) {
-    mobile_gap_align_divide = 100;
-  }
+  var wrapper_width = $('.puzzle_wrapper').width();
+  var wrapper_height = $('.puzzle_wrapper').height();
+  var pieces_x_ratio = (((videoWidth/matrix_x) * 1.25) / wrapper_width) * 100;
+  var pieces_y_ratio = (videoHeight/matrix_y) * 1.25;
+
+  var gap_x = ((100 / matrix_x) / 2) - pieces_x_ratio;
+  var gap_y = ((400 / matrix_y) / 2) - pieces_y_ratio;
+
 
   for (var x = 0; x < matrix_x; x++) {
-    var gap = 12+addgap;
-    var gap_align = 1.25/divide;
-    if (matrix_x >= 8) {
-      gap = gap - 2.5;
-      gap_align = (gap_align+0.25)/mobile_gap_align_divide;
-    }
-    if (matrix_x >= 10) {
-      gap = gap - 2.5;
-      gap_align = (gap_align+0.75)/mobile_gap_align_divide;
-    }
-    x_coord_array.push((x+gap_align) * gap);
+    x_coord_array.push(gap_x);
+    gap_x = gap_x + (100 / matrix_x);
   }
   for (var y = 0; y < matrix_y; y++) {
-    var gap = 125;
-    if (matrix_y >= 4) {
-      gap = gap - 30;
-    }
-    if (matrix_y >= 5) {
-      gap = gap - 20;
-    }
-    y_coord_array.push((y * gap) + 10);
+    y_coord_array.push(gap_y);
+    gap_y = gap_y + (400 / matrix_y);
   }
   shuffle(x_coord_array);
   shuffle(y_coord_array);
@@ -427,5 +411,10 @@ $(document).ready(function() {
     return (d < 10) ? '0' + d.toString() : d.toString();
   }
 
+  // confirm complete
+  $('.confirm_complete').click(function() {
+    location.reload();
+    $('.congratulation_lightbox').fadeOut();
+  });
 
 });

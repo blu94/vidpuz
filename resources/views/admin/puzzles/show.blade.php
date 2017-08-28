@@ -49,6 +49,10 @@
           {{$y_number}}x{{$x_number}}
           <div class="menu">
             <div class="item ui radio checkbox plain_button">
+              <input type="radio" name="pieces" value='2x4' @if ($x_number == 4 && $y_number == 2) checked="checked" @endif>
+              <label>2x4</label>
+            </div>
+            <div class="item ui radio checkbox plain_button">
               <input type="radio" name="pieces" value='3x6' @if ($x_number == 6 && $y_number == 3) checked="checked" @endif>
               <label>3x6</label>
             </div>
@@ -59,6 +63,14 @@
             <div class="item ui radio checkbox plain_button">
               <input type="radio" name="pieces" value='5x10' @if ($x_number == 10 && $y_number == 5) checked="checked" @endif>
               <label>5x10</label>
+            </div>
+            <div class="item ui radio checkbox plain_button">
+              <input type="radio" name="pieces" value='6x12' @if ($x_number == 12 && $y_number == 6) checked="checked" @endif>
+              <label>6x12</label>
+            </div>
+            <div class="item ui radio checkbox plain_button">
+              <input type="radio" name="pieces" value='7x14' @if ($x_number == 14 && $y_number == 7) checked="checked" @endif>
+              <label>7x14</label>
             </div>
           </div>
         </div>
@@ -160,11 +172,13 @@
         </div>
         <div class="puzzle_thumbnail_wrapper">
           <img src="{{asset($asset->thumbnail_img)}}" alt="">
-          <button type="button" name="button" class="confirm_complete color_lightgreen font_size25">Confirm</button>
+          <button type="button" name="button" class="confirm_complete color_lightgreen font_size25">Play Again</button>
         </div>
       </div>
     </div>
   </div>
+
+  <audio src="{{asset('sounds\droppiece.mp3')}}" id="dropsound"></audio>
 @endsection
 
 @section('scripts')
@@ -210,6 +224,9 @@
              draggable.appendTo(droppable);
              draggable.css({top: '0px', left: '0px', 'z-index':1});
 
+             // play drop sound
+             $('#dropsound').get(0).play();
+
              // match then add counter
              puzzle_matched+=1;
 
@@ -240,11 +257,6 @@
       @endfor
     @endfor
 
-
-    // confirm complete
-    $('.confirm_complete').click(function() {
-      $('.congratulation_lightbox').fadeOut();
-    });
 
     function completepuzzle (puzzle_id, duration) {
       var token = $('meta[name="_token"]').attr('content')

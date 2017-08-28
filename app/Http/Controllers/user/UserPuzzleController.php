@@ -31,7 +31,11 @@ class UserPuzzleController extends Controller
           }
         }
         if ($piece) {
-          if ($piece == '3x6') {
+          if ($piece == '2x4') {
+            $x_number = 4;
+            $y_number = 2;
+          }
+          elseif ($piece == '3x6') {
             $x_number = 6;
             $y_number = 3;
           }
@@ -42,6 +46,14 @@ class UserPuzzleController extends Controller
           elseif ($piece == '5x10') {
             $x_number = 10;
             $y_number = 5;
+          }
+          elseif ($piece == '6x12') {
+            $x_number = 12;
+            $y_number = 6;
+          }
+          elseif ($piece == '7x14') {
+            $x_number = 14;
+            $y_number = 7;
           }
         }
 

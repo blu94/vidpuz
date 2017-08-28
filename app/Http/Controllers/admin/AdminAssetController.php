@@ -285,14 +285,33 @@ class AdminAssetController extends Controller
         'user_id' => Auth::user()->id
       ]);
 
-      // // create thumbnail
-      $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.jpg';
+      // create thumbnail
+      // $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.jpg';
+      // $thumbnail_path = '/assets/' . $thumbnail_name;
+      // Flavy::thumbnail(public_path() . '/' . $export_as, public_path() . $thumbnail_path, 1);
+      // $thumbnail_rec = Asset::create([
+      //   'title' => $thumbnail_name,
+      //   'path' => $thumbnail_path,
+      //   'format' => 'jpg',
+      //   'usage' => 'VIDEO_THUMBNAIL',
+      //   'is_public' => 1,
+      //   'user_id' => Auth::user()->id,
+      //   'assetable_id' => $asset->id,
+      //   'assetable_type' => 'App\Asset'
+      // ]);
+
+
+      $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.gif';
       $thumbnail_path = '/assets/' . $thumbnail_name;
-      Flavy::thumbnail(public_path() . '/' . $export_as, public_path() . $thumbnail_path, 1);
+      $ffmpeg = FFMpeg::create();
+      $video = $ffmpeg->open(public_path() . '/' . $export_as);
+      $video
+      ->gif(\FFMpeg\Coordinate\TimeCode::fromSeconds(0), new \FFMpeg\Coordinate\Dimension(1080, 720), 10)
+      ->save(public_path() . $thumbnail_path);
       $thumbnail_rec = Asset::create([
         'title' => $thumbnail_name,
         'path' => $thumbnail_path,
-        'format' => 'jpg',
+        'format' => 'gif',
         'usage' => 'VIDEO_THUMBNAIL',
         'is_public' => 1,
         'user_id' => Auth::user()->id,
