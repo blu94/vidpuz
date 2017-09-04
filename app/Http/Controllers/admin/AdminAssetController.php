@@ -28,8 +28,7 @@ class AdminAssetController extends Controller
     {
         //
         $assets = Asset::select(
-          '*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          '*'
         )
         ->where('usage', 'VIDEO')
         ->orderBy('created_at', 'desc')
@@ -94,9 +93,8 @@ class AdminAssetController extends Controller
     {
         //
         $asset = Asset::select(
-          '*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
-        )
+          '*'
+          )
         ->where('assets.usage', 'VIDEO')
         ->where('assets.id', $id)
         ->get();
@@ -186,7 +184,7 @@ class AdminAssetController extends Controller
 
 
           // add notification
-          $all_users = User::where('id', '!=', Auth::user()->id)->get();
+          $all_users = User::where('id', '!=', Auth::user()->id)->where('id', $asset->user_id)->get();
           foreach ($all_users as $user) {
             $user->notify(new AdminEditUserVideo($asset, $asset->user_id));
           }
@@ -225,7 +223,7 @@ class AdminAssetController extends Controller
         //
         $file = $request->file('file');
 
-        $name = time() . md5($file->getClientOriginalName()) . $file->getClientOriginalName();
+        $name = preg_replace('/[^A-Za-z0-9\-]/', ' ', time() . md5($file->getClientOriginalName()) . $file->getClientOriginalName());
 
         $path = '/assets/' . $name;
 
@@ -286,19 +284,19 @@ class AdminAssetController extends Controller
       ]);
 
       // create thumbnail
-      // $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.jpg';
-      // $thumbnail_path = '/assets/' . $thumbnail_name;
-      // Flavy::thumbnail(public_path() . '/' . $export_as, public_path() . $thumbnail_path, 1);
-      // $thumbnail_rec = Asset::create([
-      //   'title' => $thumbnail_name,
-      //   'path' => $thumbnail_path,
-      //   'format' => 'jpg',
-      //   'usage' => 'VIDEO_THUMBNAIL',
-      //   'is_public' => 1,
-      //   'user_id' => Auth::user()->id,
-      //   'assetable_id' => $asset->id,
-      //   'assetable_type' => 'App\Asset'
-      // ]);
+      $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.jpg';
+      $thumbnail_path = '/assets/' . $thumbnail_name;
+      Flavy::thumbnail(public_path() . '/' . $export_as, public_path() . $thumbnail_path, 1);
+      $thumbnail_rec = Asset::create([
+        'title' => $thumbnail_name,
+        'path' => $thumbnail_path,
+        'format' => 'jpg',
+        'usage' => 'VIDEO_THUMBNAIL',
+        'is_public' => 1,
+        'user_id' => Auth::user()->id,
+        'assetable_id' => $asset->id,
+        'assetable_type' => 'App\Asset'
+      ]);
 
 
       $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.gif';

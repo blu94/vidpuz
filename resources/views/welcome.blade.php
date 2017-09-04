@@ -31,7 +31,18 @@
           @if ($asset->number > 0)
             @if ($key == 0)
               <div class="item active">
-                <img class="d-block img-fluid" src="{{asset($asset->thumbnail_img)}}" alt="{{$asset->title}}">
+                @php
+                  $static_thumbnail = $gif_thumbnail = "";
+                  foreach ($asset->video_thumnail as $thumbnail) {
+                    if ($thumbnail->format == 'jpg') {
+                      $static_thumbnail = $thumbnail->path;
+                    }
+                    if ($thumbnail->format == 'gif') {
+                      $gif_thumbnail = $thumbnail->path;
+                    }
+                  }
+                @endphp
+                <img class="d-block img-fluid" src="{{asset($gif_thumbnail)}}" class="asset_thumbnail" alt="{{$asset->title}}">
                 <div class="ui dimmer">
 
                   <div class="content">
@@ -45,7 +56,18 @@
               </div>
             @elseif ($key > 0)
               <div class="item">
-                <img class="d-block img-fluid" src="{{asset($asset->thumbnail_img)}}" alt="{{$asset->title}}">
+                @php
+                  $static_thumbnail = $gif_thumbnail = "";
+                  foreach ($asset->video_thumnail as $thumbnail) {
+                    if ($thumbnail->format == 'jpg') {
+                      $static_thumbnail = $thumbnail->path;
+                    }
+                    if ($thumbnail->format == 'gif') {
+                      $gif_thumbnail = $thumbnail->path;
+                    }
+                  }
+                @endphp
+                <img class="d-block img-fluid" src="{{asset($static_thumbnail)}}" alt="{{$asset->title}}">
                 <div class="ui dimmer">
                   <div class="content">
                     <div class="landing_item_container">
@@ -79,8 +101,10 @@
     </h3>
     <div class="ui link special cards" style='padding:10px 40px 80px;'>
       @foreach ($assets_current_month as $asset)
-
-        <div class="card assets_item_container">
+        @php
+          $unique_id = bcrypt($asset->id);
+        @endphp
+        <div class="card assets_item_container" data-asset-id='{{$unique_id}}'>
           <div class="blurring dimmable image">
             <div class="ui dimmer">
               <div class="content">
@@ -89,7 +113,18 @@
                 </div>
               </div>
             </div>
-            <img src="{{asset($asset->thumbnail_img)}}" class="">
+            @php
+              $static_thumbnail = $gif_thumbnail = "";
+              foreach ($asset->video_thumnail as $thumbnail) {
+                if ($thumbnail->format == 'jpg') {
+                  $static_thumbnail = $thumbnail->path;
+                }
+                if ($thumbnail->format == 'gif') {
+                  $gif_thumbnail = $thumbnail->path;
+                }
+              }
+            @endphp
+            <img src="{{asset($static_thumbnail)}}" data-asset-id='{{$unique_id}}' data-gif-thumbnail='{{asset($gif_thumbnail)}}' class="asset_thumbnail">
           </div>
           <div class="content">
             <a class="header ellipsis_content" href='{{route('landing.video.show', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>

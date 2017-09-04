@@ -65,7 +65,7 @@
 
               </div> --}}
 
-              <div class="card assets_item_container">
+              <div class="card assets_item_container" data-asset-id='{{$asset->id}}'>
                 <div class="bulk_action_checkbox_container">
                   <span class="tick_symbol color_white">&#x2714;</span>
                   <input type="checkbox" name="bulk_action_checkbox[]" class="bulk_action_checkbox" value="{{$asset->id}}">
@@ -78,7 +78,18 @@
                       </div>
                     </div>
                   </div>
-                  <img src="{{asset($asset->thumbnail_img)}}" class="">
+                  @php
+                    $static_thumbnail = $gif_thumbnail = "";
+                    foreach ($asset->video_thumnail as $thumbnail) {
+                      if ($thumbnail->format == 'jpg') {
+                        $static_thumbnail = $thumbnail->path;
+                      }
+                      if ($thumbnail->format == 'gif') {
+                        $gif_thumbnail = $thumbnail->path;
+                      }
+                    }
+                  @endphp
+                  <img src="{{asset($static_thumbnail)}}" data-asset-id='{{$asset->id}}' data-gif-thumbnail='{{asset($gif_thumbnail)}}' class="asset_thumbnail">
                 </div>
                 <div class="content">
                   <a class="header ellipsis_content" href='{{route('user.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
@@ -115,7 +126,7 @@
         @if (count($public_assets) > 0)
           @foreach ($public_assets as $asset)
 
-            <div class="card assets_item_container">
+            <div class="card assets_item_container" data-asset-id='{{$asset->id}}'>
               <div class="blurring dimmable image">
                 <div class="ui dimmer">
                   <div class="content">
@@ -124,7 +135,18 @@
                     </div>
                   </div>
                 </div>
-                <img src="{{asset($asset->thumbnail_img)}}" class="">
+                @php
+                  $static_thumbnail = $gif_thumbnail = "";
+                  foreach ($asset->video_thumnail as $thumbnail) {
+                    if ($thumbnail->format == 'jpg') {
+                      $static_thumbnail = $thumbnail->path;
+                    }
+                    if ($thumbnail->format == 'gif') {
+                      $gif_thumbnail = $thumbnail->path;
+                    }
+                  }
+                @endphp
+                <img src="{{asset($static_thumbnail)}}" data-asset-id='{{$asset->id}}' data-gif-thumbnail='{{asset($gif_thumbnail)}}' class="asset_thumbnail">
               </div>
               <div class="content">
                 <a class="header ellipsis_content" href='{{route('user.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>

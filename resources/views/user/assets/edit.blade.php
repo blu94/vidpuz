@@ -50,8 +50,19 @@
         </div>
 
         <div class="asset_file_wrapper">
+          @php
+            $static_thumbnail = $gif_thumbnail = "";
+            foreach ($asset->video_thumnail as $thumbnail) {
+              if ($thumbnail->format == 'jpg') {
+                $static_thumbnail = $thumbnail->path;
+              }
+              if ($thumbnail->format == 'gif') {
+                $gif_thumbnail = $thumbnail->path;
+              }
+            }
+          @endphp
           @if ($asset->usage == 'VIDEO')
-            <video src="{{asset($asset->path)}}" class="video_file" controls poster="{{asset($asset->thumbnail_img)}}">
+            <video src="{{asset($asset->path)}}" class="video_file" controls poster="{{asset($static_thumbnail)}}">
 
             </video>
           @endif

@@ -203,4 +203,18 @@ $(document).ready(function() {
     });
   });
 
+  $('.assets_item_container').hover(function(){
+    var asset_id = $(this).data('asset-id');
+    var src = $(".asset_thumbnail[data-asset-id='"+asset_id+"']").attr('src');
+    var gif = $(".asset_thumbnail[data-asset-id='"+asset_id+"']").data('gif-thumbnail');
+    $(".asset_thumbnail[data-asset-id='"+asset_id+"']").attr('src', gif);
+    $(".asset_thumbnail[data-asset-id='"+asset_id+"']").data('gif-thumbnail', src);
+  }, function(){
+    var asset_id = $(this).data('asset-id');
+    var src = $(".asset_thumbnail[data-asset-id='"+asset_id+"']").attr('src');
+    var gif = $(".asset_thumbnail[data-asset-id='"+asset_id+"']").data('gif-thumbnail');
+    $(".asset_thumbnail[data-asset-id='"+asset_id+"']").attr('src', gif);
+    $(".asset_thumbnail[data-asset-id='"+asset_id+"']").data('gif-thumbnail', src);
+  });
+
 });

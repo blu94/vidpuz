@@ -1179,6 +1179,11 @@ input:checked + .slider:before {
 .notification_time {
   color: rgba(0,0,0,.87);
 }
+.asset_thumbnail{
+  display: block;
+  height: 130px !important;
+  object-fit: cover;
+}
 /*body*/
 
 /*hide scrollbar*/

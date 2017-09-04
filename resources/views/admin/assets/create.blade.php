@@ -83,7 +83,8 @@
           var parentwidth = $this.parent().width();
           var x = thisPos.left - parentPos.left;
           var percentage = parseFloat(100 * (x / parentwidth)).toFixed(0);
-          var starttime = parseInt(array['videolength'] * (x / parentwidth));
+          var starttime = 0;
+          starttime = parseInt(array['videolength'] * (x / parentwidth));
           var endtime = parseInt(starttime) + 20;
 
           $('.video_starttime').val(starttime);

@@ -60,8 +60,10 @@
                 </div>
 
               </div> --}}
-
-              <div class="card assets_item_container">
+              @php
+                $unique_id = bcrypt($asset->id);
+              @endphp
+              <div class="card assets_item_container" data-asset-id='{{$unique_id}}'>
                 <div class="bulk_action_checkbox_container">
                   <span class="tick_symbol color_white">&#x2714;</span>
                   <input type="checkbox" name="bulk_action_checkbox[]" class="bulk_action_checkbox" value="{{$asset->id}}">
@@ -74,7 +76,18 @@
                       </div>
                     </div>
                   </div>
-                  <img src="{{asset($asset->thumbnail_img)}}" class="">
+                  @php
+                    $static_thumbnail = $gif_thumbnail = "";
+                    foreach ($asset->video_thumnail as $thumbnail) {
+                      if ($thumbnail->format == 'jpg') {
+                        $static_thumbnail = $thumbnail->path;
+                      }
+                      if ($thumbnail->format == 'gif') {
+                        $gif_thumbnail = $thumbnail->path;
+                      }
+                    }
+                  @endphp
+                  <img src="{{asset($static_thumbnail)}}" data-asset-id='{{$unique_id}}' data-gif-thumbnail='{{asset($gif_thumbnail)}}' class="asset_thumbnail">
                 </div>
                 <div class="content">
                   <a class="header ellipsis_content" href='{{route('admin.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>

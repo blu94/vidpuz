@@ -36,4 +36,9 @@ class Asset extends Model
     public function uploader () {
       return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function video_thumnail()
+    {
+        return $this->hasMany('App\Asset', 'assetable_id')->where('assetable_type', 'LIKE', 'App%%Asset');
+    }
 }

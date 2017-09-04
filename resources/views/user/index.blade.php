@@ -16,7 +16,10 @@
       <div class="ui link special cards">
         @if (count($assets_in_1_week) > 0)
           @foreach ($assets_in_1_week as $asset)
-            <div class="card assets_item_container">
+            @php
+              $unique_id = bcrypt($asset->id);
+            @endphp
+            <div class="card assets_item_container" data-asset-id='{{$unique_id}}'>
               <div class="blurring dimmable image">
                 <div class="ui dimmer">
                   <div class="content">
@@ -25,15 +28,26 @@
                     </div>
                   </div>
                 </div>
-                <img src="{{asset($asset->thumbnail_img)}}" class="">
+                @php
+                  $static_thumbnail = $gif_thumbnail = "";
+                  foreach ($asset->video_thumnail as $thumbnail) {
+                    if ($thumbnail->format == 'jpg') {
+                      $static_thumbnail = $thumbnail->path;
+                    }
+                    if ($thumbnail->format == 'gif') {
+                      $gif_thumbnail = $thumbnail->path;
+                    }
+                  }
+                @endphp
+                <img src="{{asset($static_thumbnail)}}" data-asset-id='{{$unique_id}}' data-gif-thumbnail='{{asset($gif_thumbnail)}}' class="asset_thumbnail">
               </div>
               <div class="content">
-                <a class="header ellipsis_content" href='{{route('admin.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
+                <a class="header ellipsis_content" href='{{route('user.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
                 <div class="meta">
                   <span class="date">Create {{$asset->created_at->diffForHumans()}}</span>
                 </div>
               </div>
-              <div class="content redirect_to_page" data-redirect-url='{{route('admin.users.edit', $asset->uploader->id)}}'>
+              <div class="content redirect_to_page" data-redirect-url='{{route('user.users.edit', $asset->uploader->id)}}'>
                 {{-- <div class="right floated meta">{{$asset->created_at->diffForHumans()}}</div> --}}
                 @if ($asset->uploader->profileimage() == NULL)
                   <img src="http://via.placeholder.com/150x150" alt="" class="ui avatar image">
@@ -65,24 +79,38 @@
       <div class="ui link special cards">
         @if (count($most_popular_assets) > 0)
           @foreach ($most_popular_assets as $asset)
-            <div class="card assets_item_container">
+            @php
+              $unique_id = bcrypt($asset->id);
+            @endphp
+            <div class="card assets_item_container" data-asset-id='{{$unique_id}}'>
               <div class="blurring dimmable image">
                 <div class="ui dimmer">
                   <div class="content">
                     <div class="center">
-                      <a href="{{route('admin.puzzles.show', $asset->id)}}" class="ui inverted purple button">Play</a>
+                      <a href="{{route('user.puzzles.show', $asset->id)}}" class="ui inverted purple button">Play</a>
                     </div>
                   </div>
                 </div>
-                <img src="{{asset($asset->thumbnail_img)}}" class="">
+                @php
+                  $static_thumbnail = $gif_thumbnail = "";
+                  foreach ($asset->video_thumnail as $thumbnail) {
+                    if ($thumbnail->format == 'jpg') {
+                      $static_thumbnail = $thumbnail->path;
+                    }
+                    if ($thumbnail->format == 'gif') {
+                      $gif_thumbnail = $thumbnail->path;
+                    }
+                  }
+                @endphp
+                <img src="{{asset($static_thumbnail)}}" data-asset-id='{{$unique_id}}' data-gif-thumbnail='{{asset($gif_thumbnail)}}' class="asset_thumbnail">
               </div>
               <div class="content">
-                <a class="header ellipsis_content" href='{{route('admin.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
+                <a class="header ellipsis_content" href='{{route('user.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
                 <div class="meta">
                   <span class="date">Create {{$asset->created_at->diffForHumans()}}</span>
                 </div>
               </div>
-              <div class="content redirect_to_page" data-redirect-url='{{route('admin.users.edit', $asset->uploader->id)}}'>
+              <div class="content redirect_to_page" data-redirect-url='{{route('user.users.edit', $asset->uploader->id)}}'>
                 {{-- <div class="right floated meta">{{$asset->created_at->diffForHumans()}}</div> --}}
                 @if ($asset->uploader->profileimage() == NULL)
                   <img src="http://via.placeholder.com/150x150" alt="" class="ui avatar image">
@@ -114,24 +142,38 @@
       <div class="ui link special cards">
         @if (count($play_again) > 0)
           @foreach ($play_again as $asset)
-            <div class="card assets_item_container">
+            @php
+              $unique_id = bcrypt($asset->id);
+            @endphp
+            <div class="card assets_item_container" data-asset-id='{{$unique_id}}'>
               <div class="blurring dimmable image">
                 <div class="ui dimmer">
                   <div class="content">
                     <div class="center">
-                      <a href="{{route('admin.puzzles.show', $asset->id)}}" class="ui inverted purple button">Play</a>
+                      <a href="{{route('user.puzzles.show', $asset->id)}}" class="ui inverted purple button">Play</a>
                     </div>
                   </div>
                 </div>
-                <img src="{{asset($asset->thumbnail_img)}}" class="">
+                @php
+                  $static_thumbnail = $gif_thumbnail = "";
+                  foreach ($asset->video_thumnail as $thumbnail) {
+                    if ($thumbnail->format == 'jpg') {
+                      $static_thumbnail = $thumbnail->path;
+                    }
+                    if ($thumbnail->format == 'gif') {
+                      $gif_thumbnail = $thumbnail->path;
+                    }
+                  }
+                @endphp
+                <img src="{{asset($static_thumbnail)}}" data-asset-id='{{$unique_id}}' data-gif-thumbnail='{{asset($gif_thumbnail)}}' class="asset_thumbnail">
               </div>
               <div class="content">
-                <a class="header ellipsis_content" href='{{route('admin.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
+                <a class="header ellipsis_content" href='{{route('user.assets.edit', $asset->id)}}' title="{{$asset->title}}">{{$asset->title}}</a>
                 <div class="meta">
                   <span class="date">Create {{$asset->created_at->diffForHumans()}}</span>
                 </div>
               </div>
-              <div class="content redirect_to_page" data-redirect-url='{{route('admin.users.edit', $asset->uploader->id)}}'>
+              <div class="content redirect_to_page" data-redirect-url='{{route('user.users.edit', $asset->uploader->id)}}'>
                 {{-- <div class="right floated meta">{{$asset->created_at->diffForHumans()}}</div> --}}
                 @if ($asset->uploader->profileimage() == NULL)
                   <img src="http://via.placeholder.com/150x150" alt="" class="ui avatar image">

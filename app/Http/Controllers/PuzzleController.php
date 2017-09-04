@@ -99,8 +99,7 @@ class PuzzleController extends Controller
         }
 
         $asset = Asset::select(
-          '*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          '*'
         )->where('assets.is_public', 1)->where('assets.id', $id)->first();
 
         if (count($asset) > 0) {

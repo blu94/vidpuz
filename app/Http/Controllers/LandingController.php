@@ -25,8 +25,7 @@ class LandingController extends Controller
         //
         $assets = Asset::select(
           'assets.*',
-          DB::raw("(SELECT COUNT(puzzles.id) FROM puzzles WHERE puzzles.asset_id = assets.id) as number"),
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          DB::raw("(SELECT COUNT(puzzles.id) FROM puzzles WHERE puzzles.asset_id = assets.id) as number")
         )
         ->where('assets.usage', 'VIDEO')
         ->where('is_public', 1)
@@ -35,8 +34,7 @@ class LandingController extends Controller
 
         $current_month = date('m');
         $assets_current_month = Asset::select(
-          'assets.*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          'assets.*'
         )
         ->whereMonth('created_at', $current_month)
         ->where('usage', 'VIDEO')

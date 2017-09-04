@@ -96,8 +96,7 @@ class AdminPuzzleController extends Controller
         }
 
         $asset = Asset::select(
-          '*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          '*'
         )->findOrFail($id);
         if ($asset->usage == 'VIDEO') {
 

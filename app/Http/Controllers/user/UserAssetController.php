@@ -24,8 +24,7 @@ class UserAssetController extends Controller
     {
         //
         $assets = Asset::select(
-          '*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          '*'
         )
         ->where('usage', 'VIDEO')
         ->where('user_id', Auth::user()->id)
@@ -33,8 +32,7 @@ class UserAssetController extends Controller
         ->get();
 
         $public_assets = Asset::select(
-          '*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          '*'
         )
         ->where('usage', 'VIDEO')
         ->where('is_public', 1)
@@ -54,8 +52,7 @@ class UserAssetController extends Controller
     {
         //
         $asset = Asset::select(
-          '*',
-          DB::raw("(SELECT `path` AS thumbnail_img FROM `assets` AS thumbnail WHERE thumbnail.`assetable_id` = assets.id AND thumbnail.`assetable_type` LIKE 'App%%Asset') AS thumbnail_img")
+          '*'
         )
         ->where('assets.usage', 'VIDEO')
         ->where('assets.id', $id)
@@ -213,7 +210,7 @@ class UserAssetController extends Controller
         'user_id' => Auth::user()->id
       ]);
 
-      // // create thumbnail
+      // create thumbnail
       $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.jpg';
       $thumbnail_path = '/assets/' . $thumbnail_name;
       Flavy::thumbnail(public_path() . '/' . $export_as, public_path() . $thumbnail_path, 1);
@@ -228,11 +225,24 @@ class UserAssetController extends Controller
         'assetable_type' => 'App\Asset'
       ]);
 
-      // add notification
-      $all_admins = User::where('role_id', 1)->get();
-      foreach ($all_admins as $admin) {
-        $admin->notify(new NewVideoUpload($asset, Auth::user()));
-      }
+
+      $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.gif';
+      $thumbnail_path = '/assets/' . $thumbnail_name;
+      $ffmpeg = FFMpeg::create();
+      $video = $ffmpeg->open(public_path() . '/' . $export_as);
+      $video
+      ->gif(\FFMpeg\Coordinate\TimeCode::fromSeconds(0), new \FFMpeg\Coordinate\Dimension(1080, 720), 10)
+      ->save(public_path() . $thumbnail_path);
+      $thumbnail_rec = Asset::create([
+        'title' => $thumbnail_name,
+        'path' => $thumbnail_path,
+        'format' => 'gif',
+        'usage' => 'VIDEO_THUMBNAIL',
+        'is_public' => 1,
+        'user_id' => Auth::user()->id,
+        'assetable_id' => $asset->id,
+        'assetable_type' => 'App\Asset'
+      ]);
 
       unlink($file);
 
