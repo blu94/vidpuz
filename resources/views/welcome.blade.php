@@ -60,9 +60,6 @@
                 @php
                   $static_thumbnail = $gif_thumbnail = "";
                   foreach ($asset->video_thumnail as $thumbnail) {
-                    if ($thumbnail->format == 'jpg') {
-                      $static_thumbnail = $thumbnail->path;
-                    }
                     if ($thumbnail->format == 'gif') {
                       $gif_thumbnail = $thumbnail->path;
                     }
@@ -93,7 +90,7 @@
                     }
                   }
                 @endphp
-                <img class="d-block img-fluid" src="{{asset($static_thumbnail)}}" alt="{{$asset->title}}">
+                <img class="d-block img-fluid" src="{{asset($gif_thumbnail)}}" alt="{{$asset->title}}">
                 <div class="ui dimmer">
                   <div class="content">
                     <div class="landing_item_container">
