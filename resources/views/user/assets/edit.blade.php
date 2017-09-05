@@ -9,6 +9,28 @@
   <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
 @endsection
 
+@section('search_wrapper')
+  <div class="search_bar">
+    <button type="button" name="button" class="search_btn">
+      <img src="{{asset('icon/search_white.svg')}}" alt="">
+    </button>
+  </div>
+  <div class="lightbox search_lightbox special_close">
+    <div class="lightbox_content_transparent search_wrapper not_to_close">
+      {!! Form::open(['method' => 'GET', 'action' => 'user\UserAssetController@index', 'id' => 'search_form']) !!}
+        <div class="ui right huge aligned search_video search">
+          <div class="ui icon input">
+            <input class="prompt" type="text" name="search" placeholder="Search video...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      {!! Form::close() !!}
+
+    </div>
+  </div>
+@endsection
+
 @section('content')
   <div class="body_container">
 
@@ -140,7 +162,23 @@
   <script src="{{asset('js/jquery-ui.min.js')}}" charset="utf-8"></script>
   <script src="{{asset('js/bootstrap-tokenfield.min.js')}}" charset="utf-8"></script>
   <script type="text/javascript">
-  $(window).keydown(function(event){
+  var content = [
+    @foreach ($search_options as $option_key => $option)
+    {
+      'title' : '{{$option->title}}',
+      'url' : '{{route('user.assets.index')}}?search={{$option->title}}'
+    }
+    @if (count($search_options) > $option_key)
+    ,
+    @endif
+    @endforeach
+  ];
+
+  $('.search_video').search({
+    source: content
+  });
+
+  $('.form_input_container').keydown(function(event){
     if(event.keyCode == 13) {
       event.preventDefault();
       return false;

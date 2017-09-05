@@ -79,6 +79,13 @@ class VideoController extends Controller
         //
         $asset = Asset::findOrFail($id);
 
+        $search = Input::get('search');
+
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->where('is_public', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         // get tag value
         $taggable = Taggable::where('taggable_id', $asset->id)->where('taggable_type', 'LIKE', 'App%%Asset')->get();
 
@@ -96,7 +103,7 @@ class VideoController extends Controller
         }
         $all_tag_value = "['".implode("','", $all_tag_array)."']";
 
-        return view('landing.video.show', compact('asset', 'tag_value', 'all_tag_value'));
+        return view('landing.video.show', compact('asset', 'tag_value', 'all_tag_value', 'search_options'));
     }
 
     /**

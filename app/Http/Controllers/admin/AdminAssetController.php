@@ -100,6 +100,12 @@ class AdminAssetController extends Controller
     public function edit($id)
     {
         //
+        $search = Input::get('search');
+
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         $asset = Asset::select(
           '*'
           )
@@ -124,7 +130,7 @@ class AdminAssetController extends Controller
         $all_tag = Tag::all();
 
         if($asset->usage == 'VIDEO') {
-          return view('admin.assets.edit', compact('asset', 'tag_value', 'all_tag'));
+          return view('admin.assets.edit', compact('asset', 'tag_value', 'all_tag', 'search_options'));
         }
         return redirect()->back();
     }

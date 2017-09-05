@@ -56,6 +56,12 @@ class PuzzleController extends Controller
     public function show($id, $shape = null, $piece = null)
     {
         //
+        $search = Input::get('search');
+
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->where('is_public', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
 
         $shape = Input::get('shape');
         $piece = Input::get('pieces');
@@ -117,7 +123,7 @@ class PuzzleController extends Controller
               $personal_best_record_duration = $personal_best_record->duration;
             }
 
-            return view('landing.puzzle.show', compact('asset', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape'));
+            return view('landing.puzzle.show', compact('asset', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape', 'search_options'));
           }
         }
         else {

@@ -53,12 +53,13 @@ class UserAssetController extends Controller
 
         $auth_user = Auth::user();
         $search_options = Asset::where('usage', 'VIDEO')
-        ->orderBy('created_at', 'desc')
         ->where('user_id', Auth::user()->id)
         ->orWhere(function($q) use($auth_user) {
           $q->where('user_id', '!=', Auth::user()->id);
           $q->where('is_public', 1);
+          $q->where('usage', 'VIDEO');
         })
+        ->orderBy('created_at', 'desc')
         ->get();
 
         return view('user.assets.index', compact('assets', 'public_assets', 'search_options'));
@@ -73,6 +74,19 @@ class UserAssetController extends Controller
     public function edit($id)
     {
         //
+        $search = Input::get('search');
+
+        $auth_user = Auth::user();
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->where('user_id', Auth::user()->id)
+        ->orWhere(function($q) use($auth_user) {
+          $q->where('user_id', '!=', Auth::user()->id);
+          $q->where('is_public', 1);
+          $q->where('usage', 'VIDEO');
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         $asset = Asset::select(
           '*'
         )
@@ -97,7 +111,7 @@ class UserAssetController extends Controller
         $all_tag = Tag::all();
 
         if($asset->usage == 'VIDEO') {
-          return view('user.assets.edit', compact('asset', 'tag_value', 'all_tag'));
+          return view('user.assets.edit', compact('asset', 'tag_value', 'all_tag', 'search_options'));
         }
         return redirect()->back();
     }

@@ -54,6 +54,13 @@ class AdminPuzzleController extends Controller
     public function show($id, $shape = null, $piece = null)
     {
         //
+
+        $search = Input::get('search');
+
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         $shape = Input::get('shape');
         $piece = Input::get('pieces');
 
@@ -129,7 +136,7 @@ class AdminPuzzleController extends Controller
             'asset_id' => $asset->id,
           ]);
 
-          return view('admin.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape'));
+          return view('admin.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape', 'search_options'));
         }
         return redirect()->back();
     }

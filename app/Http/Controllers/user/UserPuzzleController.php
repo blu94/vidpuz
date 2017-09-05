@@ -16,6 +16,18 @@ class UserPuzzleController extends Controller
     public function show($id)
     {
         //
+
+        $auth_user = Auth::user();
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->where('user_id', Auth::user()->id)
+        ->orWhere(function($q) use($auth_user) {
+          $q->where('user_id', '!=', Auth::user()->id);
+          $q->where('is_public', 1);
+          $q->where('usage', 'VIDEO');
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         $shape = Input::get('shape');
         $piece = Input::get('pieces');
 
@@ -93,7 +105,7 @@ class UserPuzzleController extends Controller
               'asset_id' => $asset->id,
             ]);
 
-            return view('user.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape'));
+            return view('user.puzzles.show', compact('asset', 'puzzle', 'personal_best_record_duration', 'corner_css', 'x_number', 'y_number', 'shape', 'search_options'));
           }
         }
 
