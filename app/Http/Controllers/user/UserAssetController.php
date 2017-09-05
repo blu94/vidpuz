@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use App\Notifications\NewVideoUpload;
+use Illuminate\Support\Facades\Input;
 use Flavy;
 use App\Asset;
 use App\Tag;
@@ -23,10 +24,16 @@ class UserAssetController extends Controller
     public function index()
     {
         //
+        $search = Input::get('search');
+
         $assets = Asset::select(
           '*'
         )
         ->where('usage', 'VIDEO')
+        ->where(function($q) use($search) {
+          $q->where('title', 'LIKE', '%'.$search.'%');
+          $q->orWhere('description', 'LIKE', '%'.$search.'%');
+        })
         ->where('user_id', Auth::user()->id)
         ->orderBy('created_at', 'desc')
         ->get();
@@ -36,10 +43,25 @@ class UserAssetController extends Controller
         )
         ->where('usage', 'VIDEO')
         ->where('is_public', 1)
+        ->where(function($q) use($search) {
+          $q->where('title', 'LIKE', '%'.$search.'%');
+          $q->orWhere('description', 'LIKE', '%'.$search.'%');
+        })
         ->where('user_id', '!=', Auth::user()->id)
         ->orderBy('created_at', 'desc')
         ->get();
-        return view('user.assets.index', compact('assets', 'public_assets'));
+
+        $auth_user = Auth::user();
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->orderBy('created_at', 'desc')
+        ->where('user_id', Auth::user()->id)
+        ->orWhere(function($q) use($auth_user) {
+          $q->where('user_id', '!=', Auth::user()->id);
+          $q->where('is_public', 1);
+        })
+        ->get();
+
+        return view('user.assets.index', compact('assets', 'public_assets', 'search_options'));
     }
 
     public function create()

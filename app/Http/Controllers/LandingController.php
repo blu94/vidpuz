@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use App\Asset;
 use App\Puzzle;
 use App\Tag;
@@ -23,6 +24,13 @@ class LandingController extends Controller
     public function index()
     {
         //
+        $search = Input::get('search');
+
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->where('is_public', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         $assets = Asset::select(
           'assets.*',
           DB::raw("(SELECT COUNT(puzzles.id) FROM puzzles WHERE puzzles.asset_id = assets.id) as number")
@@ -42,7 +50,7 @@ class LandingController extends Controller
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
 
-        return view('welcome', compact('assets', 'assets_current_month'));
+        return view('welcome', compact('assets', 'assets_current_month', 'search_options'));
     }
 
     /**

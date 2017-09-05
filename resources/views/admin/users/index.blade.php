@@ -4,6 +4,28 @@
   USERS
 @endsection
 
+@section('search_wrapper')
+  <div class="search_bar">
+    <button type="button" name="button" class="search_btn">
+      <img src="{{asset('icon/search_white.svg')}}" alt="">
+    </button>
+  </div>
+  <div class="lightbox search_lightbox special_close">
+    <div class="lightbox_content_transparent search_wrapper not_to_close">
+      {!! Form::open(['method' => 'GET', 'action' => 'admin\AdminUsersController@index', 'id' => 'search_form']) !!}
+        <div class="ui right huge aligned search_video search">
+          <div class="ui icon input">
+            <input class="prompt" type="text" name="search" placeholder="Search User...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      {!! Form::close() !!}
+
+    </div>
+  </div>
+@endsection
+
 @section('content')
   <div class="body_container">
     <span class="page_title">USERS</span>
@@ -61,4 +83,24 @@
 
     </div>
   </div>
+@endsection
+
+@section('scripts')
+  <script type="text/javascript">
+  var content = [
+    @foreach ($search_options as $option_key => $option)
+    {
+      'title' : '{{$option->username}}',
+      'url' : '{{route('admin.users.index')}}?search={{$option->username}}'
+    }
+    @if (count($search_options) > $option_key)
+    ,
+    @endif
+    @endforeach
+  ];
+
+  $('.search_video').search({
+    source: content
+  });
+  </script>
 @endsection

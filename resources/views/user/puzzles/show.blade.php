@@ -22,7 +22,12 @@
   @endphp
 
   <div class="body_container">
-
+    {{-- screen size too small --}}
+    <div class="screen_size_too_small">
+      Screen Size Too Small !!
+    </div>
+    {{-- screen size too small --}}
+    
     {{-- operation area --}}
     <div class="puzzle_operation_wrapper segment bg_white">
       {!! Form::open(['method' => 'get', 'action' => ['user\UserPuzzleController@show', $asset->id], 'class' => 'ui icon buttons submit_style']) !!}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use App\Asset;
 use App\Puzzle;
 use App\Tag;
@@ -23,15 +24,27 @@ class VideoController extends Controller
     public function index()
     {
         //
+
+        $search = Input::get('search');
+
+        $search_options = Asset::where('usage', 'VIDEO')
+        ->where('is_public', 1)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         $assets = Asset::select(
           'assets.*'
         )
+        ->where(function($q) use($search) {
+          $q->where('title', 'LIKE', '%'.$search.'%');
+          $q->orWhere('description', 'LIKE', '%'.$search.'%');
+        })
         ->where('assets.usage', 'VIDEO')
         ->where('is_public', 1)
         ->orderBy('created_at', 'DESC')
         ->paginate(20);
 
-        return view('landing.video.index', compact('assets'));
+        return view('landing.video.index', compact('assets', 'search_options'));
     }
 
     /**

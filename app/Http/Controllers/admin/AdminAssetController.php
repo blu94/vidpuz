@@ -16,6 +16,7 @@ use App\User;
 use FFMpeg\FFMpeg;
 use FFMpeg\FFProbe;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Input;
 
 class AdminAssetController extends Controller
 {
@@ -27,13 +28,20 @@ class AdminAssetController extends Controller
     public function index()
     {
         //
-        $assets = Asset::select(
-          '*'
-        )
-        ->where('usage', 'VIDEO')
+        $search = Input::get('search');
+
+        $search_options = Asset::where('usage', 'VIDEO')
         ->orderBy('created_at', 'desc')
         ->get();
-        return view('admin.assets.index', compact('assets'));
+
+        $assets = Asset::where('usage', 'VIDEO')
+        ->where(function($q) use($search) {
+          $q->where('title', 'LIKE', '%'.$search.'%');
+          $q->orWhere('description', 'LIKE', '%'.$search.'%');
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return view('admin.assets.index', compact('assets', 'search_options'));
     }
 
     /**

@@ -22,6 +22,11 @@
   @endphp
 
   <div class="body_container clear_left_right_forbody">
+    {{-- screen size too small --}}
+    <div class="screen_size_too_small">
+      Screen Size Too Small !!
+    </div>
+    {{-- screen size too small --}}
 
     {{-- operation area --}}
     <div class="puzzle_operation_wrapper segment bg_white">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
+use Illuminate\Support\Facades\Input;
 use Auth;
 use Illuminate\Support\Facades\Session;
 use App\User;
@@ -19,8 +20,16 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        $users = User::where('role_id', '!=', '1')->get();
-        return view('admin.users.index', compact('users'));
+        $search = Input::get('search');
+
+        $search_options = User::where('role_id', '!=', '1')->get();
+
+        $users = User::where('role_id', '!=', '1')
+        ->where(function($q) use($search) {
+          $q->where('surname', 'LIKE', '%'.$search.'%');
+        })
+        ->get();
+        return view('admin.users.index', compact('users', 'search_options'));
     }
 
     /**

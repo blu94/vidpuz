@@ -9,6 +9,32 @@
   </style>
 @endsection
 
+@section('search_link')
+  <a href="#" class="header_item color_white search_link">Search</a>
+@endsection
+
+@section('search_wrapper')
+  <div class="search_bar">
+    <button type="button" name="button" class="search_btn">
+      <img src="{{asset('icon/search_white.svg')}}" alt="">
+    </button>
+  </div>
+  <div class="lightbox search_lightbox special_close">
+    <div class="lightbox_content_transparent search_wrapper not_to_close">
+      {!! Form::open(['method' => 'GET', 'action' => 'VideoController@index', 'id' => 'search_form']) !!}
+        <div class="ui right huge aligned search_video search">
+          <div class="ui icon input">
+            <input class="prompt" type="text" name="search" placeholder="Search video...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      {!! Form::close() !!}
+
+    </div>
+  </div>
+@endsection
+
 @section('content')
   <div class="assets_container">
     <h3 class="ui horizontal divider header">
@@ -60,6 +86,22 @@
 
 @section('scripts')
   <script type="text/javascript">
+    var content = [
+      @foreach ($search_options as $option_key => $option)
+      {
+        'title' : '{{$option->title}}',
+        'url' : '{{route('landing.video.index')}}?search={{$option->title}}'
+      }
+      @if (count($search_options) > $option_key)
+      ,
+      @endif
+      @endforeach
+    ];
+
+    $('.search_video').search({
+      source: content
+    });
+
     $('.special.cards .image').dimmer({
       on: 'hover'
     });

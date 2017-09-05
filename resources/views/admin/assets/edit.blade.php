@@ -19,13 +19,13 @@
     {!! Form::open(['method' => 'PATCH', 'action' => ['admin\AdminAssetController@update', $asset->id], 'class' => 'form_input_container col-md-12 col-sm-12']) !!}
       {!! csrf_field() !!}
 
-      <div class="input_container no_pad_left_right col-md-5 col-sm-9">
+      <div class="input_container no_pad_left_right col-md-5 col-sm-12">
         {!! Form::label('title', 'Title', ['class'=>'input_label font_size12']) !!}
         {!! Form::text('title', $asset->title, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Title']) !!}
       </div>
       <div class="col-md-6 col-sm-1">
       </div>
-      <div class="input_container col-md-1 col-sm-2">
+      <div class="input_container col-md-1 col-sm-12">
         @php
           $asset_status = "Public";
           $check_switch = "checked";

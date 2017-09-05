@@ -153,6 +153,10 @@ $(document).ready(function() {
     $('.edit_user_detail_lightbox').fadeIn().css({'display':'flex'});
   });
 
+  $('.search_btn, .search_link').click(function() {
+    $('.search_lightbox').fadeIn().css({'display':'flex'});
+  });
+
   $('.special_close').on('click', function(event) {
     if ($(event.target).has('.not_to_close').length) {
       $(".lightbox").fadeOut();

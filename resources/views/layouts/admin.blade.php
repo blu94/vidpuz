@@ -34,6 +34,8 @@
 
     {{-- header --}}
     <header class="header_section bg_neonblue">
+      @yield('search_wrapper')
+      
       <a href="{{ route('admin.index') }}" class="logo_title text_shadow_neon_blue font_size18 color_white">
         INTERACTIVE VIDEO PUZZLE
       </a>
@@ -49,6 +51,7 @@
 
       {{-- sidebar --}}
       <div class="sidebar bg_neonblue1">
+
         <div class="profile_div redirect_to_page" data-redirect-url='{{route('admin.users.edit', Auth::user()->id)}}'>
 
 

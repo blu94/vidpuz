@@ -25,10 +25,14 @@
         @yield('styles')
 
     </head>
+
+    @yield('search_wrapper')
+
     <body class="bg_lightgray">
       <div class="landing_header1">
         <div class="landing_login_bar">
           <div class="landing_navbar_wrapper">
+            @yield('search_link')
             <a href="{{ route('landing.video.index') }}" class="header_item color_white">Asset</a>
             @if (Route::has('login'))
               @if (Auth::check())

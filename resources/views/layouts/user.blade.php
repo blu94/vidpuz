@@ -35,6 +35,7 @@
 
     {{-- header --}}
     <header class="header_section bg_lightpurple">
+      @yield('search_wrapper')
       <a href="{{ route('user.index') }}" class="logo_title text_shadow_purple font_size18 color_white">
         INTERACTIVE VIDEO PUZZLE
       </a>
