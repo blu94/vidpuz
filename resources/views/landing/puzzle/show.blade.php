@@ -19,11 +19,6 @@
 @endsection
 
 @section('search_wrapper')
-  <div class="search_bar">
-    <button type="button" name="button" class="search_btn">
-      <img src="{{asset('icon/search_white.svg')}}" alt="">
-    </button>
-  </div>
   <div class="lightbox search_lightbox special_close">
     <div class="lightbox_content_transparent search_wrapper not_to_close">
       {!! Form::open(['method' => 'GET', 'action' => 'VideoController@index', 'id' => 'search_form']) !!}

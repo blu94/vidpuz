@@ -1218,6 +1218,10 @@ input:checked + .slider:before {
 }
 .search_wrapper {
   height: 80%;
+  width: 50%;
+}
+.search_video, .search_video .input {
+  width: 100%;
 }
 .ui.search>.results {
   width: 100%;
