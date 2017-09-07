@@ -106,7 +106,7 @@
 @extends('layouts.landing')
 
 @section('page_title')
-  Login
+  Register
 @endsection
 
 @section('header_section_content')
@@ -117,7 +117,7 @@
 <div class="login_page_container container">
 
   <div class="login_form_wrapper">
-    <form class="ui form @if (count($errors) > 0) error @endif" method="POST" action="{{ route('login') }}">
+    <form class="ui form @if (count($errors) > 0) error @endif" method="POST" action="{{ route('register') }}">
       {{ csrf_field() }}
       <div class="ui attached segments">
         <div class="ui segment" style="padding:40px;">
