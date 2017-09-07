@@ -14,16 +14,16 @@ class UsersTableSeeder extends Seeder
         //
         DB::table('users')->insert([
           [
-            'surname' => 'Cheng Wei',
-            'givenname' => 'Yap',
-            'username' => 'bluycw94',
+            'surname' => 'Dummy Surname',
+            'givenname' => 'Dummy Given Name',
+            'username' => 'dummyusername',
             'is_active' => 1,
-            'email' => 'yapchengwei@gmail.com',
+            'email' => 'dummyadmin@gmail.com',
             'role_id' => 1,
             'first_login' => 1,
-            'birthday' => '1994-06-06 00:00:00',
+            'birthday' => '1994-01-01 00:00:00',
             'gender' => 'M',
-            'password' => '$2y$10$pVzpAgVQtN2wbki27Q1reOsztWvhyIMdlL5cdpZJ4Q13fyRPDKsHK',
+            'password' => bcrypt('dummypassword'),
             'bio' => 'test bio'
           ]
         ]);
