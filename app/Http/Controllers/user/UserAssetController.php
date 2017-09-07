@@ -225,7 +225,12 @@ class UserAssetController extends Controller
       set_time_limit(0);
       $file = public_path($request->url);
 
-      $ffmpeg = FFMpeg::create();
+      $ffmpeg = FFMpeg::create([
+        'ffmpeg.binaries'  => 'C:/ffmpeg/bin/ffmpeg.exe', // the path to the FFMpeg binary
+        'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe', // the path to the FFProbe binary
+        'timeout'          => 3600, // the timeout for the underlying process
+        'ffmpeg.threads'   => 12,   // the number of threads that FFMpeg should use
+      ]);
 
       $video = $ffmpeg->open($file);
 
@@ -264,7 +269,12 @@ class UserAssetController extends Controller
 
       $thumbnail_name =  md5($request->video_name).'_thumbnail'.date('YmdHis').'.gif';
       $thumbnail_path = '/assets/' . $thumbnail_name;
-      $ffmpeg = FFMpeg::create();
+      $ffmpeg = FFMpeg::create([
+        'ffmpeg.binaries'  => 'C:/ffmpeg/bin/ffmpeg.exe', // the path to the FFMpeg binary
+        'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe', // the path to the FFProbe binary
+        'timeout'          => 3600, // the timeout for the underlying process
+        'ffmpeg.threads'   => 12,   // the number of threads that FFMpeg should use
+      ]);
       $video = $ffmpeg->open(public_path() . '/' . $export_as);
       $video
       ->gif(\FFMpeg\Coordinate\TimeCode::fromSeconds(0), new \FFMpeg\Coordinate\Dimension(1080, 720), 10)
@@ -368,7 +378,12 @@ class UserAssetController extends Controller
 
     public function getDuration($full_video_path)
     {
-      $ffprobe = FFProbe::create();
+      $ffprobe = FFProbe::create([
+        'ffmpeg.binaries'  => 'C:/ffmpeg/bin/ffmpeg.exe', // the path to the FFMpeg binary
+        'ffprobe.binaries' => 'C:/ffmpeg/bin/ffprobe.exe', // the path to the FFProbe binary
+        'timeout'          => 3600, // the timeout for the underlying process
+        'ffmpeg.threads'   => 12,   // the number of threads that FFMpeg should use
+      ]);
       $duration = $ffprobe->format($full_video_path)->get('duration');
       return $duration;
     }
