@@ -98,6 +98,14 @@
               <input type="radio" name="pieces" value='7x14' @if ($x_number == 14 && $y_number == 7) checked="checked" @endif>
               <label>7x14</label>
             </div>
+            <div class="item ui radio checkbox plain_button">
+              <input type="radio" name="pieces" value='8x16' @if ($x_number == 16 && $y_number == 8) checked="checked" @endif>
+              <label>8x16</label>
+            </div>
+            <div class="item ui radio checkbox plain_button">
+              <input type="radio" name="pieces" value='9x18' @if ($x_number == 18 && $y_number == 9) checked="checked" @endif>
+              <label>9x18</label>
+            </div>
           </div>
         </div>
 

@@ -78,7 +78,6 @@ $(document).ready(function() {
     }
   }
   shuffle(coord_array);
-  console.log(coord_array);
 
 
 
@@ -198,7 +197,6 @@ $(document).ready(function() {
     // randomize the pieaces
     var random_x_coord = coord_array[(hints_counter-1)][0];
     var random_y_coord = coord_array[(hints_counter-1)][1];
-    console.log(hints_counter);
 
     $(".puzzle_wrapper").append("<div id='pieaces_"+x+y+"' data-number='"+x+y+"' class='canvas_pieces "+pieces_class+"' style='"+extra_styles+" left: "+random_x_coord+"%; top:"+random_y_coord+"px;'><span class='hints_container "+alignment_of_hints+"'>"+hints_counter+"</span><canvas id='target_canvas"+x+y+"'></canvas></div>");
 
