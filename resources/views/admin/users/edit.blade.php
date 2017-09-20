@@ -146,7 +146,7 @@
 @endsection
 
 @section('scripts')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js" charset="utf-8"></script>
+  <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
   <script type="text/javascript">
     $('.ui.dropdown').dropdown();
     $('.ui.checkbox').checkbox();

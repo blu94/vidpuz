@@ -12,9 +12,9 @@
         @php
           $version = str_random(20);
         @endphp
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css">
+        <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/semantic.min.css')}}">
         <meta name="version" content="{{$version}}">
         <meta name="wide_style" content="{{asset('css/main_wide.css')}}">
         <meta name="medium_style" content="{{asset('css/main_medium.css')}}">
@@ -69,10 +69,12 @@
 
     </body>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{asset('js/jquery-3.2.1.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/jquery-3.2.1.min.js')}}" charset="utf-8"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js" charset="utf-8"></script>
+    <script src="{{asset('js/umd/popper.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}" charset="utf-8"></script>
+    <script src="{{asset('js/semantic.min.js')}}" charset="utf-8"></script>
 
     <script src="{{asset('js/main.js?v='.$version)}}" charset="utf-8"></script>
 

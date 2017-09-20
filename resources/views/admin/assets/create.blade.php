@@ -9,8 +9,8 @@
 @endsection
 
 @section('styles')
-  <link href="http://vjs.zencdn.net/6.2.4/video-js.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
+  <link rel="stylesheet" href="{{asset('css/videojs.css')}}">
+  <link rel="stylesheet" href="{{asset('css/dropzone.css')}}">
 @endsection
 
 @section('content')
@@ -29,11 +29,9 @@
 @endsection
 
 @section('scripts')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js" charset="utf-8"></script>
+  <script src="{{asset('js/dropzone.js')}}" charset="utf-8"></script>
   <script src="{{asset('js/jqueryui_for_puzzle.js')}}" charset="utf-8"></script>
   <script src="{{asset('js/jquery.ui.touch-punch.min.js?v='.str_random(20))}}" charset="utf-8"></script>
-  <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
-  <script src="http://vjs.zencdn.net/6.2.4/video.js"></script>
   <script type="text/javascript">
     Dropzone.autoDiscover = false;
     $(".dropzone").dropzone({
