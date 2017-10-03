@@ -44,9 +44,19 @@ class LandingController extends Controller
         $assets_current_month = Asset::select(
           'assets.*'
         )
-        ->whereMonth('created_at', $current_month)
+        // ->whereMonth('created_at', $current_month)
         ->where('usage', 'VIDEO')
         ->where('is_public', 1)
+        ->orderBy('created_at', 'DESC')
+        ->take(30)
+        ->get();
+
+        $get_id_arr = array();
+        foreach ($assets_current_month as $video) {
+          array_push($get_id_arr, $video->id);
+        }
+
+        $assets_current_month = Asset::whereIn('id', $get_id_arr)
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
 

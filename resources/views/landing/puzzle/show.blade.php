@@ -208,7 +208,18 @@
           <span class="complete_puzzle_text font_size15">You have complete the puzzle.</span>
         </div>
         <div class="puzzle_thumbnail_wrapper">
-          <img src="{{asset($asset->thumbnail_img)}}" alt="">
+          @php
+            $static_thumbnail = $gif_thumbnail = "";
+            foreach ($asset->video_thumnail as $thumbnail) {
+              if ($thumbnail->format == 'jpg') {
+                $static_thumbnail = $thumbnail->path;
+              }
+              if ($thumbnail->format == 'gif') {
+                $gif_thumbnail = $thumbnail->path;
+              }
+            }
+          @endphp
+          <img src="{{asset($gif_thumbnail)}}" alt="">
           <button type="button" name="button" class="confirm_complete color_lightgreen font_size25">Play Again</button>
         </div>
       </div>
