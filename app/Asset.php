@@ -41,4 +41,9 @@ class Asset extends Model
     {
         return $this->hasMany('App\Asset', 'assetable_id')->where('assetable_type', 'LIKE', 'App%%Asset');
     }
+
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 }

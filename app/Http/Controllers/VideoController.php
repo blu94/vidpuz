@@ -87,11 +87,9 @@ class VideoController extends Controller
         ->get();
 
         // get tag value
-        $taggable = Taggable::where('taggable_id', $asset->id)->where('taggable_type', 'LIKE', 'App%%Asset')->get();
-
         $tag_array = [];
-        foreach ($taggable as $asset_tag) {
-          array_push($tag_array, $asset_tag->tag->title);
+        foreach ($asset->tags as $key => $asset_tag) {
+          array_push($tag_array, $asset_tag->title);
         }
         $tag_value = implode(",", $tag_array);
 

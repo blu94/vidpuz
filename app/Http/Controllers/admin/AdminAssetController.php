@@ -111,16 +111,12 @@ class AdminAssetController extends Controller
           )
         ->where('assets.usage', 'VIDEO')
         ->where('assets.id', $id)
-        ->get();
-
-        $asset = $asset[0];
+        ->first();
 
 
         // get tag value
-        $taggable = Taggable::where('taggable_id', $asset->id)->where('taggable_type', 'LIKE', 'App%%Asset')->get();
-
         $tag_array = [];
-        foreach ($taggable as $asset_tag) {
+        foreach ($asset->tags as $key => $asset_tag) {
           array_push($tag_array, $asset_tag->title);
         }
         $tag_value = implode(",", $tag_array);
@@ -395,7 +391,7 @@ class AdminAssetController extends Controller
         }
         Session::flash('success_message', 'Asset private sucessfully.');
       }
-
+      
       return redirect('admin/assets');
     }
 

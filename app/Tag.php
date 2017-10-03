@@ -12,4 +12,9 @@ class Tag extends Model
       'user_id',
       'is_active',
     ];
+
+    public function assets()
+    {
+        return $this->morphedByMany('App\Asset', 'taggable');
+    }
 }
